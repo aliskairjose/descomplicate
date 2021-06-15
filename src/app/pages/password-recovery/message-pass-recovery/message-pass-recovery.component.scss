@@ -1,0 +1,17 @@
+@import "../../../../assets/variables";
+
+section{
+    background: $background;
+    background: $gradient ;
+
+    .img-circle-icon{
+        background: $gray2;
+        border-radius: 60px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 55px;
+        height: 55px;
+        align-items: center;
+        padding: 10px;
+    }
+}
