@@ -9,20 +9,43 @@
 									</div>
 								
 			
-									<form  class="form p-2 px-4 mt-4">
+									<form  class="form p-2 px-4 mt-4" [formGroup]="FormLogin" (ngSubmit)="onSubmit()">
 										<div class="form-floating mb-4">
 											<label for="email" class="label-form">Correo electronico</label>
 											<input  type="email" class="form-control" id="email"
-												placeholder="Ingresa tu correo" maxlength="40" />
-										
+												placeholder="Ingresa tu correo" maxlength="40" 
+												formControlName="email" />
+												<div *ngIf="submitted && f.email.errors?.required" class="invalid-feedback d-block">
+													Campo Requerido
+												</div>
+												<div *ngIf="submitted && f.email.errors?.email" class="invalid-feedback d-block">
+													Email Invalido
+												</div>
 										
 										</div>
 			
 										<div class="form-floating mb-4">
 											<label for="password" class="label-form">Contraseña</label>
-											<input  type="password" class="form-control" id="password"
-												placeholder="Ingresa tu contraseña" maxlength="20" />
-											
+											<div class="input-group mb-3">
+												<input  [type]="fieldTextType ? 'text' : 'password'"  maxlength="20"
+												class="form-control password" placeholder="Ingresa tu contraseña" id="password"
+												formControlName="password" >
+												<div class="input-group-append">
+												  <span class="input-group-text" id="basic-addon2">	
+													<i   [ngClass]="{
+														'bi-eye-slash-fill': !fieldTextType,
+														'bi-eye-fill': fieldTextType
+													  }"
+													  (click)="toggleFieldTextType()"></i>
+												</span>
+												</div>
+											  </div>
+											  <div *ngIf="submitted && f.password.errors?.required" class="invalid-feedback d-block">
+												Campo Requerido
+											</div>
+											<div *ngIf="submitted && f.password.errors?.minlength" class="invalid-feedback d-block">
+												La contraseña debe contener al menos 8 caracteres
+											</div>
 										
 										</div>
 			

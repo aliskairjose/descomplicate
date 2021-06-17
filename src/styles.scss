@@ -1,1 +1,71 @@
 /* You can add global styles to this file, and also import other style files */
+@import "assets/variables";
+html,
+body {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	// font-family: $text-secondary ;
+   background-color: $body;
+}
+
+input{
+    background: #dcdcdc42 !important;
+    color: gray;
+    box-shadow: none !important;
+}
+
+input.password{
+    border-right: none !important;
+}
+
+.input-group-text{
+    border-left: none;
+    background: #dcdcdc42 !important;    
+ 
+}
+
+.label-form{
+    color: gray !important;
+    font-size: 0.8rem ;
+}
+
+.button-primary{
+    background: $background-button;
+    color: wheat !important;
+}
+
+.img-circle-icon{
+    background: $gray2;
+    border-radius: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 55px;
+    height: 55px;
+    align-items: center;
+    padding: 10px;
+    // i.bi
+    //     font-size: 1.8rem;
+    //     color : $gray-icon;
+    // }
+}
+
+
+#sidebar ul li.active {
+    color: #fff;
+    background: #3ABBD2;
+    border-radius: 5px 5px 0px 0px;
+    // .dropdown-toggle ,.dropdown-togglea[aria-expanded="true"]{
+    //     color: #fff;
+    //     background: #3ABBD2;
+    //     border-radius: 5px 5px 0px 0px;
+    // }
+ 
+    // i{
+    //     transform: rotate(180deg);
+    // }
+  
+  
+}

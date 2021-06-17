@@ -1,0 +1,26 @@
+@import "../../../../assets/variables";
+.navbar{
+    border-bottom: 1px solid $gray2;
+    background: white;
+    .navbar-brand{
+        text-align: center;
+     
+    }
+    .btn-info{
+        background: transparent;
+        border: none;
+        color: $blue;
+        font-size: 1.5rem;
+        padding: none;
+    }
+    .nav-item{
+        
+        a{
+            font-weight: 600;
+            color: black !important;
+        }
+    }
+    .btn-notification{
+        color: $blue;
+    }
+}

@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./message-pass-recovery.component.scss']
 })
 export class MessagePassRecoveryComponent implements OnInit {
+  
+  constructor(private router: Router) { }
 
-  constructor() { }
+ 
 
   ngOnInit(): void {
   }
 
+  onSubmit(): void {
+   
+    this.router.navigate( [ '/pages/reset-password' ] );
+  }
 }
