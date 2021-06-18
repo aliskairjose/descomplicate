@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,Input} from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 @Component({
   selector: 'app-pages',
@@ -6,7 +6,7 @@ import { Router, NavigationEnd } from '@angular/router';
   styleUrls: ['./pages.component.scss']
 })
 export class PagesComponent implements OnInit {
-
+	currentItem = '';
   public url: any;
 
 	constructor( private router: Router ) {
@@ -18,6 +18,11 @@ export class PagesComponent implements OnInit {
 	}
 
   ngOnInit(): void {
+  }
+
+  addItem(status: string) {
+    // console.log(status);
+	this.currentItem = status;
   }
 
 }

@@ -12,6 +12,7 @@ import { ResetPasswordComponent } from './auth/reset-password/reset-password.com
 import { MessageResetPassComponent } from './auth/reset-password/message-reset-pass/message-reset-pass.component';
 // Dashboard
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { UsersComponent } from './users/users.component';
 
 
 @NgModule({
@@ -21,10 +22,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MessagePassRecoveryComponent,
     ResetPasswordComponent,
     MessageResetPassComponent,
-    DashboardComponent
+    DashboardComponent,
+    UsersComponent
   ],
   imports: [
     CommonModule,
+    
     PagesRoutingModule,
     SharedModule,
     ReactiveFormsModule,

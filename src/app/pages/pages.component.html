@@ -2,13 +2,13 @@
 
   <!-- Sidebar -->
 
-   <app-menu></app-menu>
+   <app-menu [item]="currentItem" ></app-menu>
  
 
   <!-- Page Content -->
   <div id="content">
       <!-- We'll fill this with dummy content -->
-      <app-navbar></app-navbar>
+      <app-navbar (newItemEvent)="addItem($event)"></app-navbar>
       <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="square-jelly-box" >
         <p style="color: white"> Cargando... </p>
       </ngx-spinner>
