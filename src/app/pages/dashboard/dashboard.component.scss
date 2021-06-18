@@ -1,0 +1,133 @@
+@import "../../../assets/variables";
+
+.dashboard{
+    .title{
+        font-weight: 600;
+        color: #434343;
+    }
+    .sub-title{
+        color: $gray4 ;
+        font-size: .8rem;
+    }
+
+    .title-card{
+        font-weight: bold;
+        color: #434343;
+        
+    }
+
+    .card{
+        box-shadow: 3px 3px 10px #00000059;
+        border: none;
+    }
+    .primary{
+        .card{
+     
+            height: 150px;
+            .card-text{
+                font-size: 1rem;
+                font-weight: 600;
+            }
+        
+            .img-circle-icon{
+                margin: 0;
+                color: white;
+                width: 48px;
+                height: 48px;
+                img{
+                    // font-size: .8rem;
+                    width: 28px;
+                    height: 28px;
+                }
+            }
+    
+          
+        }
+     
+        .monitor .img-circle-icon{
+            background: #FF6E40;
+            
+        }
+    
+        .aprobacion .img-circle-icon{
+            background: #00C853;
+            
+        }
+    
+        .finanzas .img-circle-icon{
+            background: $blue;
+            
+        }
+    
+        .disponibilidad .img-circle-icon{
+            background: #FF1744;
+            
+        }
+    }
+
+    .secondary{
+        .sub-title img {
+            font-size: 1.2rem;
+            bottom: 46%;
+            position: absolute;
+            right: 7%;
+        }
+        .progress{
+            height: 10px;
+            .bg-orange{
+                background: #FF6E40;
+                border-radius: 60px;
+              
+            }
+            .bg-red{
+                background: #FF1744;
+                border-radius: 60px;
+              
+            }
+            .bg-green{
+                background: #00C853;
+                border-radius: 60px;
+              
+            }
+        }
+
+        .multiple-card{
+            box-shadow: 3px 3px 10px #00000059;
+            border: none;
+            .card-union{
+                box-shadow: none;
+            }
+            .card-union.union-1{
+                
+                   border-radius: .25rem 0rem 0rem  .25rem ;
+                   
+               
+            }
+    
+            .card-union.union-2{
+                border-radius: 0rem .25rem .25rem 0rem ;
+            }
+        }
+      
+        .line-height-card {
+            position: relative;
+          }
+          
+          .line-height-card:after {
+            content: '';
+            height: 60%; //You can change this if you want smaller/bigger borders
+            width: 2px;
+            margin-top: 20px;
+            position: absolute;
+            right: 0;
+            top: 0; // If you want to set a smaller height and center it, change this value
+          
+            background-color: $gray2; // The color of your border
+          }
+    }
+
+  
+  
+ 
+  
+}
