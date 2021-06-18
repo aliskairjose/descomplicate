@@ -8,33 +8,40 @@
 
 
 #sidebar.active {
-    margin-left: -250px;
+    min-width: 120px;
+    max-width: 120px;
+    text-align: center;
 }
+
+// 
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    min-height: 100vh;
+  
+    min-height: 115vh;
+   
     background: $blue;
     color: #fff;
     transition: all 0.3s;
     font-size: 0.8rem;
 
-    ul.collapse{
-        background:#3ABBD2 ;
-        border-radius: 0px 0px 5px 5px;
-        li a{
-            background: transparent;
-        }
+    // ul.collapse{
+    //     background:#3ABBD2 ;
+    //     border-radius: 0px 0px 5px 5px;
+    //     li a{
+    //         background: transparent;
+    //     }
 
        
-    }
+    // }
+   
 }
 
 a[data-toggle="collapse"] {
     position: relative;
 }
 .dropdown-toggle  {
-    display: flex !important;
+    // display: flex !important;
     justify-content: space-around !important;
     i{
         font-size: 0.8rem;
@@ -107,12 +114,17 @@ a, a:hover, a:focus {
 #sidebar ul p {
     color: #fff;
     padding: 10px;
+    
 }
 
 #sidebar ul li a {
     padding: 10px;
     font-size: 1.1em;
-    display: block;
+    display: flex;
+    align-items: center;
+    .icon-menu{
+        margin-right: 5px;
+    }
 }
 #sidebar ul li a:hover {
     // color: #7386D5;
@@ -123,21 +135,42 @@ a, a:hover, a:focus {
 #sidebar ul li.active {
     color: #fff;
     background: #3ABBD2;
-    border-radius: 5px 5px 0px 0px;
-    // .dropdown-toggle ,.dropdown-togglea[aria-expanded="true"]{
-    //     color: #fff;
-    //     background: #3ABBD2;
-    //     border-radius: 5px 5px 0px 0px;
-    // }
- 
-    // i{
-    //     transform: rotate(180deg);
-    // }
+    border-radius: 5px;
   
   
 }
-ul ul a {
-    font-size: 0.9em !important;
-    padding-left: 30px !important;
-    background: #6d7fcc;
+
+li a.dropdown-toggle[aria-expanded="true"]{
+    border-radius: 5px 5px 0px 0px;
+    background:#3ABBD2 ;
+    margin-top: .50rem;
+    // border-radius: 0px 0px 5px 5px;
+     i{
+        transform: rotate(180deg);
+    }
+    // ul.collapse li a{
+    //     background: transparent;
+    //     color: black;
+    // }
+       
+}
+
+
+
+
+ ul.collapse   {
+    a{
+        background: #3ABBD2;
+        color: black;
+    }
+       
+}
+
+ul.collapse.show   {
+    border-radius: 5px 5px 0px 0px;
+    a.active{
+       
+        color: white;
+    }
+       
 }

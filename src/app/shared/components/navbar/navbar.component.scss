@@ -2,8 +2,13 @@
 .navbar{
     border-bottom: 1px solid $gray2;
     background: white;
+    padding-left: 11px;
     .navbar-brand{
         text-align: center;
+        width: 59px;
+        padding-right: 4px;
+        margin-right: 10px;
+        border-right: 1px solid $gray2;
      
     }
     .btn-info{

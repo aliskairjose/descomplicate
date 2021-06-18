@@ -7,7 +7,7 @@ import { Component, ElementRef, OnDestroy, OnInit, HostListener, Input } from '@
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-
+  @Input() item = ''; // decorate the property with @Input()
 
   constructor(
  
@@ -15,7 +15,7 @@ export class MenuComponent implements OnInit {
     
   }
   ngOnInit() {
-   
+    console.log(this.item);
   }
 
 

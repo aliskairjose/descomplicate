@@ -1,19 +1,26 @@
-<nav id="sidebar">
+<nav id="sidebar" class="{{item}}">
     <div class="sidebar-header">
         <img src="../../../../assets/logo/logo.svg" alt="" srcset="">
     </div>
     
-    <ul class="list-unstyled components">
+    <ul class="list-unstyled components" >
         <div class="profile-user ">
                 <img src="../../../../assets/user-img/user.png" alt="" srcset="" class="img-user">
-                <label for="" class="m-0">Melissa Olaya</label>
-                <p class="">Administrador</p>
+                <label for="" class="m-0 name-user">Melissa Olaya</label>
+                <p class="rol-user">Administrador</p>
         </div>
-        <li   >
-            <a  href="pages/dashboard" >Dashboard</a>
+        <li  [routerLink]="['/pages/dashboard']" routerLinkActive="active" >  
+            <a> 
+                <img src="../../../../assets/icon/menu/dashboard_white.svg"  class="icon-menu">
+                <label for="" class="m-0 title-option">Dashboard</label>
+            </a>
         </li>
-        <li>
-            <a href="#pageSubmenu">Usuarios</a>
+        <li [routerLink]="['/pages/users']" routerLinkActive="active" >
+            <a>
+                
+                <!-- <img src="../../../../assets/icon/menu/dashboard_white.svg"  class="icon-menu"> -->
+                <label for="" class="m-0 title-option">Usuarios</label>
+            </a>
         </li>
         <li>
             <a >Monitoreo</a>
@@ -24,28 +31,72 @@
         <li>
             <a >Disponibilidad</a>
         </li>
-        <li>
-            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                Pages
+        <li  >
+            <a href="#finance" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                Finanzas
                 <i class="bi bi-chevron-down"></i>
             </a>
-            <ul class="collapse list-unstyled" id="pageSubmenu">
+            <ul class="collapse list-unstyled" id="finance">
                 <li>
-                    <a href="#">Page 1</a>
+                    <a >Cuentas por Compensar</a>
                 </li>
                 <li>
-                    <a href="#">Page 2</a>
+                    <a >Cuentas Compensadas</a>
                 </li>
                 <li>
-                    <a href="#">Page 3</a>
+                    <a >Verificacion de Pagos</a>
                 </li>
             </ul>
         </li>
-        <li>
-            <a href="#">Portfolio</a>
+        <li >
+            <a href="#Approval" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+              Aprobaciones
+                <i class="bi bi-chevron-down"></i>
+            </a>
+            <ul class="collapse list-unstyled" id="Approval">
+                <li>
+                    <a >Tramitadores socios</a>
+                </li>
+                <li>
+                    <a >Mensajeros socios</a>
+                </li>
+              
+            </ul>
         </li>
         <li>
-            <a href="#">Contact</a>
+            <a href="#Config" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                Configuración
+                <i class="bi bi-chevron-down"></i>
+            </a>
+            <ul class="collapse list-unstyled" id="Config">
+                <li>
+                    <a >Requisitos</a>
+                </li>
+                <li>
+                    <a >Instituciones</a>
+                </li>
+                <li>
+                    <a >Tramites</a>
+                </li>
+                <li>
+                    <a >Entidades Bancarias</a>
+                </li>
+                <li>
+                    <a >Gastos</a>
+                </li>
+            </ul>
         </li>
+    
     </ul>
+    <!-- <div > -->
+       <ul class="list-unstyled components">
+           <li>
+               <a href="">
+                    <img src="../../../../assets/icon/menu/logout_white.svg"  class="icon-menu">
+                 
+                   <label for="" class="m-0 title-option">Cerrar sesión</label>
+                </a>
+           </li>
+       </ul>
+    <!-- </div> -->
 </nav>
