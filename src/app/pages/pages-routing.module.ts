@@ -8,17 +8,17 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 // Users
-import { UsersComponent } from './users/users.component';
+// import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
   {
     path : "dashboard",
     component: DashboardComponent
   },
-  {
-    path : "users",
-    component: UsersComponent
-  }
+  // {
+  //   path : "users",
+  //   component: UsersComponent
+  // }
 	
 ];
 
