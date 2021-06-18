@@ -10,21 +10,24 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/service/auth.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+
 @NgModule({
   declarations: [
     AppComponent,
     PagesComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    RouterModule,
+    BrowserModule,
     SharedModule,
     NgxSpinnerModule,
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule, 
     ReactiveFormsModule,
-    RouterModule
+    
+  
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es' },

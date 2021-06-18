@@ -40,7 +40,6 @@ const routes: Routes = [
       path : "pages/message-reset-pass",
       component: MessageResetPassComponent
     },
-    
     {
       path: 'pages',
       component: PagesComponent,
