@@ -1,0 +1,26 @@
+@import "../../../../assets/variables";
+
+
+
+.tramitadores{
+    .card-container{
+        box-shadow: 3px 3px 10px #00000059;
+        border: none;
+        
+        .card-title.primary{
+            border-bottom: 1px solid $gray2;
+        }
+
+        .card-data{
+            .img-user{
+                height: 30px;
+                width: 30px;
+            }
+            
+            .label-data{
+                font-size: 1rem;
+                font-weight: 600;
+            }
+        }
+    }
+}
