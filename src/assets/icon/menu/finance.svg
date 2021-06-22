@@ -1,0 +1,16 @@
+<svg version="1.2" baseProfile="tiny-ps" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 50" width="24" height="50">
+	<title>finance</title>
+	<defs>
+		<image width="24" height="24" id="img1" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48ZGVmcz48c3R5bGU+LmF7b3BhY2l0eTowLjc7fS5ie2ZpbGw6bm9uZTt9LmN7ZmlsbDojZmZmO308L3N0eWxlPjwvZGVmcz48ZyBjbGFzcz0iYSI+PHJlY3QgY2xhc3M9ImIiIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIvPjxwYXRoIGNsYXNzPSJjIiBkPSJNNi41LDIxSDNhMSwxLDAsMCwxLTEtMVYxMEExLDEsMCwwLDEsMyw5SDYuNWExLDEsMCwwLDEsMSwxVjIwQTEsMSwwLDAsMSw2LjUsMjFaTTEzLjc1LDNoLTMuNWExLDEsMCwwLDAtMSwxVjIwYTEsMSwwLDAsMCwxLDFoMy41YTEsMSwwLDAsMCwxLTFWNEExLDEsMCwwLDAsMTMuNzUsM1pNMjEsMTFIMTcuNWExLDEsMCwwLDAtMSwxdjhhMSwxLDAsMCwwLDEsMUgyMWExLDEsMCwwLDAsMS0xVjEyQTEsMSwwLDAsMCwyMSwxMVoiLz48L2c+PC9zdmc+"/>
+		<image width="24" height="24" id="img2" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48ZGVmcz48c3R5bGU+LmF7ZmlsbDpub25lO30uYntmaWxsOiNmZmY7fTwvc3R5bGU+PC9kZWZzPjxyZWN0IGNsYXNzPSJhIiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiLz48cGF0aCBjbGFzcz0iYiIgZD0iTTYuNSwyMUgzYTEsMSwwLDAsMS0xLTFWMTBBMSwxLDAsMCwxLDMsOUg2LjVhMSwxLDAsMCwxLDEsMVYyMEExLDEsMCwwLDEsNi41LDIxWk0xMy43NSwzaC0zLjVhMSwxLDAsMCwwLTEsMVYyMGExLDEsMCwwLDAsMSwxaDMuNWExLDEsMCwwLDAsMS0xVjRBMSwxLDAsMCwwLDEzLjc1LDNaTTIxLDExSDE3LjVhMSwxLDAsMCwwLTEsMXY4YTEsMSwwLDAsMCwxLDFIMjFhMSwxLDAsMCwwLDEtMVYxMkExLDEsMCwwLDAsMjEsMTFaIi8+PC9zdmc+"/>
+	</defs>
+	<style>
+		tspan { white-space:pre }
+	</style>
+	<g id="Layer" style="opacity: 0.702">
+		<use id="leaderboard_white_24dp" href="#img1" transform="matrix(1,0,0,1,0,0)"/>
+		<use id="leaderboard_white_24dp" href="#img2" transform="matrix(1,0,0,1,0,25)"/>
+	</g>
+	<g id="listos">
+	</g>
+</svg>
