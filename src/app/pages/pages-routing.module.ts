@@ -6,14 +6,14 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 // Users
-import { UsersComponent } from './users/users.component';
+// import { UsersComponent } from './users/users.component';
 
 // Approval
 import { TramitadoresPartnersComponent } from './approval/tramitadores-partners/tramitadores-partners.component';
 import { MessengersPartnersComponent } from './approval/messengers-partners/messengers-partners.component';
 
 // Monitoring
-import { MonitoringComponent } from './monitoring/monitoring.component';
+// import { MonitoringComponent } from './monitoring/monitoring.component';
 
 
 // Config
@@ -29,10 +29,10 @@ const routes: Routes = [
     path : "dashboard",
     component: DashboardComponent
   },
-  {
-    path : "users",
-    component: UsersComponent
-  },
+  // {
+  //   path : "users",
+  //   component: UsersComponent
+  // },
   {
     path : "approval/tramitadores",
     component: TramitadoresPartnersComponent
@@ -41,10 +41,10 @@ const routes: Routes = [
     path : "approval/messengers",
     component: MessengersPartnersComponent
   },
-  {
-    path : "monitoring",
-    component: MonitoringComponent
-  },
+  // {
+  //   path : "monitoring",
+  //   component: MonitoringComponent
+  // },
   {
     path : "config/banks",
     component: BanksComponent
