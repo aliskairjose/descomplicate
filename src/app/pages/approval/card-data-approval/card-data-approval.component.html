@@ -28,7 +28,17 @@
                 <div class="col-2">
                     <label for="" class="text-title">{{pages == 'tramitadores' ? 'Institución(es)' : 'Tipo de Mensajeria'}}</label>
                     <div class="">
-                        <p class="p-content" *ngFor="let institute of data.manager.institutions">{{institute.name}}</p>
+                      
+                        <container-element [ngSwitch]="pages">
+                            <some-element *ngSwitchCase="'tramitadores'">
+                                <p class="p-content" *ngFor="let institute of data.manager.institutions">{{institute.name}}</p>
+                            </some-element>
+                       
+                            <some-element *ngSwitchCase="'messengers'">
+                                <!-- <p class="p-content" *ngFor="let i of data.manager.courier">{{i.name}}</p> -->
+                                <p class="p-content" >{{data.manager.courier.name}}</p>
+                            </some-element>
+                         </container-element>
                     </div>
                   
                 </div>
@@ -69,8 +79,8 @@
     </div>
     <div class="col-12 mt-2 pr-0">
         <div class="d-flex justify-content-end flex-row">
-                <button class="btn btn-sm btn-approval mr-2 text-primary  text-bold">Aprobar</button>
-                <button class="btn btn-sm btn-cancel text-secondary  text-bold">Rechazar</button>
+            <button class="btn btn-sm btn-approval mr-2 text-primary  text-bold" (click)="Approval(data.id)">Aprobar</button>
+            <button class="btn btn-sm btn-cancel text-secondary  text-bold" (click)="Reject(data.id)">Rechazar</button>
         </div>
     </div>
 </div>

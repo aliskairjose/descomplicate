@@ -21,7 +21,7 @@
                             </div>
                         </div>
                         <div class="card-text px-5">
-                             <app-card-data-approval [data]="data" [pages]="'messengers'"></app-card-data-approval>
+                             <app-card-data-approval [data]="data" [pages]="'messengers'" (newItemEvent)="ChangeItem($event)"></app-card-data-approval>
                         </div>
                     
                 

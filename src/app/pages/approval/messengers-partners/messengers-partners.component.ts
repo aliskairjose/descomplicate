@@ -28,4 +28,10 @@ export class MessengersPartnersComponent implements OnInit {
     );
   }
 
+  ChangeItem(newItem: string) {
+    if(newItem == "RefreshList"){
+      this.GetItemMessengers();
+    }
+  }
+
 }

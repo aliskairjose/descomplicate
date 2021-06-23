@@ -18,13 +18,19 @@ export class TramitadoresPartnersComponent implements OnInit {
   GetItemTramitadores(){
     this.htpp.get("users/admin/manager/processors?page=1").subscribe(
       (res)=>{
-        // console.log(res.data);
+        console.log(res.data);
         this.Item = res.data;
       },
       error => {
         console.log(error);
       }
     );
+  }
+
+  ChangeItem(newItem: string) {
+    if(newItem == "RefreshList"){
+      this.GetItemTramitadores();
+    }
   }
 
 }
