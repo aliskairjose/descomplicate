@@ -1,0 +1,57 @@
+<section class="py-5 px-4 ">
+    <div class="container users"> 
+        <div class="card " >
+            <div class="card-body px-0">
+            <div class="card-title px-4 ">
+                <div class="row">
+                    <div class="col-6">
+                            <h5>Listado de usuarios</h5>
+                    </div>
+                    <div class="col-5 text-right">
+                        <label for="" class="text-primary">Crear usuario</label>
+                        <button class="btn btn-primary btn-sm ml-2"><i class="bi bi-plus-lg"></i></button>
+                    </div>
+                    <div class="col-1">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="card-text">
+                <table class="table">
+                    <thead >
+                      <tr >
+                      
+                        <th scope="col" class="color-gray" style="width:180px">Usuario</th>
+                        <th scope="col" class="color-gray">Rol</th>
+                        <th scope="col" class="color-gray"></th>
+                        <th scope="col" class="color-gray"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of Item">
+                        <td>  <img src="{{data.src}}" alt="" srcset="" class="img-user ml-2 mr-1"> {{data.name}}</td>
+                        <td>{{data.rol}}</td>
+                        <td></td>
+                        <td class="text-right">
+                            <div class="btn-group dropleft">
+                                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="bi bi-three-dots-vertical"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#"><i class="bi bi-arrow-clockwise mr-2"></i>Actualizar</a>
+                                    <a class="dropdown-item" href="#"><i class="bi bi-power mr-2"></i>Desactivar</a>
+                               
+                                </div>
+                              </div>
+                        </td>
+                      </tr>
+                
+                    </tbody>
+                  </table>
+            </div>
+        
+    
+            </div>
+        </div>
+    </div>
+</section>

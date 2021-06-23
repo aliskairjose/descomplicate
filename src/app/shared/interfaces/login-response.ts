@@ -1,7 +1,9 @@
 import { User } from './user';
 
 export interface LoginResponse {
-	token: string;
+	data: string;
 	user: User;
 	message: string;
 }
+
+

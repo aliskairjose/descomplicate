@@ -16,6 +16,8 @@ export class PasswordRecoveryComponent implements OnInit {
   submitted :boolean = false;
   constructor(private router: Router,private http:HttpserviceService) { }
 
+  get f() { return this.FormLogin.controls; }
+
   ngOnInit(): void {
   }
 
@@ -24,11 +26,14 @@ export class PasswordRecoveryComponent implements OnInit {
     // console.log("submit");
     this.submitted = true;
     if(this.FormLogin.valid){
-      this.http.post( 'password-recovery', this.FormLogin.value ).subscribe( response => {
+      this.http.post( 'auth/recovery-password/admin', this.FormLogin.value ).subscribe( response => {
+        console.log(response)
 			  this.router.navigate( [ '/pages/message-pass-recovery' ] );
-			} );
+			},
+      error=>{
+        console.log(error)
+      } );
     }
-   
    
   }
 

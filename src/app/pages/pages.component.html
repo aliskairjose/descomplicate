@@ -1,17 +1,18 @@
-<div class="wrapper">
 
+<div class="wrapper">
+  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="square-jelly-box" >
+    <p style="color: white"> Cargando... </p>
+  </ngx-spinner>
   <!-- Sidebar -->
 
    <app-menu [item]="currentItem" ></app-menu>
  
 
   <!-- Page Content -->
-  <div id="content">
+  <div id="content" [class.margin_min]="currentItem == 'active'" class="margin">
       <!-- We'll fill this with dummy content -->
       <app-navbar (newItemEvent)="addItem($event)"></app-navbar>
-      <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="square-jelly-box" >
-        <p style="color: white"> Cargando... </p>
-      </ngx-spinner>
+  
       <router-outlet></router-outlet>
   </div>
 

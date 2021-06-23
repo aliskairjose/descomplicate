@@ -1,30 +1,70 @@
 
 @import "../../../../assets/variables";
-.wrapper {
-    display: flex;
-    align-items: stretch;
+
+
+#sidebar {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 999;
+    // background: #7386D5;
+    color: #fff;
+    transition: all 0.3s;
+
 }
 
-
-
 #sidebar.active {
-    min-width: 120px;
-    max-width: 120px;
+    min-width: 100px;
+    max-width: 100px;
     text-align: center;
+    .rol-user{
+        display: none;
+    }
+    .title-option{
+        display: none;
+    }
+
+    .sidebar-header{
+        padding-bottom: 35px ;
+    }
+
+    .profile-user{
+        margin-bottom: 20px !important;
+    }
+
+   ul li a {
+        justify-content: center !important;
+         
+            .icon-menu{
+                margin-right:0px;
+            
+            }
+    }
+
+    .dropdown-toggle  {
+    
+        justify-content: start !important;
+        i{
+            display: none;
+        }
+    }
 }
 
 // 
 #sidebar {
+    
     min-width: 250px;
     max-width: 250px;
   
-    min-height: 115vh;
+    min-height: 120vh;
    
     background: $blue;
     color: #fff;
     transition: all 0.3s;
     font-size: 0.8rem;
-
+    
     // ul.collapse{
     //     background:#3ABBD2 ;
     //     border-radius: 0px 0px 5px 5px;
@@ -40,6 +80,7 @@
 a[data-toggle="collapse"] {
     position: relative;
 }
+
 .dropdown-toggle  {
     // display: flex !important;
     justify-content: space-around !important;
@@ -48,6 +89,7 @@ a[data-toggle="collapse"] {
         margin-left: auto;
     }
 }
+
 .dropdown-toggle::after{
     
         display: none;
@@ -72,14 +114,25 @@ a, a:hover, a:focus {
     color: inherit;
     text-decoration: none;
     transition: all 0.3s;
+   
 }
 
 
 
 #sidebar .sidebar-header {
-    padding: 20px;
+    padding: 15px;
+    //  padding: 20px
     background: white;
+    text-align: center;
     border: 1px solid $gray2;
+    transition: all 0.3s;
+    .img1{
+        width: 180px;
+    }
+}
+
+label.title-option{
+    cursor: pointer;
 }
 
 #sidebar ul.components {
@@ -90,7 +143,8 @@ a, a:hover, a:focus {
         flex-direction: column;
         text-align: center;
         justify-content: center;
-
+        margin-bottom: 10px;
+        // margin-bottom: 12px;
         .img-user{
             border-radius: 60px;
             height: 60px;
@@ -99,6 +153,8 @@ a, a:hover, a:focus {
             margin-right: auto;
         }
 
+      
+
         label{
             font-size: 1.2rem;
             font-weight: 600;
@@ -106,6 +162,7 @@ a, a:hover, a:focus {
 
         p{
             padding-top: 1px;
+            margin: 0;
             font-size: 0.8rem;
         }
     }
@@ -118,13 +175,77 @@ a, a:hover, a:focus {
 }
 
 #sidebar ul li a {
-    padding: 10px;
-    font-size: 1.1em;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 1em;
     display: flex;
     align-items: center;
+
     .icon-menu{
-        margin-right: 5px;
+        margin-right: 6px;
+        height: 20px;
+        background-size: 20px !important;
+        width: 20px;
     }
+    // menu icon 
+
+        .icon-menu.option1{
+            background-image: url("../../../../assets/icon/menu/dashboard.svg");
+            background-repeat: no-repeat;
+            background-size: 25px;
+            background-position: 0% 0%;
+        }
+
+        .icon-menu.option2{
+            background-image: url("../../../../assets/icon/menu/double_person.svg");
+            background-repeat: no-repeat;
+            background-size: 25px;
+            background-position: 0% 0%;
+        }
+
+        .icon-menu.option3{
+            background-image: url("../../../../assets/icon/menu/folder_check_error.svg");
+            background-repeat: no-repeat;
+            background-size: 25px;
+            background-position: 0% 0%;
+        }
+        .icon-menu.option4{
+            background-image: url("../../../../assets/icon/menu/notifications.svg");
+            background-repeat: no-repeat;
+            background-size: 25px;
+            background-position: 0% 0%;
+        }
+
+        .icon-menu.option5{
+            background-image: url("../../../../assets/icon/menu/double_check.svg");
+            background-repeat: no-repeat;
+            background-size: 25px;
+            background-position: 0% 0%;
+        }
+
+        .icon-menu.option6{
+            background-image: url("../../../../assets/icon/menu/finance.svg");
+            background-repeat: no-repeat;
+            background-size: 25px;
+            background-position: 0% 0%;
+        }
+
+        .icon-menu.option7{
+            background-image: url("../../../../assets/icon/menu/double_person_plus.svg");
+            background-repeat: no-repeat;
+            background-size: 25px;
+            background-position: 0% 0%;
+        }
+
+        .icon-menu.option8{
+            background-image: url("../../../../assets/icon/menu/config.svg");
+            background-repeat: no-repeat;
+            background-size: 25px;
+            background-position: 0% 0%;
+        }
+
+    // menu icon 
 }
 #sidebar ul li a:hover {
     // color: #7386D5;
@@ -136,7 +257,31 @@ a, a:hover, a:focus {
     color: #fff;
     background: #3ABBD2;
     border-radius: 5px;
-  
+
+ 
+    
+    .icon-menu.option1{
+        background-position: 100% 100% !important;
+    }
+
+    .icon-menu.option2{
+        background-position: 100% 90% !important;
+    }
+
+    .icon-menu.option3{
+        background-position: 100% 90% !important;
+    }
+    
+    .icon-menu.option4{
+        background-position: 100% 90% !important;
+    }
+
+    .icon-menu.option5{
+        background-position: 100% 90% !important;
+    }
+
+
+    
   
 }
 
@@ -147,6 +292,18 @@ li a.dropdown-toggle[aria-expanded="true"]{
     // border-radius: 0px 0px 5px 5px;
      i{
         transform: rotate(180deg);
+    }
+
+    .icon-menu.option6{
+        background-position: 100% 90% !important;
+    }
+
+    .icon-menu.option7{
+        background-position: 100% 90% !important;
+    }
+
+    .icon-menu.option8{
+        background-position: 100% 90% !important;
     }
     // ul.collapse li a{
     //     background: transparent;
@@ -174,3 +331,4 @@ ul.collapse.show   {
     }
        
 }
+

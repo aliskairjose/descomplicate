@@ -24,7 +24,9 @@ export class LoginAdminComponent implements OnInit {
   ) { 
   
   }
+
   get f() { return this.FormLogin.controls; }
+  
   ngOnInit(): void {
   }
 
@@ -39,11 +41,15 @@ export class LoginAdminComponent implements OnInit {
       this.auth.login( 'admin', this.FormLogin.value ).subscribe( response => {
 				this.auth.isAuthSubject( true );
 				this.auth.userSubject( response.user );
-				this.storage.setItem( TOKEN, response.token );
+				this.storage.setItem( TOKEN, response.data );
 				this.storage.setItem( USER, response.user );
-				this.router.navigateByUrl( 'pages/home' );
+				this.router.navigateByUrl( 'pages/dashboard' );
+    
 				// Mostrar mensaje de bienvenida
-			} );
+			},
+      error =>{
+        console.log(error);
+      } );
     }
 
   }

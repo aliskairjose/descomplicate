@@ -13,28 +13,33 @@
                         <div class="row">
                             <!-- card acceso rapido -->
                                 <div class="col-3">
-                                    <div class="card monitor" >
-                                        <div class="card-body">
-                                        <div class="card-title">
-                                            <div class="img-circle-icon">	<img src="../../../assets/icon/folder_check_error_white.svg" alt="" srcset=""> </div>
-                                        </div>
+                                        <a href="/pages/monitoring" style="text-decoration: none;">
                                     
-                                        <p class="card-text">Monitoreo de <br> trámite</p>
-                                
+                                        <div class="card monitor" >
+                                            <div class="card-body">
+                                            <div class="card-title">
+                                                <div class="img-circle-icon">	<img src="../../../assets/icon/folder_check_error_white.svg" alt="" srcset=""> </div>
+                                            </div>
+                                        
+                                            <p class="card-text text-dark">Monitoreo de <br> trámite</p>
+                                    
+                                            </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 </div>
                                 <div class="col-3">
-                                    <div class="card aprobacion" >
-                                        <div class="card-body">
-                                        <div class="card-title">
-                                            <div class="img-circle-icon">	<img src="../../../assets/icon/person_double_plus_white.svg" alt="" srcset=""> </div>
-                                        </div>
+                                    <a href="/pages/approval/tramitadores" style="text-decoration: none;">
+                                        <div class="card aprobacion" >
+                                            <div class="card-body">
+                                            <div class="card-title">
+                                                <div class="img-circle-icon">	<img src="../../../assets/icon/person_double_plus_white.svg" alt="" srcset=""> </div>
+                                            </div>
+                                        
+                                            <p class="card-text text-dark">Aprobaciones</p>
                                     
-                                        <p class="card-text">Aprobaciones</p>
-                                
+                                            </div>
                                         </div>
-                                    </div>
+                                     </a>
                                 </div>
                                 <div class="col-3">
                                     <div class="card finanzas" >
@@ -71,13 +76,13 @@
                             <div class="card " >
                                 <div class="card-body">
                                 <div class="card-title">
-                                    <label for="" class="title-card mb-0">45</label>
+                                    <label for="" class="title-card mb-0">{{active_ordes}}</label>
                                     <div class="d-flex justify-content-between sub-title"> N° Trámites activos <img src="../../../assets/icon/dashboard/file_plus_gray.svg" alt="" srcset=""></div>
                                 </div>
                             
                                 <div class="card-text">
                                     <div class="progress">
-                                        <div class="progress-bar bg-orange" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar bg-orange" role="progressbar" [style.width.%]="porcentaje_ordes" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                       </div>
                                 </div>
                         
@@ -90,13 +95,13 @@
                                 <div class="card card-union union-1 mr-0" style="width:50%">
                                     <div class="card-body">
                                     <div class="card-title">
-                                        <label for="" class="title-card mb-0">45</label>
-                                        <div class="d-flex justify-content-between sub-title"> N° Trámites activos <img src="../../../assets/icon/dashboard/check_double_gray.svg" alt="" srcset=""></div>
+                                        <label for="" class="title-card mb-0">{{active_processors}}</label>
+                                        <div class="d-flex justify-content-between sub-title"> N° Tramitadores activos <img src="../../../assets/icon/dashboard/check_double_gray.svg" alt="" srcset=""></div>
                                     </div>
                                 
                                         <div class="card-text">
                                             <div class="progress">
-                                                <div class="progress-bar bg-red" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-red" role="progressbar" [style.width.%]="porcentaje_processors" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         </div>
                             
@@ -107,13 +112,13 @@
                                 <div class="card  card-union union-2 ml-0" style="width:50%">
                                     <div class="card-body">
                                     <div class="card-title">
-                                        <label for="" class="title-card mb-0">45</label>
-                                        <div class="d-flex justify-content-between sub-title"> N° Trámites activos <img src="../../../assets/icon/dashboard/person_one_gray.svg" alt="" srcset=""></div>
+                                        <label for="" class="title-card mb-0">{{active_messengers}}</label>
+                                        <div class="d-flex justify-content-between sub-title">N° Mensajeros activos<img src="../../../assets/icon/dashboard/person_one_gray.svg" alt="" srcset=""></div>
                                     </div>
                                 
                                         <div class="card-text">
                                             <div class="progress">
-                                                <div class="progress-bar bg-green" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-green" role="progressbar" [style.width.%]="porcentaje_messengers" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         </div>
                             

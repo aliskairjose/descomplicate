@@ -13,6 +13,11 @@ import { MessageResetPassComponent } from './auth/reset-password/message-reset-p
 // Dashboard
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UsersComponent } from './users/users.component';
+import { TramitadoresPartnersComponent } from './approval/tramitadores-partners/tramitadores-partners.component';
+import { MessengersPartnersComponent } from './approval/messengers-partners/messengers-partners.component';
+import { CardDataApprovalComponent } from './approval/card-data-approval/card-data-approval.component';
+import { MonitoringComponent } from './monitoring/monitoring.component';
+import { BanksComponent } from './config/banks/banks.component';
 
 
 @NgModule({
@@ -23,11 +28,15 @@ import { UsersComponent } from './users/users.component';
     ResetPasswordComponent,
     MessageResetPassComponent,
     DashboardComponent,
-    UsersComponent
+    UsersComponent,
+    TramitadoresPartnersComponent,
+    MessengersPartnersComponent,
+    CardDataApprovalComponent,
+    MonitoringComponent,
+    BanksComponent
   ],
   imports: [
     CommonModule,
-    
     PagesRoutingModule,
     SharedModule,
     ReactiveFormsModule,

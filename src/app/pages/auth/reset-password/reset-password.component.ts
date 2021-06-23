@@ -16,9 +16,11 @@ export class ResetPasswordComponent implements OnInit {
   fieldTextType : boolean = false;
   fieldTextType1 : boolean = false;
   FormLogin = new FormGroup({
-    password: new FormControl('',[Validators.required,Validators.minLength( 8 )])
+    token : new FormControl('',[Validators.required]),
+    new_password: new FormControl('',[Validators.required,Validators.minLength( 8 )]),
+    new_password_confirmation : new FormControl('',[Validators.required]),
   });
-  
+
   constructor(
     private router: Router,
 	private route: ActivatedRoute,private http:HttpserviceService
@@ -47,9 +49,12 @@ export class ResetPasswordComponent implements OnInit {
    onSubmit(){
     this.submitted = true;
     if(this.FormLogin.valid){
-      this.http.post( 'reset-pass', this.FormLogin.value ).subscribe( response => {
+      this.http.post( 'auth/new-password', this.FormLogin.value ).subscribe( response => {
         this.router.navigate( [ '/pages/message-reset-pass' ] );
-			} );
+        console.log(response);
+			},error=>{
+        console.log(error);
+      } );
     }
    
 

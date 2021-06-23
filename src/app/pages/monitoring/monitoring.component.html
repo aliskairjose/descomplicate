@@ -1,0 +1,67 @@
+<section class="py-5 px-4 ">
+    <div class="container monitoring"> 
+        <div class="card " >
+            <div class="card-body px-0">
+            <div class="card-title px-4 ">
+                <div class="row">
+                    <div class="col-4">
+                            <h5>Listado de trámites</h5>
+                    </div>
+                    <div class="col-7 d-flex justify-content-end">
+                        <div class="d-flex flex-row">
+                            <!-- button status -->
+                            <button class="btn btn-sm text-secondary border-1 mr-2 d-flex align-items-center flex-row"> <div class="point-yellow"></div> Pendientes: 00</button>
+                            <button class="btn btn-sm text-secondary border-1 mr-2 d-flex align-items-center flex-row"> <div class="point-red"></div> Culminados: 02</button>
+                            <button class="btn btn-sm text-secondary border-1 mr-3 d-flex align-items-center flex-row"> <div class="point-blue"></div> En proceso: 00</button>
+                            <!-- button status -->
+                            <!-- filter downloand -->
+                            <button class="btn btn-sm text-secondary text-center border-1 mr-2"><img src="../../../assets/icon/filter_list.svg" alt=""></button>
+                            <button class="btn btn-sm text-secondary text-center border-1"><img src="../../../assets/icon/download.svg" alt=""></button>
+                            <!-- filter downloand -->
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="card-text">
+                <table class="table">
+                    <thead >
+                      <tr >
+                      
+                        <th scope="col" class="color-gray" >Código de Trámite</th>
+                        <th scope="col" class="color-gray">Trámite</th>
+                        <th scope="col" class="color-gray">Institución</th>
+                        <th scope="col" class="color-gray">Mensajero</th>
+                        <th scope="col" class="color-gray">Tramitador</th>
+                        <th scope="col" class="color-gray">Estatus</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of Item">
+                        <td>  {{data.code}}</td>
+                        <td>  {{data.doc_name}}</td>
+                        <td>  {{data.institute}}</td>
+                        <td>   <img class="img-user" src="{{data.src_messages}}" alt="">{{data.name_messages}}</td>
+                        <td>   <img class="img-user" src="{{data.src_tramitador}}" alt="">{{data.name_tramitador}}</td>
+                        <td>   
+                            <div class="box-status">
+                                <div  [class.point-yellow]="data.status=='0'"
+                                [class.point-red]="data.status=='2'"
+                                [class.point-blue]="data.status=='1'">
+                                </div>
+                                    {{Getnamestatus(data.status)}}
+                            </div>
+                        </td>
+                      </tr>
+                
+                    </tbody>
+                  </table>
+            </div>
+        
+    
+            </div>
+        </div>
+    </div>
+</section>

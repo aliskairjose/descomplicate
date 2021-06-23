@@ -9,7 +9,11 @@ body {
 	margin: 0;
 	// font-family: $text-secondary ;
    background-color: $body;
+   
 }
+
+
+
 
 input{
     background: #dcdcdc42 !important;
@@ -56,3 +60,13 @@ input.password{
 //     display: block;
 //     min-width: 100px !important;
 // }
+
+#sidebar.active  > #content{
+    margin-left: 100px;
+}
+
+.button-cancel-sweet{
+    background: white !important;
+    color: $gray3 !important;
+    border:1px solid $gray2 !important;
+}

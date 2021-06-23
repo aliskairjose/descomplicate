@@ -14,6 +14,11 @@ import { MessengersPartnersComponent } from './approval/messengers-partners/mess
 
 // Monitoring
 import { MonitoringComponent } from './monitoring/monitoring.component';
+
+
+// Config
+import { BanksComponent } from './config/banks/banks.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -39,6 +44,10 @@ const routes: Routes = [
   {
     path : "monitoring",
     component: MonitoringComponent
+  },
+  {
+    path : "config/banks",
+    component: BanksComponent
   }
 	
 ];

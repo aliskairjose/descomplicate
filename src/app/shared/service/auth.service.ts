@@ -28,7 +28,7 @@ export class AuthService {
              * @returns Data tipo LoginResponse
              */
           login( type: string, data: any ): Observable<LoginResponse> {
-            return this.http.post( `login/${type}`, data );
+            return this.http.post( `auth/login/${type}`, data );
           }
 
           /**
@@ -37,7 +37,7 @@ export class AuthService {
           logout(): void {
             this.storage.clearAll();
             this.isAuthSubject( false );
-            this.router.navigateByUrl( 'pages' );
+            this.router.navigateByUrl( '' );
           }
 
 
