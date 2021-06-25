@@ -51,9 +51,9 @@ export class ResetPasswordComponent implements OnInit {
     if(this.FormLogin.valid){
       this.http.post( 'auth/new-password', this.FormLogin.value ).subscribe( response => {
         this.router.navigate( [ '/pages/message-reset-pass' ] );
-        console.log(response);
+        // console.log(response);
 			},error=>{
-        console.log(error);
+        // console.log(error);
       } );
     }
    

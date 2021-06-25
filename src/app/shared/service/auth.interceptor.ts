@@ -45,8 +45,33 @@ export class AuthInterceptor implements HttpInterceptor {
 		} ),
 			catchError( ( response: HttpErrorResponse ) => {
 				this.spinner.hide();
-				const error = response.error.message || response.statusText;
-				Swal.fire( '', error, 'error' );
+				const errors = response.error.errors;
+				let mensaje = "";
+
+				if(Object.entries(errors).length){
+					for (const key in errors) {
+						if (Object.prototype.hasOwnProperty.call(errors, key)) {
+							const element = errors[key];
+							mensaje += `${element} <br>`;
+						}
+					}
+					Swal.fire( '', mensaje, 'error' );
+				}else{
+						const message = response.error.message;
+						Swal.fire( '', message, 'error' );
+
+				}
+				// let error = response.error.message || response.statusText;
+				// if(response.error.hasOwnProperty("errors")){
+				// 	for (const key in response.error.errors) {
+				// 			let item = response.error.errors[key];
+				// 			console.log(item[0]);
+				// 	}
+				// }else{
+
+				// }
+				// console.log(response);
+				// Swal.fire( '', error, 'error' );
 				return throwError( response );
 			} )
 		);
