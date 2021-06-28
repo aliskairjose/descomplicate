@@ -1,0 +1,35 @@
+@import "../../../assets/variables";
+
+
+.users{
+    .color-gray{
+        color: $gray4;
+    }
+    .card{
+        box-shadow: 3px 3px 10px #00000059;
+        border: none;
+        // .card-title{
+        //     border-bottom: 1px solid $gray2;
+        // }
+    }
+
+    .table{
+        border-bottom: 1px solid $gray2;
+        .img-user{
+            height: 30px;
+            width: 30px;
+        }
+        .dropdown-toggle{
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            i{
+                color: $blue;
+                font-size: 1.2rem;
+            }
+        }
+        .dropdown-toggle::after{
+            display: none;
+        }
+    }
+}

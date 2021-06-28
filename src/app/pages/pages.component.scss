@@ -1,0 +1,21 @@
+.wrapper {
+    display: flex;
+    flex-direction :row;
+    width: 100%;
+    align-items: stretch;
+}
+
+#content{
+    width: 100%;
+    transition: all 0.3s;
+}
+.margin{
+    margin-left: 250px;
+}
+
+.margin_min{
+    margin-left: 100px;
+}
+
+
+

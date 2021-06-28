@@ -1,0 +1,36 @@
+<section class="py-5 px-4 ">
+    <div class="container tramitadores"> 
+        <div class="card card-container" >
+            <div class="card-body px-0">
+            <div class="card-title primary px-4 ">
+                <div class="row">
+                    <div class="col-6">
+                            <h5>Mensajeros socios por aprobar</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="card-text px-4 pt-4">
+                          <!-- card content -->
+                    <div class="card card-data mb-4"  *ngFor="let data of Item">
+                        <div class="card-body px-0">
+                        <div class="card-title px-4 ">
+                            <div class="row">
+                                <div class="col-6">
+                                        <label class="label-data">información del mensajero</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-text px-5">
+                             <app-card-data-approval [data]="data" [pages]="'messengers'" (newItemEvent)="ChangeItem($event)"></app-card-data-approval>
+                        </div>
+                    
+                
+                        </div>
+                    </div>
+                    <!-- card content -->
+            </div>
+                  
+            </div>
+        </div>
+    </div>
+</section>

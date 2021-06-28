@@ -1,0 +1,129 @@
+<nav id="sidebar" class="{{item}}">
+    <div class="sidebar-header">
+        <img src="../../../../assets/logo/logo.svg" alt="" srcset="" [hidden]="item != ''" class="img1">
+        <img src="../../../../assets/logo/logo_min.svg" [hidden]="item != 'active'">
+    </div>
+    
+    <ul class="list-unstyled components" >
+        <div class="profile-user ">
+                <img src="../../../../assets/user-img/user.png" alt="" srcset="" class="img-user">
+                <label for="" class="m-0 name-user text-capitalize">{{display_name}}</label>
+ 
+                <p class="rol-user">Administrador</p>
+        </div>
+        <li  [routerLink]="['/pages/dashboard']" routerLinkActive="active" >  
+            <a> 
+                <div class="icon-menu option1"></div>
+                <label for="" class="m-0 title-option">Dashboard</label>
+            </a>
+        </li>
+        <li [routerLink]="['/pages/users']" routerLinkActive="active" >
+            <a>
+                
+                <!-- <img src="../../../../assets/icon/menu/dashboard_white.svg"  class="icon-menu"> -->
+                <div class="icon-menu option2"></div>
+                <label for="" class="m-0 title-option">Usuarios</label>
+            </a>
+        </li>
+        <li  [routerLink]="['/pages/monitoring']" routerLinkActive="active" >
+            <a >
+                
+                <div class="icon-menu option3"></div>
+                <label for="" class="m-0 title-option">Monitoreo</label>
+            </a>
+        </li>
+        <li>
+            <a >
+                <div class="icon-menu option4"></div>
+                <label for="" class="m-0 title-option">Notificaciones</label>
+            </a>
+        </li>
+        <li>
+            <a >
+                
+                <div class="icon-menu option5"></div>
+                <label for="" class="m-0 title-option">Disponibilidad</label>
+            </a>
+        </li>
+        <li  >
+            <a href="#finance" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                
+                <div class="icon-menu option6"></div>
+                <label for="" class="m-0 title-option">Finanzas</label>
+                <i class="bi bi-chevron-down"></i>
+            </a>
+            <ul class="collapse list-unstyled" id="finance">
+                <li>
+                    <a >Cuentas por Compensar</a>
+                </li>
+                <li>
+                    <a >Cuentas Compensadas</a>
+                </li>
+                <li>
+                    <a >Verificacion de Pagos</a>
+                </li>
+            </ul>
+        </li>
+        <li  >
+            <a href="#Approval" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+              
+              <div class="icon-menu option7"></div>
+              <label for="" class="m-0 title-option">Aprobaciones</label>
+                <i class="bi bi-chevron-down"></i>
+            </a>
+            <ul class="collapse list-unstyled" id="Approval">
+                <li>
+                    <a [routerLink]="['/pages/approval/tramitadores']" routerLinkActive="active">Tramitadores socios</a>
+                </li>
+                <li>
+                    <a [routerLink]="['/pages/approval/messengers']" routerLinkActive="active">Mensajeros socios</a>
+                </li>
+              
+            </ul>
+        </li>
+        <li>
+            <a href="#Config" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                
+                <div class="icon-menu option8"></div>
+                <label for="" class="m-0 title-option">Configuración</label>
+                <i class="bi bi-chevron-down"></i>
+            </a>
+            <ul class="collapse list-unstyled" id="Config">
+                <li>
+                    <a >Requisitos</a>
+                </li>
+                <li>
+                    <a >Instituciones</a>
+                </li>
+                <li>
+                    <a >Tramites</a>
+                </li>
+                <li >
+                    <a [routerLink]="['/pages/config/banks']" routerLinkActive="active">Entidades Bancarias</a>
+                </li>
+                <li>
+                    <a >Gastos</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a (click)="Logout()">
+                 <img src="../../../../assets/icon/menu/logout_white.svg"  class="icon-menu">
+              
+                <label for="" class="m-0 title-option">Cerrar sesión</label>
+             </a>
+        </li>
+    
+    </ul>
+    <!-- <div > -->
+       <!-- <ul class="list-unstyled components">
+           <li>
+               <a (click)="Logout()">
+                    <img src="../../../../assets/icon/menu/logout_white.svg"  class="icon-menu">
+                 
+                   <label for="" class="m-0 title-option">Cerrar sesión</label>
+                </a>
+           </li>
+       </ul> -->
+    <!-- </div> -->
+</nav>
