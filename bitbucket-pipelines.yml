@@ -29,7 +29,7 @@ pipelines:
             - pipe: atlassian/scp-deploy:0.3.12
               variables:
                 USER: 'root'
-                SERVER: 'gestionar.dev.cronapis.com'
+                SERVER: 'api.descomplicate.dev.cronapis.com'
                 REMOTE_PATH: '/var/www/html/web_descomplicate/'
                 LOCAL_PATH: './*'
            
