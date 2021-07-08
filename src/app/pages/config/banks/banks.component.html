@@ -1,4 +1,4 @@
-<section class="py-5 px-4 ">
+<section class="py-2 py-md-5 px-2 px-md-4 ">
     <div class="container bank"> 
         <div class="card " >
             <div class="card-body px-0">
@@ -18,7 +18,7 @@
             <div class="card-text px-2">
                         <div class="col-12" *ngFor="let data of Item">
                                 <div class="row">
-                                    <div class="col-3">
+                                    <div class="col-6 col-md-3">
                                             <label for=""  class="text-secondary">Nombre</label>
                                             <p>{{data.name}}</p>
                                     </div>
@@ -26,7 +26,7 @@
                                         <label for=""  class="text-secondary">Dirección</label>
                                         <p>{{data.address}}</p>
                                     </div>
-                                    <div class="col-3 d-flex justify-content-end">
+                                    <div class="col col-md-3 d-flex justify-content-end">
                                         <button class="btn  text-primary" (click)="ModalEdit(data)" data-toggle="modal" data-target="#exampleModal">Editar</button>
                                         <button class="btn  text-secondary" (click)="RemoveBank(data.id)">Eliminar</button>
                                     </div>

@@ -29,3 +29,14 @@
         color: $blue;
     }
 }
+
+.mobile{
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .mobile{
+        margin-left: 100px;
+        transition: all 0.3s;
+    }
+}

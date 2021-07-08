@@ -3,14 +3,14 @@
         <img src="../../../../assets/logo/logo.svg" alt="" srcset="" [hidden]="item != ''" class="img1">
         <img src="../../../../assets/logo/logo_min.svg" [hidden]="item != 'active'">
     </div>
-    
+    <div class="profile-user ">
+        <img src="../../../../assets/user-img/user.png" alt="" srcset="" class="img-user">
+        <label for="" class="m-0 name-user text-capitalize">{{display_name}}</label>
+
+        <p class="rol-user">Administrador</p>
+    </div>
     <ul class="list-unstyled components" >
-        <div class="profile-user ">
-                <img src="../../../../assets/user-img/user.png" alt="" srcset="" class="img-user">
-                <label for="" class="m-0 name-user text-capitalize">{{display_name}}</label>
- 
-                <p class="rol-user">Administrador</p>
-        </div>
+        
         <li  [routerLink]="['/pages/dashboard']" routerLinkActive="active" >  
             <a> 
                 <div class="icon-menu option1"></div>
@@ -54,13 +54,13 @@
             </a>
             <ul class="collapse list-unstyled" id="finance">
                 <li>
-                    <a >Cuentas por Compensar</a>
+                    <a >{{item== "active" ? 'CPC':'Cuentas por Compensar'}}</a>
                 </li>
                 <li>
-                    <a >Cuentas Compensadas</a>
+                    <a >{{item== "active" ? 'CC':'Cuentas Compensadas'}}</a>
                 </li>
                 <li>
-                    <a >Verificacion de Pagos</a>
+                    <a >{{item== "active" ? 'VDP':'Verificacion de Pagos'}}</a>
                 </li>
             </ul>
         </li>
@@ -73,10 +73,16 @@
             </a>
             <ul class="collapse list-unstyled" id="Approval">
                 <li>
-                    <a [routerLink]="['/pages/approval/tramitadores']" routerLinkActive="active">Tramitadores socios</a>
+                    <a [routerLink]="['/pages/approval/tramitadores']" routerLinkActive="active">
+                        
+                        {{item== "active" ? 'TS':'Tramitadores socios'}}
+                    </a>
                 </li>
                 <li>
-                    <a [routerLink]="['/pages/approval/messengers']" routerLinkActive="active">Mensajeros socios</a>
+                    <a [routerLink]="['/pages/approval/messengers']" routerLinkActive="active">
+                        
+                        {{item== "active" ? 'MS':'Mensajeros socios'}}
+                    </a>
                 </li>
               
             </ul>
@@ -90,19 +96,24 @@
             </a>
             <ul class="collapse list-unstyled" id="Config">
                 <li>
-                    <a >Requisitos</a>
+                    <a >    {{item== "active" ? 'REQ':'Requisitos'}}</a>
                 </li>
                 <li>
-                    <a >Instituciones</a>
+                    <a > {{item== "active" ? 'INST':'Instituciones'}}</a>
                 </li>
                 <li>
-                    <a >Tramites</a>
+                    <a > {{item== "active" ? 'TRA':'Tramites'}}</a>
                 </li>
                 <li >
-                    <a [routerLink]="['/pages/config/banks']" routerLinkActive="active">Entidades Bancarias</a>
+                    <a [routerLink]="['/pages/config/banks']" routerLinkActive="active">
+                        
+                        {{item== "active" ? 'EB':'Entidades Bancarias'}}
+                    </a>
                 </li>
                 <li>
-                    <a >Gastos</a>
+                    <a >
+                        {{item== "active" ? 'GAS':'Gastos'}}
+                    </a>
                 </li>
             </ul>
         </li>

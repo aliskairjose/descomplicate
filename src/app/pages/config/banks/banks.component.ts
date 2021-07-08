@@ -42,6 +42,7 @@ export class BanksComponent implements OnInit {
           this.http.post( 'banks', this.Bank.value ).subscribe( response => {
             document.getElementById("close")?.click();
             Swal.fire( '', "Registro Exitoso", 'success' );
+            this.Clean();
             this.GetBanks();
           },
           error =>{
@@ -57,6 +58,9 @@ export class BanksComponent implements OnInit {
           this.http.put( 'banks/'+this.id_bank, this.Bank.value ).subscribe( response => {
             document.getElementById("close")?.click();
             Swal.fire( '', "Actualización Exitosa", 'success' );
+            this.id_bank = "";
+            this.btn = false;
+            this.Clean();
             this.GetBanks();
           },
           error =>{
@@ -107,8 +111,7 @@ export class BanksComponent implements OnInit {
     }
 
     Clean(){
-      this.id_bank = "";
-      this.btn = false;
+     
       this.Bank.patchValue({
         name : "",
         address :""
