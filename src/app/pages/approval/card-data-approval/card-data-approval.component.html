@@ -1,31 +1,31 @@
 <div class="row card-data">
     <div class="col-12 line-gray-bottom padding-col">
         <div class="row">
-                <div class="col-1">
+                <div class="col-6 mb-2 mb-md-0 col-md-1">
                     <img src="{{data.profile_image}}" alt="" srcset="" class="img-user ml-2 mr-1"> 
                 </div>
                 <!-- img user -->
-                <div class="col-2">
+                <div class="col-6 mb-2 mb-md-0  col-md-2">
                     <label for="" class="text-title">Usuario</label>
                     <p class="p-content">{{data.name}}</p>
                 </div>
                 <!-- name user -->
-                <div class="col-2">
+                <div class="col-6 mb-2 mb-md-0  col-md-2">
                     <label for="" class="text-title">N° documento identidad</label>
                     <p class="p-content">{{data.manager.dni}}</p>
                 </div>
                 <!-- nro dni -->
-                <div class="col-2">
+                <div class="col-6 mb-2 mb-md-0  col-md-2">
                     <label for="" class="text-title">Teléfono</label>
                     <p class="p-content">{{data.phone}}</p>
                 </div>
                 <!-- phone -->
-                <div class="col-3">
+                <div class="col-6  mb-2 mb-md-0 col-md-3">
                     <label for="" class="text-title">Correo</label>
                     <p class="p-content">{{data.email}}</p>
                 </div>
                 <!-- email -->
-                <div class="col-2">
+                <div class="col-6 mb-2 mb-md-0  col-md-2">
                     <label for="" class="text-title">{{pages == 'tramitadores' ? 'Institución(es)' : 'Tipo de Mensajeria'}}</label>
                     <div class="">
                       
@@ -47,10 +47,10 @@
     </div>
     <div class="col-12 line-gray-bottom mt-4">
         <div class="row">
-            <div class="col-6 padding-col">
+            <div class="col-12 col-md-6 mb-2 mb-md-0 padding-col">
                 <label class="label-data">Información bancaria</label>
                 <div class="row">
-                    <div class="col-2">
+                    <div class="col col-md-2">
                         <label for="" class="text-title">Banco</label>
                         <p class="p-content">{{data.manager?.bank?.bank_data.name}}</p>
                     </div>
@@ -68,7 +68,7 @@
     
             </div>
             </div>
-            <div class="col-6 padding-col">
+            <div class="col-12 col-md-6 padding-col">
                 <label class="label-data">Imagen Documento de Identidad</label>
                 <div class="col">
                    <img src="{{data.manager.dni_url}}" alt="" srcset="" style="width: 20px;height: 20px;">

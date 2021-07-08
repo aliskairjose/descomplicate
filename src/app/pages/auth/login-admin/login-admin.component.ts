@@ -48,7 +48,7 @@ export class LoginAdminComponent implements OnInit {
 				// Mostrar mensaje de bienvenida
 			},
       error =>{
-        console.log(error);
+        // console.log(error);
       } );
     }
 
