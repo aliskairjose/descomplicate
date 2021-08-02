@@ -44,8 +44,8 @@ export class CardDataApprovalComponent implements OnInit {
       );
   }
 
-  Reject(id:string){
-    let id_user = id;
+ async Reject(id:string){
+  let id_user = id;
     let name = "";
     switch (this.pages) {
       case "tramitadores":
@@ -56,21 +56,34 @@ export class CardDataApprovalComponent implements OnInit {
       break;
      
     }
-    this.http.put("admin/users/managers/"+id_user+"/reject").subscribe(
-      (res)=>{
-        // Swal.fire( '', "Rechazado "+name, 'success' );
-        Swal.fire({
-          title: '',
-          text: "Rechazado "+name,
-          icon: 'success',
-          showCancelButton: false,
-          confirmButtonColor: '#304FFE'});
-        this.newItemEvent.emit("RefreshList");
-      },
-      (error)=> {
-        this.newItemEvent.emit("Error");
-      }
-    );
+
+    const { value: motivo } = await Swal.fire({
+      title: 'Rechazo de '+name,
+      input: 'text',
+      inputLabel: 'Indique el motivo del Rechazo',
+      inputPlaceholder: '',
+      showCancelButton: true
+    })
+    
+ 
+    if(motivo != "" && motivo != undefined && motivo != null){
+      this.http.put("admin/users/managers/"+id_user+"/reject",{reason:motivo}).subscribe(
+        (res)=>{
+          // Swal.fire( '', "Rechazado "+name, 'success' );
+          Swal.fire({
+            title: '',
+            text: "Rechazado "+name,
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonColor: '#304FFE'});
+          this.newItemEvent.emit("RefreshList");
+        },
+        (error)=> {
+          this.newItemEvent.emit("Error");
+        }
+      );
+    }
+  
   }
 
  
