@@ -6,7 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 // Users
-// import { UsersComponent } from './users/users.component';
+ import { UsersComponent } from './users/users.component';
 
 // Approval
 import { TramitadoresPartnersComponent } from './approval/tramitadores-partners/tramitadores-partners.component';
@@ -29,10 +29,10 @@ const routes: Routes = [
     path : "dashboard",
     component: DashboardComponent
   },
-  // {
-  //   path : "users",
-  //   component: UsersComponent
-  // },
+   {
+     path : "users",
+     component: UsersComponent
+   },
   {
     path : "approval/tramitadores",
     component: TramitadoresPartnersComponent

@@ -9,7 +9,7 @@
                     </div>
                     <div class="col-5 text-right">
                         <label for="" class="text-primary">Crear usuario</label>
-                        <button class="btn btn-primary btn-sm ml-2"><i class="bi bi-plus-lg"></i></button>
+                        <button class="btn btn-primary btn-sm ml-2" id="btn-create" data-toggle="modal" data-target="#exampleModal"><i class="bi bi-plus-lg"></i></button>
                     </div>
                     <div class="col-1">
                         
@@ -55,3 +55,67 @@
         </div>
     </div>
 </section>
+
+<div class="modal fade bd-example-modal-sm" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+       <div class="modal-header">
+        <h5 class="modal-title">Usuario</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div> 
+       <form  [formGroup]="UserForm" >
+       <div class="modal-body px-4">
+
+        <div class="row">
+          <div class="col-6">
+         
+              <label for="" class="text-secondary">Nombre de usuario</label>
+              <input type="text" class="form-control" placeholder="Ingresar nombre"
+              formControlName="name">
+               <!-- <div *ngIf="submitted && f.name.errors?.required" class="invalid-feedback d-block">
+                  Campo Requerido
+              </div>   -->
+     
+          </div>
+          <div class="col-6">
+              
+            <label for="" class="text-secondary">Correo electrónico</label>
+            <input type="text" class="form-control" placeholder="Ingresar nombre"
+            formControlName="mail">
+             <!-- <div *ngIf="submitted && f.name.errors?.required" class="invalid-feedback d-block">
+                Campo Requerido
+            </div>   -->
+          </div>
+          <div class="col-6">
+              
+            <label for="" class="text-secondary">Contraseña</label>
+            <input type="password" class="form-control" placeholder="Ingresar password"
+            formControlName="pass">
+             <!-- <div *ngIf="submitted && f.name.errors?.required" class="invalid-feedback d-block">
+                Campo Requerido
+            </div>   -->
+          </div>
+          <div class="col-6">
+              
+            <label for="" class="text-secondary">Rol</label>
+            <input type="text" class="form-control" placeholder="Seleccionar"
+            formControlName="rol">
+             <!-- <div *ngIf="submitted && f.name.errors?.required" class="invalid-feedback d-block">
+                Campo Requerido
+            </div>   -->
+          </div>
+          
+        </div>
+      </div> 
+      
+       <div class="modal-footer">
+          <button  type="button" class="btn btn-secondary text-secondary" data-dismiss="modal" (click)="Clean()">Cancelar</button>
+          <button [disabled]="!UserForm.valid " type="submit" class="btn btn-primary" (click)="regUser()" >Registrar</button>
+          <!-- <button type="submit" class="btn btn-primary" [hidden]="!btn" (click)="EditBank()">Editar</button> -->
+      </div> 
+  </form> 
+    </div>
+  </div>
+</div>
