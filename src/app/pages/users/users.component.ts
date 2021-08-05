@@ -1,6 +1,8 @@
-import { ɵCodegenComponentFactoryResolver } from '@angular/core';
+import { ViewChild, ɵCodegenComponentFactoryResolver } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-users',
@@ -8,6 +10,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
+  
+  @ViewChild('closebutton')
+  closebutton!: { nativeElement: { click: () => void; }; };
   UserForm = new FormGroup({
     name: new FormControl('',Validators.required),
     mail: new FormControl('',Validators.required),
@@ -35,6 +40,17 @@ export class UsersComponent implements OnInit {
 
   regUser() {
     console.log(this.UserForm.value);
+    this.alertSucces();
+  }
+
+  alertSucces() {
+    Swal.fire({  
+      icon: 'success',
+      title: 'Muy bien !',
+      text: 'Usuario registrado con éxito !',
+      
+    });
+    this.closebutton.nativeElement.click();
   }
 
 }

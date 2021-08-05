@@ -111,7 +111,7 @@
       </div> 
       
        <div class="modal-footer">
-          <button  type="button" class="btn btn-secondary text-secondary" data-dismiss="modal" (click)="Clean()">Cancelar</button>
+          <button  type="button" class="btn btn-secondary text-secondary" #closebutton data-dismiss="modal" (click)="Clean()">Cancelar</button>
           <button [disabled]="!UserForm.valid " type="submit" class="btn btn-primary" (click)="regUser()" >Registrar</button>
           <!-- <button type="submit" class="btn btn-primary" [hidden]="!btn" (click)="EditBank()">Editar</button> -->
       </div> 
