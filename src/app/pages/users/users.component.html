@@ -33,7 +33,7 @@
               <tr *ngFor="let data of userList">
                 <td> <img src="{{data.profile_image}}" alt="" srcset="" class="img-user ml-2 mr-1"> {{data.name}} </td>
                 <td>  {{data.last_name}} </td>
-                <td>Rol</td>
+                <td>{{data.roles[0].name}}</td>
                 <td></td>
                 <td class="text-right">
                   <div class="btn-group dropleft">
