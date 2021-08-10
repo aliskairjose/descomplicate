@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { GetdataService } from '../../shared/service/getdata.service';
+import { AuthService } from '../../shared/service/auth.service';
 
 
 @Component({
@@ -17,6 +18,9 @@ export class UsersComponent implements OnInit {
   UserForm: FormGroup;
   btn : boolean = false;
   rolesList: any = [];
+  rolUser: any = [];
+  dataRegister: any = [];
+  userList: any = [];
 
   Item = [
     {src:"../../../../assets/user-img/user.png",name:"Mark Torres",rol:"Administrador"},
@@ -29,6 +33,7 @@ export class UsersComponent implements OnInit {
   constructor(
     public formBuilder: FormBuilder,
     private GetdataService: GetdataService,
+    private AuthService: AuthService
   ) { 
     this.UserForm = this.formBuilder.group({
       name: ['',[Validators.required,],],
@@ -43,7 +48,8 @@ export class UsersComponent implements OnInit {
   get f() { return this.UserForm.controls; }
 
   ngOnInit(): void {
-    this.getInstitutions();
+    this.roles();
+    this.users();
   }
 
   Clean(){
@@ -52,8 +58,22 @@ export class UsersComponent implements OnInit {
 
   regUser() {
     this.submitted = true;
-    console.log(this.UserForm.value);
     this.alertSucces();
+    this.dataRegister = {
+      "name": this.UserForm.value.name,
+      "password": this.UserForm.value.pass,
+      "password_confirmation": this.UserForm.value.pass,
+      "email": this.UserForm.value.mail, 
+      "role_id": this.UserForm.value.rol
+    }
+    this.AuthService.register(this.dataRegister).subscribe(
+      (response) => {
+        this.alertSucces();
+      },
+      (error) => {
+        
+      }
+    );
   }
 
   alertSucces() {
@@ -72,11 +92,19 @@ export class UsersComponent implements OnInit {
 
    }
 
-   getInstitutions() {
+   roles() {
     this.GetdataService.roles().subscribe(
       (response) => {
         this.rolesList = response.data;
-        console.log(this.rolesList);
+      },
+      (error) => { }
+    );
+  }
+
+  users() {
+    this.GetdataService.users().subscribe(
+      (response) => {
+        this.userList = response.data;
       },
       (error) => { }
     );
