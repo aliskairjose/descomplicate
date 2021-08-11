@@ -18,6 +18,7 @@ import { MessengersPartnersComponent } from './approval/messengers-partners/mess
 import { CardDataApprovalComponent } from './approval/card-data-approval/card-data-approval.component';
 import { MonitoringComponent } from './monitoring/monitoring.component';
 import { BanksComponent } from './config/banks/banks.component';
+import { RequirementsComponent } from './config/requirements/requirements.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { BanksComponent } from './config/banks/banks.component';
     MessengersPartnersComponent,
     CardDataApprovalComponent,
     MonitoringComponent,
-    BanksComponent
+    BanksComponent,
+    RequirementsComponent
   ],
   imports: [
     CommonModule,

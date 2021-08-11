@@ -18,6 +18,7 @@ import { MessengersPartnersComponent } from './approval/messengers-partners/mess
 
 // Config
 import { BanksComponent } from './config/banks/banks.component';
+import { RequirementsComponent } from './config/requirements/requirements.component';
 
 const routes: Routes = [
   {
@@ -26,7 +27,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path : "dashboard",
+    path: "dashboard",
     component: DashboardComponent
   },
   // {
@@ -34,11 +35,11 @@ const routes: Routes = [
   //   component: UsersComponent
   // },
   {
-    path : "approval/tramitadores",
+    path: "approval/tramitadores",
     component: TramitadoresPartnersComponent
   },
   {
-    path : "approval/messengers",
+    path: "approval/messengers",
     component: MessengersPartnersComponent
   },
   // {
@@ -46,14 +47,18 @@ const routes: Routes = [
   //   component: MonitoringComponent
   // },
   {
-    path : "config/banks",
+    path: "config/banks",
     component: BanksComponent
+  },
+  {
+    path: "config/requirements",
+    component: RequirementsComponent
   }
-	
+
 ];
 
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
-})
+@NgModule( {
+  imports: [ RouterModule.forChild( routes ) ],
+  exports: [ RouterModule ]
+} )
 export class PagesRoutingModule { }
