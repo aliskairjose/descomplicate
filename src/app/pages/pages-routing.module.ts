@@ -20,6 +20,7 @@ import { MessengersPartnersComponent } from './approval/messengers-partners/mess
 import { BanksComponent } from './config/banks/banks.component';
 import { RequirementsComponent } from './config/requirements/requirements.component';
 import { InstitutionsComponent } from './config/institutions/institutions.component';
+import { ProcedureComponent } from './config/procedure/procedure.component';
 
 const routes: Routes = [
   {
@@ -58,6 +59,10 @@ const routes: Routes = [
   {
     path: "config/institutions",
     component: InstitutionsComponent
+  },
+  {
+    path: "config/procedure",
+    component: ProcedureComponent
   }
 
 ];

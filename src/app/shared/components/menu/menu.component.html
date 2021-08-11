@@ -106,7 +106,9 @@
                     </a>
                 </li>
                 <li>
-                    <a> {{item== "active" ? 'TRA':'Tramites'}}</a>
+                    <a [routerLink]="['/pages/config/procedure']" routerLinkActive="active">
+                        {{item== "active" ? 'TRA':'Tramites'}}
+                    </a>
                 </li>
                 <li>
                     <a [routerLink]="['/pages/config/banks']" routerLinkActive="active">

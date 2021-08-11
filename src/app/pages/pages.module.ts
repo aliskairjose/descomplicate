@@ -20,6 +20,7 @@ import { MonitoringComponent } from './monitoring/monitoring.component';
 import { BanksComponent } from './config/banks/banks.component';
 import { RequirementsComponent } from './config/requirements/requirements.component';
 import { InstitutionsComponent } from './config/institutions/institutions.component';
+import { ProcedureComponent } from './config/procedure/procedure.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { InstitutionsComponent } from './config/institutions/institutions.compon
     MonitoringComponent,
     BanksComponent,
     RequirementsComponent,
-    InstitutionsComponent
+    InstitutionsComponent,
+    ProcedureComponent
   ],
   imports: [
     CommonModule,
