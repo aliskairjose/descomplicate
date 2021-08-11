@@ -35,7 +35,13 @@ export class RequirementsComponent implements OnInit {
     this.submitted = true;
     if ( this.form.valid ) {
       console.log( this.form.value );
-      Swal.fire( '', "Registro Exitoso", 'success' );
+      this.regSrv.store( this.form.value ).subscribe( response => {
+        console.log( response );
+        if ( response.status === 'Success' ) {
+          this.requirements.push( response.data );
+          Swal.fire( '', "Registro Exitoso", 'success' );
+        }
+      } );
 
     }
   }

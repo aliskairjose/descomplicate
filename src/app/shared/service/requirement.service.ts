@@ -21,6 +21,15 @@ export class RequirementService {
     return this.http.get( `requeriments` );
   }
 
+  /**
+   * 
+   * @param data Objeto name 
+   * @returns Requisito completo
+   */
+  store( data: any ): Observable<BaseResponse<any>> {
+    return this.http.post( `requeriments`, data );
+  }
+
 }
 
 
