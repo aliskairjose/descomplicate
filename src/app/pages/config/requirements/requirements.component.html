@@ -11,7 +11,7 @@
             <div class="col-4 text-right">
               <label for="btn-create" class="text-primary">Crear requisito</label>
               <button class="btn btn-primary btn-sm ml-2" id="btn-create" data-toggle="modal"
-                data-target="#exampleModal" (click)="newRequirement()">
+                data-target="#exampleModal" (click)="add()">
                 <i class="bi bi-plus-lg"></i>
               </button>
             </div>
@@ -27,7 +27,7 @@
                 <div class="d-flex justify-content-end">
                   <button class="btn text-primary" data-toggle="modal" data-target="#exampleModal"
                     (click)="update(req)">Editar</button>
-                  <button class="btn text-secondary">Eliminar</button>
+                  <button class="btn text-secondary" (click)="delete(req.id)">Eliminar</button>
                 </div>
               </div>
             </div>

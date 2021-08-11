@@ -41,6 +41,15 @@ export class RequirementService {
     return this.http.put( `requeriments/${id}`, data );
   }
 
+  /**
+   * @description Elimina requerimiento
+   * @param id Id del requerimiento a eliminar
+   * @returns 
+   */
+  delete( id: number ): Observable<any> {
+    return this.http.delete( `requeriments/${id}` );
+  }
+
 }
 
 

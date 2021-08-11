@@ -4,6 +4,7 @@ import { RequirementService } from '../../../shared/service/requirement.service'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Requirement } from 'src/app/shared/interfaces/requirement';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component( {
   selector: 'app-requirements',
@@ -39,13 +40,17 @@ export class RequirementsComponent implements OnInit {
     }
   }
 
-  newRequirement(): void {
+  add(): void {
     this.createForm();
   }
 
   update( req: Requirement ): void {
     this.requirement = { ...req };
     this.form.controls.name.patchValue( req.name );
+  }
+
+  delete( id: number ): void {
+    this.deleteRequirement( id );
   }
 
   private loadData(): void {
@@ -68,6 +73,16 @@ export class RequirementsComponent implements OnInit {
 
   private updateRequirement(): void {
     this.regSrv.update( this.requirement.id, this.form.value ).subscribe( response => {
+      if ( response.status === 'Success' ) {
+        Swal.fire( '', response.message, 'success' );
+        document.getElementById( "close" )?.click();
+        this.loadData();
+      }
+    } )
+  }
+
+  private deleteRequirement( id: number ): void {
+    this.regSrv.delete( id ).subscribe( response => {
       if ( response.status === 'Success' ) {
         Swal.fire( '', response.message, 'success' );
         document.getElementById( "close" )?.click();
