@@ -18,9 +18,9 @@
         <div class="card-text px-2">
           <ng-container *ngIf="requirements.length; else noData">
             <div class="col-12" *ngFor="let req of requirements">
-              <div class="d-flex justify-content-between">
+              <div class="d-flex justify-content-between align-items-center my-1">
                 <div>
-                  <p>{{req.name}}</p>
+                  <p class="m-0">{{req.name}}</p>
                 </div>
                 <div class="d-flex justify-content-end">
                   <button class="btn  text-primary" data-toggle="modal" data-target="#exampleModal">Editar</button>
