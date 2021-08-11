@@ -3,6 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { RequirementService } from '../../../shared/service/requirement.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { Requirement } from 'src/app/shared/interfaces/requirement';
 
 @Component( {
   selector: 'app-requirements',
@@ -13,8 +14,8 @@ export class RequirementsComponent implements OnInit {
 
   form!: FormGroup;
   submitted = false;
-
-  requirements: any[] = [];
+  requirements: Requirement[] = [];
+  requirement!: Requirement;
 
   constructor(
     private fb: FormBuilder,
@@ -34,23 +35,17 @@ export class RequirementsComponent implements OnInit {
   onSubmit(): void {
     this.submitted = true;
     if ( this.form.valid ) {
-      this.regSrv.store( this.form.value ).subscribe( response => {
-        if ( response.status === 'Success' ) {
-          document.getElementById( "close" )?.click();
-          this.requirements.push( response.data );
-          Swal.fire( '', "Registro Exitoso", 'success' );
-        }
-      } );
+      ( this.requirement ) ? this.updateRequirement() : this.createRequirement();
     }
   }
 
-  openModal(): void {
-
+  newRequirement(): void {
+    this.createForm();
   }
 
-  update( req: any ): void {
-    console.log( req );
-    this.createForm( req );
+  update( req: Requirement ): void {
+    this.requirement = { ...req };
+    this.form.controls.name.patchValue( req.name );
   }
 
   private loadData(): void {
@@ -58,14 +53,33 @@ export class RequirementsComponent implements OnInit {
       if ( response.status === 'Success' ) {
         this.requirements = [ ...response.data ];
       }
-    }
-    );
+    } );
   }
 
-  private createForm( req?: any ): void {
+  private createRequirement(): void {
+    this.regSrv.store( this.form.value ).subscribe( response => {
+      if ( response.status === 'Success' ) {
+        document.getElementById( "close" )?.click();
+        this.requirements.push( response.data );
+        Swal.fire( '', response.message, 'success' );
+      }
+    } );
+  }
+
+  private updateRequirement(): void {
+    this.regSrv.update( this.requirement.id, this.form.value ).subscribe( response => {
+      if ( response.status === 'Success' ) {
+        Swal.fire( '', response.message, 'success' );
+        document.getElementById( "close" )?.click();
+        this.loadData();
+      }
+    } )
+  }
+
+  private createForm(): void {
     this.form = this.fb.group(
       {
-        name: [ req ? req.name : '', Validators.required ]
+        name: [ '', Validators.required ]
       }
     );
   }

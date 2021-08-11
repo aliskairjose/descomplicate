@@ -5,13 +5,13 @@
         <div class="card-title px-4 ">
           <div class="row">
             <div class="col-8">
-              <h5>Listado de requisitos disponibles</h5>
+              <h5>Listado de requisitos disponibles </h5>
               <label for="" class="text-secondary">Requisitos creados hasta el momento</label>
             </div>
             <div class="col-4 text-right">
               <label for="btn-create" class="text-primary">Crear requisito</label>
               <button class="btn btn-primary btn-sm ml-2" id="btn-create" data-toggle="modal"
-                data-target="#exampleModal">
+                data-target="#exampleModal" (click)="newRequirement()">
                 <i class="bi bi-plus-lg"></i>
               </button>
             </div>
@@ -48,7 +48,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Crear requisito</h5>
+        <h5 class="modal-title">{{requirement ? 'Editar requisito' : 'Crear requisito' }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close">
           <span aria-hidden="true">&times;</span>
         </button>

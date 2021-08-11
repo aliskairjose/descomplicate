@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpserviceService } from './httpservice.service';
 import { Observable } from 'rxjs';
 import { BaseResponse, Response } from '../interfaces/response';
+import { Requirement } from '../interfaces/requirement';
 
 @Injectable( {
   providedIn: 'root'
@@ -14,20 +15,30 @@ export class RequirementService {
 
 
   /**
-   * 
+   * @description Listado de requisitos
    * @returns Listado de requerimientos
    */
-  list(): Observable<BaseResponse<any[]>> {
+  list(): Observable<BaseResponse<Requirement[]>> {
     return this.http.get( `requeriments` );
   }
 
   /**
-   * 
+   * @description Crea un nuevo requisito
    * @param data Objeto name 
    * @returns Requisito completo
    */
-  store( data: any ): Observable<BaseResponse<any>> {
+  store( data: any ): Observable<BaseResponse<Requirement>> {
     return this.http.post( `requeriments`, data );
+  }
+
+  /**
+   * @description Actualiza un requisito
+   * @param id Id del requisito que se actualizará
+   * @param data Name del requisito
+   * @returns Requisito actualizado
+   */
+  update( id: number, data: any ): Observable<BaseResponse<Requirement>> {
+    return this.http.put( `requeriments/${id}`, data );
   }
 
 }
