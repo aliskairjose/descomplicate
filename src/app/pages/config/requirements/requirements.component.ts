@@ -34,16 +34,23 @@ export class RequirementsComponent implements OnInit {
   onSubmit(): void {
     this.submitted = true;
     if ( this.form.valid ) {
-      console.log( this.form.value );
       this.regSrv.store( this.form.value ).subscribe( response => {
-        console.log( response );
         if ( response.status === 'Success' ) {
+          document.getElementById( "close" )?.click();
           this.requirements.push( response.data );
           Swal.fire( '', "Registro Exitoso", 'success' );
         }
       } );
-
     }
+  }
+
+  openModal(): void {
+
+  }
+
+  update( req: any ): void {
+    console.log( req );
+    this.createForm( req );
   }
 
   private loadData(): void {
@@ -55,10 +62,10 @@ export class RequirementsComponent implements OnInit {
     );
   }
 
-  private createForm(): void {
+  private createForm( req?: any ): void {
     this.form = this.fb.group(
       {
-        name: [ '', Validators.required ]
+        name: [ req ? req.name : '', Validators.required ]
       }
     );
   }
