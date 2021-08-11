@@ -101,7 +101,9 @@
                     </a>
                 </li>
                 <li>
-                    <a> {{item== "active" ? 'INST':'Instituciones'}}</a>
+                    <a [routerLink]="['/pages/config/institutions']" routerLinkActive="active">
+                        {{item== "active" ? 'INST':'Instituciones'}}
+                    </a>
                 </li>
                 <li>
                     <a> {{item== "active" ? 'TRA':'Tramites'}}</a>

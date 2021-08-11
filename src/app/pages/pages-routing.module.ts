@@ -19,6 +19,7 @@ import { MessengersPartnersComponent } from './approval/messengers-partners/mess
 // Config
 import { BanksComponent } from './config/banks/banks.component';
 import { RequirementsComponent } from './config/requirements/requirements.component';
+import { InstitutionsComponent } from './config/institutions/institutions.component';
 
 const routes: Routes = [
   {
@@ -53,6 +54,10 @@ const routes: Routes = [
   {
     path: "config/requirements",
     component: RequirementsComponent
+  },
+  {
+    path: "config/institutions",
+    component: InstitutionsComponent
   }
 
 ];
