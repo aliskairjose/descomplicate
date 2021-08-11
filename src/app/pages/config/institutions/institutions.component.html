@@ -13,7 +13,6 @@
               <button class="btn btn-primary btn-sm ml-2" id="btn-create" data-toggle="modal"
                 data-target="#exampleModal"><i class="bi bi-plus-lg"></i></button>
             </div>
-
           </div>
         </div>
         <div class="card-text px-2">
@@ -21,15 +20,16 @@
             <div class="row">
               <div class="col-6 col-md-3">
                 <label for="" class="text-secondary">Nombre</label>
-                <!-- <p>{{data.name}}</p> -->
+                <p>{{data.name}}</p>
               </div>
               <div class="col-6">
                 <label for="" class="text-secondary">Dirección</label>
-                <!-- <p>{{data.address}}</p> -->
+                <p>{{data.address}}</p>
               </div>
               <div class="col col-md-3 d-flex justify-content-end">
-                <button class="btn  text-primary" data-toggle="modal" data-target="#exampleModal">Editar</button>
-                <button class="btn  text-secondary">Eliminar</button>
+                <button class="btn  text-primary" data-toggle="modal" data-target="#exampleModal"
+                  (click)="update(data)">Editar</button>
+                <button class="btn  text-secondary" (click)="delete(data.id)">Eliminar</button>
               </div>
             </div>
           </div>
@@ -39,21 +39,20 @@
   </div>
 </section>
 
-<!-- <div class="modal fade bd-example-modal-sm" id="exampleModal" tabindex="-1" role="dialog"
+<div class="modal fade bd-example-modal-sm" id="exampleModal" tabindex="-1" role="dialog"
   aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Crear entidad bancaria</h5>
+        <h5 class="modal-title">{{institution ? 'Editar entidad' : 'Crear entidad' }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form [formGroup]="Bank">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="modal-body px-5">
-
           <div class="d-flex flex-column mb-3">
-            <label for="" class="text-secondary">Nombre de Entidad</label>
+            <label for="" class="text-secondary">Nombre institución</label>
             <input type="text" class="form-control" placeholder="Ingresar nombre" formControlName="name">
             <div *ngIf="submitted && f.name.errors?.required" class="invalid-feedback d-block">
               Campo Requerido
@@ -66,15 +65,12 @@
               Campo Requerido
             </div>
           </div>
-
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary text-secondary" data-dismiss="modal"
-            (click)="Clean()">Cancelar</button>
-          <button type="submit" class="btn btn-primary" (click)="onSubmit()" [hidden]="btn">Registrar</button>
-          <button type="submit" class="btn btn-primary" [hidden]="!btn" (click)="EditBank()">Editar</button>
+          <button type="button" class="btn btn-secondary text-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Registrar</button>
         </div>
       </form>
     </div>
   </div>
-</div> -->
+</div>

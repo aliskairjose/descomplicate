@@ -4,7 +4,6 @@ import { RequirementService } from '../../../shared/service/requirement.service'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Requirement } from 'src/app/shared/interfaces/requirement';
-import { ThrowStmt } from '@angular/compiler';
 
 @Component( {
   selector: 'app-requirements',

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
+import { Institution } from 'src/app/shared/interfaces/institution';
+import { InstitutionService } from 'src/app/shared/service/institution.service';
 
 @Component( {
   selector: 'app-institutions',
@@ -11,11 +14,13 @@ export class InstitutionsComponent implements OnInit {
 
   form!: FormGroup;
   submitted = false;
-  institutions: any[] = [];
+  institutions: Institution[] = [];
+  institution!: Institution;
 
   constructor(
+    private titleSrv: Title,
     private fb: FormBuilder,
-    private titleSrv: Title
+    private iSrv: InstitutionService,
   ) {
     this.createForm();
     this.titleSrv.setTitle( 'Descomplicate-Instituciones' );
@@ -27,16 +32,71 @@ export class InstitutionsComponent implements OnInit {
     this.loadData();
   }
 
-  private loadData(): void {
+  onSubmit(): void {
+    this.submitted = true;
+    if ( this.form.valid ) {
+      ( this.institution ) ? this.updateInstitution() : this.createInstitution();
+    }
+  }
 
+  add(): void {
+    this.createForm();
+  }
+
+  update( inst: Institution ): void {
+    this.institution = { ...inst };
+    this.form.controls.name.patchValue( inst.name );
+    this.form.controls.address.patchValue( inst.address );
+  }
+
+  delete( id: number ): void {
+    this.deleteinstitution( id );
+  }
+
+  private loadData(): void {
+    this.iSrv.list().subscribe( response => {
+      if ( response.status === 'Success' ) {
+        this.institutions = [ ...response.data ];
+      }
+    } )
   }
 
   private createForm(): void {
     this.form = this.fb.group(
       {
-
+        name: [ '', Validators.required ],
+        address: [ '', Validators.required ]
       }
     );
   }
 
+  private createInstitution(): void {
+    this.iSrv.store( this.form.value ).subscribe( response => {
+      if ( response.status === 'Success' ) {
+        document.getElementById( "close" )?.click();
+        this.institutions.push( response.data );
+        Swal.fire( '', response.message, 'success' );
+      }
+    } );
+  }
+
+  private updateInstitution(): void {
+    this.iSrv.update( this.institution.id, this.form.value ).subscribe( response => {
+      if ( response.status === 'Success' ) {
+        Swal.fire( '', response.message, 'success' );
+        document.getElementById( "close" )?.click();
+        this.loadData();
+      }
+    } );
+  }
+
+  private deleteinstitution( id: number ): void {
+    this.iSrv.delete( id ).subscribe( response => {
+      if ( response.status === 'Success' ) {
+        Swal.fire( '', response.message, 'success' );
+        document.getElementById( "close" )?.click();
+        this.loadData();
+      }
+    } );
+  }
 }
