@@ -11,7 +11,7 @@
             <div class="col-4 text-right">
               <label for="btn-create" class="text-primary">Crear institución</label>
               <button class="btn btn-primary btn-sm ml-2" id="btn-create" data-toggle="modal"
-                data-target="#exampleModal"><i class="bi bi-plus-lg"></i></button>
+                data-target="#exampleModal" (click)="add()"><i class="bi bi-plus-lg"></i></button>
             </div>
           </div>
         </div>
@@ -29,7 +29,7 @@
               <div class="col col-md-3 d-flex justify-content-end">
                 <button class="btn  text-primary" data-toggle="modal" data-target="#exampleModal"
                   (click)="update(data)">Editar</button>
-                <button class="btn  text-secondary" (click)="delete(data.id)">Eliminar</button>
+                <button class="btn text-secondary" (click)="delete(data.id)">Eliminar</button>
               </div>
             </div>
           </div>
@@ -44,7 +44,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">{{institution ? 'Editar entidad' : 'Crear entidad' }}</h5>
+        <h5 class="modal-title">{{isEdit ? 'Editar entidad' : 'Crear entidad' }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close">
           <span aria-hidden="true">&times;</span>
         </button>

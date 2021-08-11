@@ -16,6 +16,7 @@ export class InstitutionsComponent implements OnInit {
   submitted = false;
   institutions: Institution[] = [];
   institution!: Institution;
+  isEdit = false;
 
   constructor(
     private titleSrv: Title,
@@ -40,10 +41,12 @@ export class InstitutionsComponent implements OnInit {
   }
 
   add(): void {
+    this.isEdit = false;
     this.createForm();
   }
 
   update( inst: Institution ): void {
+    this.isEdit = true;
     this.institution = { ...inst };
     this.form.controls.name.patchValue( inst.name );
     this.form.controls.address.patchValue( inst.address );
@@ -71,6 +74,7 @@ export class InstitutionsComponent implements OnInit {
   }
 
   private createInstitution(): void {
+    this.isEdit = false;
     this.iSrv.store( this.form.value ).subscribe( response => {
       if ( response.status === 'Success' ) {
         document.getElementById( "close" )?.click();

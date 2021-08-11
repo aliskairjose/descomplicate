@@ -16,6 +16,7 @@ export class RequirementsComponent implements OnInit {
   submitted = false;
   requirements: Requirement[] = [];
   requirement!: Requirement;
+  isEdit = false;
 
   constructor(
     private fb: FormBuilder,
@@ -40,10 +41,12 @@ export class RequirementsComponent implements OnInit {
   }
 
   add(): void {
+    this.isEdit = false;
     this.createForm();
   }
 
   update( req: Requirement ): void {
+    this.isEdit = true;
     this.requirement = { ...req };
     this.form.controls.name.patchValue( req.name );
   }
