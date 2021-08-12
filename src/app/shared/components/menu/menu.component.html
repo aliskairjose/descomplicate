@@ -9,109 +9,114 @@
 
         <p class="rol-user">Administrador</p>
     </div>
-    <ul class="list-unstyled components" >
-        
-        <li  [routerLink]="['/pages/dashboard']" routerLinkActive="active" >  
-            <a> 
+    <ul class="list-unstyled components">
+
+        <li [routerLink]="['/pages/dashboard']" routerLinkActive="active">
+            <a>
                 <div class="icon-menu option1"></div>
                 <label for="" class="m-0 title-option">Dashboard</label>
             </a>
         </li>
-        <li [routerLink]="['/pages/users']" routerLinkActive="active" >
+        <li [routerLink]="['/pages/users']" routerLinkActive="active">
             <a>
-                
+
                 <!-- <img src="../../../../assets/icon/menu/dashboard_white.svg"  class="icon-menu"> -->
                 <div class="icon-menu option2"></div>
                 <label for="" class="m-0 title-option">Usuarios</label>
             </a>
         </li>
-        <li  [routerLink]="['/pages/monitoring']" routerLinkActive="active" >
-            <a >
-                
+        <li [routerLink]="['/pages/monitoring']" routerLinkActive="active">
+            <a>
+
                 <div class="icon-menu option3"></div>
                 <label for="" class="m-0 title-option">Monitoreo</label>
             </a>
         </li>
         <li>
-            <a >
+            <a>
                 <div class="icon-menu option4"></div>
                 <label for="" class="m-0 title-option">Notificaciones</label>
             </a>
         </li>
         <li>
-            <a >
-                
+            <a>
+
                 <div class="icon-menu option5"></div>
                 <label for="" class="m-0 title-option">Disponibilidad</label>
             </a>
         </li>
-        <li  >
+        <li>
             <a href="#finance" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                
+
                 <div class="icon-menu option6"></div>
                 <label for="" class="m-0 title-option">Finanzas</label>
                 <i class="bi bi-chevron-down"></i>
             </a>
             <ul class="collapse list-unstyled" id="finance">
                 <li>
-                    <a >{{item== "active" ? 'CPC':'Cuentas por Compensar'}}</a>
+                    <a>{{item== "active" ? 'CPC':'Cuentas por Compensar'}}</a>
                 </li>
                 <li>
-                    <a >{{item== "active" ? 'CC':'Cuentas Compensadas'}}</a>
+                    <a>{{item== "active" ? 'CC':'Cuentas Compensadas'}}</a>
                 </li>
                 <li>
-                    <a >{{item== "active" ? 'VDP':'Verificacion de Pagos'}}</a>
+                    <a>{{item== "active" ? 'VDP':'Verificacion de Pagos'}}</a>
                 </li>
             </ul>
         </li>
-        <li  >
+        <li>
             <a href="#Approval" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-              
-              <div class="icon-menu option7"></div>
-              <label for="" class="m-0 title-option">Aprobaciones</label>
+
+                <div class="icon-menu option7"></div>
+                <label for="" class="m-0 title-option">Aprobaciones</label>
                 <i class="bi bi-chevron-down"></i>
             </a>
             <ul class="collapse list-unstyled" id="Approval">
                 <li>
                     <a [routerLink]="['/pages/approval/tramitadores']" routerLinkActive="active">
-                        
+
                         {{item== "active" ? 'TS':'Tramitadores socios'}}
                     </a>
                 </li>
                 <li>
                     <a [routerLink]="['/pages/approval/messengers']" routerLinkActive="active">
-                        
+
                         {{item== "active" ? 'MS':'Mensajeros socios'}}
                     </a>
                 </li>
-              
+
             </ul>
         </li>
         <li>
             <a href="#Config" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                
+
                 <div class="icon-menu option8"></div>
                 <label for="" class="m-0 title-option">Configuración</label>
                 <i class="bi bi-chevron-down"></i>
             </a>
             <ul class="collapse list-unstyled" id="Config">
                 <li>
-                    <a >    {{item== "active" ? 'REQ':'Requisitos'}}</a>
+                    <a [routerLink]="['/pages/config/requirements']" routerLinkActive="active">
+                        {{item== "active" ? 'REQ':'Requisitos'}}
+                    </a>
                 </li>
                 <li>
-                    <a > {{item== "active" ? 'INST':'Instituciones'}}</a>
+                    <a [routerLink]="['/pages/config/institutions']" routerLinkActive="active">
+                        {{item== "active" ? 'INST':'Instituciones'}}
+                    </a>
                 </li>
                 <li>
-                    <a > {{item== "active" ? 'TRA':'Tramites'}}</a>
+                    <a [routerLink]="['/pages/config/procedure']" routerLinkActive="active">
+                        {{item== "active" ? 'TRA':'Tramites'}}
+                    </a>
                 </li>
-                <li >
+                <li>
                     <a [routerLink]="['/pages/config/banks']" routerLinkActive="active">
-                        
                         {{item== "active" ? 'EB':'Entidades Bancarias'}}
                     </a>
                 </li>
                 <li>
-                    <a >
+                    <a>
                         {{item== "active" ? 'GAS':'Gastos'}}
                     </a>
                 </li>
@@ -119,15 +124,15 @@
         </li>
         <li>
             <a (click)="Logout()">
-                 <img src="../../../../assets/icon/menu/logout_white.svg"  class="icon-menu">
-              
+                <img src="../../../../assets/icon/menu/logout_white.svg" class="icon-menu">
+
                 <label for="" class="m-0 title-option">Cerrar sesión</label>
-             </a>
+            </a>
         </li>
-    
+
     </ul>
     <!-- <div > -->
-       <!-- <ul class="list-unstyled components">
+    <!-- <ul class="list-unstyled components">
            <li>
                <a (click)="Logout()">
                     <img src="../../../../assets/icon/menu/logout_white.svg"  class="icon-menu">
