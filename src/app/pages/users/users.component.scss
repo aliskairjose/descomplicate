@@ -32,4 +32,31 @@
             display: none;
         }
     }
+
+    
+}
+
+.modal{
+    label{
+        font-size: 0.8rem;
+       
+    }
+
+ 
+
+    .btn-primary{
+        background: $blue;
+        color: white;
+    }
+
+    .btn-secondary{
+        background: white;
+        color: $gray2;
+        border-color: $gray2;
+    }
+}
+
+.custom-select-two {
+        width: 90%;
+        margin: auto;
 }
