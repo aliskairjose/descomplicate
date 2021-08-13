@@ -61,7 +61,10 @@ export class ProcedureComponent implements OnInit {
   update( pro: Procedure ): void {
     this.isEdit = true;
     this.procedure = { ...pro };
-    // this.form.controls.name.patchValue( req.name );
+    this.form.controls.name.patchValue( pro.name );
+    this.form.controls.estimated_time.patchValue( pro.estimated_time );
+    this.form.controls.cost.patchValue( pro.cost );
+    this.form.controls.institution_id.patchValue( pro.institution_id );
   }
 
   delete( id: number ): void {
