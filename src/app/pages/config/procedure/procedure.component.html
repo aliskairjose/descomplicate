@@ -20,17 +20,18 @@
         <div class="card-text px-2">
           <div class="col-12" *ngFor="let data of procedures">
             <div class="row justify-content-between">
-              <div>
+              <div class="w-25">
                 <label for="" class="text-secondary">Trámite</label>
-                <!-- <p>{{data.name}}</p> -->
+                <p>{{data.name}}</p>
               </div>
-              <div>
+              <div class="w-25">
                 <label for="" class="text-secondary">Intitución</label>
-                <!-- <p>{{data.address}}</p> -->
+                <!-- <p>{{data.institution_id}}</p> -->
+                <p>Colegio de abogados</p>
               </div>
               <div>
-                <label for="" class="text-secondary">Tiempo estimado de trámite</label>
-                <!-- <p>{{data.address}}</p> -->
+                <label for="" class="text-secondary">Tiempo estimado</label>
+                <p>{{data.estimated_time}}</p>
               </div>
               <div class="d-flex justify-content-end">
                 <button class="btn  text-primary" data-toggle="modal" data-target="#exampleModal"

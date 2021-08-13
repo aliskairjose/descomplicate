@@ -19,7 +19,7 @@ export class ProcedureService {
    * @returns Listado de requerimientos
    */
   list(): Observable<BaseResponse<Procedure[]>> {
-    return this.http.get( `requeriments` );
+    return this.http.get( `procedures?includes[]=requeriments&includes[]=managerTypes` );
   }
 
   /**
@@ -28,7 +28,7 @@ export class ProcedureService {
    * @returns Requisito completo
    */
   store( data: any ): Observable<BaseResponse<Procedure>> {
-    return this.http.post( `requeriments`, data );
+    return this.http.post( `procedures`, data );
   }
 
   /**
@@ -38,7 +38,7 @@ export class ProcedureService {
    * @returns Requisito actualizado
    */
   update( id: number, data: any ): Observable<BaseResponse<Procedure>> {
-    return this.http.put( `requeriments/${id}`, data );
+    return this.http.put( `procedures/${id}`, data );
   }
 
   /**
@@ -47,7 +47,7 @@ export class ProcedureService {
    * @returns 
    */
   delete( id: number ): Observable<any> {
-    return this.http.delete( `requeriments/${id}` );
+    return this.http.delete( `procedures/${id}` );
   }
 
 }

@@ -26,8 +26,6 @@ export class ProcedureComponent implements OnInit {
     this.titleService.setTitle( 'Descomplicate - Requisitos' );
   }
 
-
-
   get f() { return this.form.controls; }
 
   ngOnInit(): void {
@@ -46,9 +44,9 @@ export class ProcedureComponent implements OnInit {
     this.createForm();
   }
 
-  update( req: Procedure ): void {
+  update( pro: Procedure ): void {
     this.isEdit = true;
-    this.procedure = { ...req };
+    this.procedure = { ...pro };
     // this.form.controls.name.patchValue( req.name );
   }
 
@@ -97,7 +95,12 @@ export class ProcedureComponent implements OnInit {
   private createForm(): void {
     this.form = this.fb.group(
       {
-        name: [ '', [ Validators.required ] ]
+        name: [ '', [ Validators.required ] ],
+        cost: [ '' ],
+        estimated_time: [],
+        institution_id: [],
+        requeriments: [],
+        managerTypes: []
       }
     );
   }
