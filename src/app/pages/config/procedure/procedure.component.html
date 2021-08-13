@@ -61,8 +61,8 @@
             <div class="col">
               <div class="form-group">
                 <label for="name">Nombre del trámite</label>
-                <input type="text" class="form-control" name="" id="" placeholder="Ingresar nombre"
-                  formControlName="control">
+                <input type="text" class="form-control" name="name" id="name" placeholder="Ingresar nombre"
+                  formControlName="name">
                 <div *ngIf="submitted && f.name.errors?.required" class="invalid-feedback d-block">
                   Campo Requerido
                 </div>
@@ -109,8 +109,9 @@
                 <select class="form-control" name="managerTypes" id="managerTypes" formControlName="managerTypes"
                   multiple>
                   <option value="" selected>Seleccione</option>
-                  <option>B</option>
-                  <option>C</option>
+                  <option value="1">Abogado socio</option>
+                  <option value="2">Tramitador socio</option>
+                  <option value="3">Mensajero socio</option>
                 </select>
                 <small id="helpId" class="text-muted">Ctrl+click para multiple selección</small>
                 <div *ngIf="submitted && f.managerTypes.errors?.required" class="invalid-feedback d-block">
@@ -121,8 +122,8 @@
             <div class="col">
               <div class="form-group">
                 <label for="requeriments" class="text-secondary">Requisitos</label>
-                <select class="form-control" name="requeriments" id="requeriments" formControlName="control"
-                  formControlName="requeriments" multiple>
+                <select class="form-control" name="requeriments" id="requeriments" formControlName="requeriments"
+                  multiple>
                   <option value="" selected>Seleccione</option>
                   <option *ngFor="let r of requirements" [value]="r.id">{{r.name}}</option>
                 </select>
