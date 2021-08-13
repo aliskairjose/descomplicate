@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
+import { forkJoin } from 'rxjs';
+import { Institution } from 'src/app/shared/interfaces/institution';
 import { Procedure } from 'src/app/shared/interfaces/procedure';
+import { Requirement } from 'src/app/shared/interfaces/requirement';
 import { ProcedureService } from 'src/app/shared/service/procedure.service';
+import { RequirementService } from 'src/app/shared/service/requirement.service';
 import Swal from 'sweetalert2';
+import { InstitutionService } from '../../../shared/service/institution.service';
 
 @Component( {
   selector: 'app-procedure',
@@ -16,14 +21,23 @@ export class ProcedureComponent implements OnInit {
   procedures: Procedure[] = [];
   procedure!: Procedure;
   isEdit = false;
+  institutions: Institution[] = [];
+  requirements: Requirement[] = [];
 
   constructor(
     private fb: FormBuilder,
     private titleService: Title,
     private procedureSrv: ProcedureService,
+    private reqService: RequirementService,
+    private instService: InstitutionService,
   ) {
     this.createForm();
     this.titleService.setTitle( 'Descomplicate - Requisitos' );
+    forkJoin( [ this.instService.list(), this.reqService.list() ] ).
+      subscribe( ( [ instResponse, requirementsResponse ] ) => {
+        this.requirements = [ ...requirementsResponse.data ];
+        this.institutions = [ ...instResponse.data ];
+      } );
   }
 
   get f() { return this.form.controls; }
