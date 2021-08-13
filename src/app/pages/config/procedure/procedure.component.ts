@@ -80,7 +80,7 @@ export class ProcedureComponent implements OnInit {
     this.procedureSrv.store( this.form.value ).subscribe( response => {
       if ( response.status === 'Success' ) {
         document.getElementById( "close" )?.click();
-        this.procedures.push( response.data );
+        this.loadData();
         Swal.fire( '', response.message, 'success' );
       }
     } );
