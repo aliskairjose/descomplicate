@@ -1,3 +1,4 @@
+import { Institution } from './institution';
 export interface Procedure {
   id: number;
   name: string;
@@ -7,5 +8,6 @@ export interface Procedure {
   created_at: string;
   updated_at: string;
   requeriments: [],
-  manager_types: []
+  manager_types: [],
+  institution: Institution
 }

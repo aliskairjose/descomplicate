@@ -110,11 +110,11 @@ export class ProcedureComponent implements OnInit {
     this.form = this.fb.group(
       {
         name: [ '', [ Validators.required ] ],
-        cost: [ '' ],
-        estimated_time: [],
-        institution_id: [],
-        requeriments: [],
-        managerTypes: []
+        cost: [ '', [ Validators.required ] ],
+        estimated_time: [ '1' ],
+        institution_id: [ '', [ Validators.required ] ],
+        requeriments: [ '', [ Validators.required ] ],
+        managerTypes: [ '', [ Validators.required ] ]
       }
     );
   }
