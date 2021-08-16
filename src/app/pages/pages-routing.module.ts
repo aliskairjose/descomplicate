@@ -19,6 +19,9 @@ import { MonitoringComponent } from './monitoring/monitoring.component';
 
 // Config
 import { BanksComponent } from './config/banks/banks.component';
+import { RequirementsComponent } from './config/requirements/requirements.component';
+import { InstitutionsComponent } from './config/institutions/institutions.component';
+import { ProcedureComponent } from './config/procedure/procedure.component';
 
 //availability
 import { AvailabilityComponent } from './availability/availability.component';
@@ -31,19 +34,19 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path : "dashboard",
+    path: "dashboard",
     component: DashboardComponent
   },
   {
-    path : "users",
-    component: UsersComponent
-  },
+     path : "users",
+     component: UsersComponent
+   },
   {
-    path : "approval/tramitadores",
+    path: "approval/tramitadores",
     component: TramitadoresPartnersComponent
   },
   {
-    path : "approval/messengers",
+    path: "approval/messengers",
     component: MessengersPartnersComponent
   },
   {
@@ -51,20 +54,29 @@ const routes: Routes = [
     component: MonitoringComponent
   },
   {
-    path : "config/banks",
+    path: "config/banks",
     component: BanksComponent
   },
   {
     path : "availability",
     component: AvailabilityComponent
+  },
+  {
+    path: "config/requirements",
+    component: RequirementsComponent
+  },
+  {
+    path: "config/institutions",
+    component: InstitutionsComponent
+  },
+  {
+    path: "config/procedure",
+    component: ProcedureComponent
   }
-
-  
-	
 ];
 
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
-})
+@NgModule( {
+  imports: [ RouterModule.forChild( routes ) ],
+  exports: [ RouterModule ]
+} )
 export class PagesRoutingModule { }

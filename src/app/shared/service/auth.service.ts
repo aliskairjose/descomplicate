@@ -21,6 +21,10 @@ export class AuthService {
 	) { }
 
 
+    register(params: any): Observable<any> {
+    return this.http.post('admin/users', params);
+  }
+
           /**
              * 
              * @param type Tipo de usuario ADMIN |STUDENT | ORGANIZATION | UNIVERSITY

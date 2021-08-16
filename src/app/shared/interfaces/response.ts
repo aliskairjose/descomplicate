@@ -1,4 +1,9 @@
 
+export interface BaseResponse<T> {
+	data: T;
+	message: string;
+	status: string;
+}
 export interface Response<T> {
 	data: T;
 	message?: string;
