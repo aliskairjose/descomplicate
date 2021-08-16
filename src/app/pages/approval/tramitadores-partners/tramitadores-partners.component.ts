@@ -7,7 +7,7 @@ import { HttpserviceService } from 'src/app/shared/service/httpservice.service';
   styleUrls: ['./tramitadores-partners.component.scss']
 })
 export class TramitadoresPartnersComponent implements OnInit {
-  Item = []
+  Item = [];
   constructor(private htpp:HttpserviceService) { }
 
   ngOnInit(): void {

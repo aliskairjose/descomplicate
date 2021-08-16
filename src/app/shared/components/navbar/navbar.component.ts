@@ -41,6 +41,7 @@ export class NavbarComponent implements OnInit {
       { pages:"approval/messengers", name_nav:"Aprobaciones/Mensajeros socios",status:false},
       { pages:"monitoring", name_nav:"Monitoreo de trámites",status:false},
       { pages:"config/banks", name_nav:"Configuración/Entidades Bancarias",status:false},
+      { pages:"availability", name_nav:"Disponibilidad de Gestores",status:false},
     ]
   }
 

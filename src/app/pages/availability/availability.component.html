@@ -1,0 +1,65 @@
+<section class="py-5 px-4 ">
+    <div class="container monitoring"> 
+        <div class="card " >
+            <div class="card-body px-0">
+            <div class="card-title px-4 ">
+                <div class="row">
+                    <div class="col-4" >
+                            <h5>Listado de gestores</h5>
+                    </div>
+                    <div class="col-7 d-flex justify-content-end">
+                        <div class="d-flex flex-row" >
+                         
+                            <!-- filter downloand -->
+                            <button class="btn btn-sm text-secondary text-center border-1 mr-2"><img src="../../../assets/icon/filter_list.svg" alt=""></button>
+                            <button class="btn btn-sm text-secondary text-center border-1" (click)="generatePDF()"><img src="../../../assets/icon/download.svg" alt=""></button>
+                            <!-- filter downloand -->
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="card-text"  id="contentToConvert">
+                <table class="table" >
+                    <thead >
+                      <tr >
+                      
+                        <th scope="col" class="color-gray" >Usuario</th>
+                        <th scope="col" class="color-gray">Tipo de Gestor</th>
+                        <th scope="col" class="color-gray">Fecha</th>
+                        <th scope="col" class="color-gray"></th>
+                        <th scope="col" class="color-gray"></th>
+                        <th scope="col" class="color-gray">Estatus</th>
+                       
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of Item">
+                      
+                        <td>  <img class="img-user" src="{{data.profile_image}}" alt="">{{data.name}}</td>
+                        <td>  {{GetTypeManager(data.manager?.manager_type_id)}}</td>
+                        <td>  {{data.fecha}}</td>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   
+                            <div class="box-status">
+                                <div 
+                                [class.point-red]="data.status=='0'"
+                                [class.point-blue]="data.status=='1'">
+                                </div>
+                                    {{Getnamestatus(data.status)}}
+                            </div>
+                        </td>
+                      </tr>
+                
+                    </tbody>
+                  </table>
+            </div>
+        
+    
+            </div>
+        </div>
+    </div>
+</section>
