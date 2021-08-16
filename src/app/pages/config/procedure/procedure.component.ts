@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
+import { forkJoin } from 'rxjs';
+import { Institution } from 'src/app/shared/interfaces/institution';
 import { Procedure } from 'src/app/shared/interfaces/procedure';
+import { Requirement } from 'src/app/shared/interfaces/requirement';
 import { ProcedureService } from 'src/app/shared/service/procedure.service';
+import { RequirementService } from 'src/app/shared/service/requirement.service';
 import Swal from 'sweetalert2';
+import { InstitutionService } from '../../../shared/service/institution.service';
 
 @Component( {
   selector: 'app-procedure',
@@ -16,17 +21,24 @@ export class ProcedureComponent implements OnInit {
   procedures: Procedure[] = [];
   procedure!: Procedure;
   isEdit = false;
+  institutions: Institution[] = [];
+  requirements: Requirement[] = [];
 
   constructor(
     private fb: FormBuilder,
     private titleService: Title,
     private procedureSrv: ProcedureService,
+    private reqService: RequirementService,
+    private instService: InstitutionService,
   ) {
     this.createForm();
     this.titleService.setTitle( 'Descomplicate - Requisitos' );
+    forkJoin( [ this.instService.list(), this.reqService.list() ] ).
+      subscribe( ( [ instResponse, requirementsResponse ] ) => {
+        this.requirements = [ ...requirementsResponse.data ];
+        this.institutions = [ ...instResponse.data ];
+      } );
   }
-
-
 
   get f() { return this.form.controls; }
 
@@ -46,10 +58,13 @@ export class ProcedureComponent implements OnInit {
     this.createForm();
   }
 
-  update( req: Procedure ): void {
+  update( pro: Procedure ): void {
     this.isEdit = true;
-    this.procedure = { ...req };
-    // this.form.controls.name.patchValue( req.name );
+    this.procedure = { ...pro };
+    this.form.controls.name.patchValue( pro.name );
+    this.form.controls.estimated_time.patchValue( pro.estimated_time );
+    this.form.controls.cost.patchValue( pro.cost );
+    this.form.controls.institution_id.patchValue( pro.institution_id );
   }
 
   delete( id: number ): void {
@@ -68,7 +83,7 @@ export class ProcedureComponent implements OnInit {
     this.procedureSrv.store( this.form.value ).subscribe( response => {
       if ( response.status === 'Success' ) {
         document.getElementById( "close" )?.click();
-        this.procedures.push( response.data );
+        this.loadData();
         Swal.fire( '', response.message, 'success' );
       }
     } );
@@ -97,7 +112,12 @@ export class ProcedureComponent implements OnInit {
   private createForm(): void {
     this.form = this.fb.group(
       {
-        name: [ '', [ Validators.required ] ]
+        name: [ '', [ Validators.required ] ],
+        cost: [ '', [ Validators.required ] ],
+        estimated_time: [ '1' ],
+        institution_id: [ '', [ Validators.required ] ],
+        requeriments: [ '', [ Validators.required ] ],
+        managerTypes: [ '', [ Validators.required ] ]
       }
     );
   }

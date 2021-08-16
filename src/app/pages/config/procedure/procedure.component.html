@@ -20,17 +20,17 @@
         <div class="card-text px-2">
           <div class="col-12" *ngFor="let data of procedures">
             <div class="row justify-content-between">
-              <div>
+              <div class="w-25">
                 <label for="" class="text-secondary">Trámite</label>
-                <!-- <p>{{data.name}}</p> -->
+                <p>{{data.name}}</p>
               </div>
-              <div>
+              <div class="w-25">
                 <label for="" class="text-secondary">Intitución</label>
-                <!-- <p>{{data.address}}</p> -->
+                <p>{{data.institution.name}}</p>
               </div>
               <div>
-                <label for="" class="text-secondary">Tiempo estimado de trámite</label>
-                <!-- <p>{{data.address}}</p> -->
+                <label for="" class="text-secondary">Tiempo estimado</label>
+                <p>{{data.estimated_time}}</p>
               </div>
               <div class="d-flex justify-content-end">
                 <button class="btn  text-primary" data-toggle="modal" data-target="#exampleModal"
@@ -45,7 +45,7 @@
   </div>
 </section>
 
-<!-- <div class="modal fade bd-example-modal-sm" id="exampleModal" tabindex="-1" role="dialog"
+<div class="modal fade bd-example-modal-sm" id="exampleModal" tabindex="-1" role="dialog"
   aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -56,12 +56,82 @@
         </button>
       </div>
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <div class="modal-body px-5">
-          <div class="d-flex flex-column mb-3">
-            <label for="" class="text-secondary">Nombre del requisito</label>
-            <input type="text" class="form-control" placeholder="Ingresar nombre" formControlName="name">
-            <div *ngIf="submitted && f.name.errors?.required" class="invalid-feedback d-block">
-              Campo Requerido
+        <div class="modal-body">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="name">Nombre del trámite</label>
+                <input type="text" class="form-control" name="name" id="name" placeholder="Ingresar nombre"
+                  formControlName="name">
+                <div *ngIf="submitted && f.name.errors?.required" class="invalid-feedback d-block">
+                  Campo Requerido
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="d-flex flex-column mb-3 m-r-1">
+                <label for="" class="text-secondary">Precio del tramite ($)</label>
+                <input type="text" class="form-control" placeholder="Ingrese precio" formControlName="cost">
+                <div *ngIf="submitted && f.cost.errors?.required" class="invalid-feedback d-block">
+                  Campo Requerido
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="institution_id" class="text-secondary">Institución</label>
+                <select class="form-control" name="institution_id" id="institution_id" formControlName="institution_id">
+                  <option value="" selected>Selecciones</option>
+                  <option *ngFor="let i of institutions" [value]="i.id">{{i.name}}</option>
+                </select>
+                <div *ngIf="submitted && f.institution_id.errors?.required" class="invalid-feedback d-block">
+                  Campo Requerido
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="estimated_time">Tiempo estimado (horas)</label>
+                <input type="number" class="form-control" name="estimated_time" id="estimated_time"
+                  placeholder="Ingresar tiempo" formControlName="estimated_time" min="1">
+                <div *ngIf="submitted && f.estimated_time.errors?.required" class="invalid-feedback d-block">
+                  Campo Requerido
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="managerTypes" class="text-secondary">Tipo de gestoría</label>
+                <select class="form-control" name="managerTypes" id="managerTypes" formControlName="managerTypes"
+                  multiple>
+                  <option value="" selected>Seleccione</option>
+                  <option value="1">Abogado socio</option>
+                  <option value="2">Tramitador socio</option>
+                  <option value="3">Mensajero socio</option>
+                </select>
+                <small id="helpId" class="text-muted">Ctrl+click para multiple selección</small>
+                <div *ngIf="submitted && f.managerTypes.errors?.required" class="invalid-feedback d-block">
+                  Campo Requerido
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="requeriments" class="text-secondary">Requisitos</label>
+                <select class="form-control" name="requeriments" id="requeriments" formControlName="requeriments"
+                  multiple>
+                  <option value="" selected>Seleccione</option>
+                  <option *ngFor="let r of requirements" [value]="r.id">{{r.name}}</option>
+                </select>
+                <small id="helpId" class="text-muted">Ctrl+click para multiple selección</small>
+                <div *ngIf="submitted && f.requeriments.errors?.required" class="invalid-feedback d-block">
+                  Campo Requerido
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -72,4 +142,4 @@
       </form>
     </div>
   </div>
-</div> -->
+</div>
