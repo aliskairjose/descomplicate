@@ -44,7 +44,7 @@
                       <i class="bi bi-three-dots-vertical"></i>
                     </button>
                     <div class="dropdown-menu">
-                      <a class="dropdown-item" href="#"><i class="bi bi-arrow-clockwise mr-2"></i>Actualizar</a>
+                      <a class="dropdown-item" ><i class="bi bi-arrow-clockwise mr-2" data-toggle="modal" data-target="#exampleModal" (click)="editUser(data)"></i>Actualizar</a>
                       <!-- <a class="dropdown-item" href="#"><i class="bi bi-power mr-2"></i>Desactivar</a> -->
 
                     </div>
@@ -79,7 +79,7 @@
             <div class="col-6">
 
               <label for="" class="text-secondary">Nombre de usuario</label>
-              <input type="text" class="form-control" placeholder="Ingresar nombre" formControlName="name">
+              <input type="text" class="form-control" placeholder="Ingresar nombre" formControlName="name" [(ngModel)]="name">
 
               <div *ngIf="submitted && f.name.errors?.required" class="invalid-feedback d-block">
                 Campo Requerido
@@ -90,7 +90,7 @@
             <div class="col-6">
 
               <label for="" class="text-secondary">Correo electrónico</label>
-              <input type="text" class="form-control" placeholder="Ingresar nombre" formControlName="mail">
+              <input type="text" class="form-control" placeholder="Ingresar nombre" formControlName="mail" [(ngModel)]="email" >
               <div *ngIf="submitted && f.mail.errors?.required" class="invalid-feedback d-block">
                 Campo Requerido
               </div>
@@ -102,11 +102,11 @@
             <div class="col-6">
 
               <label for="" class="text-secondary">Contraseña</label>
-              <input type="password" class="form-control" placeholder="Ingresar password" formControlName="pass">
-              <div *ngIf="submitted && f.pass.errors?.required" class="invalid-feedback d-block">
+              <input type="password" class="form-control" placeholder="Ingresar password" formControlName="pass" [(ngModel)]="password">
+              <div *ngIf="submitted && f.pass.errors?.required && !condUpdate" class="invalid-feedback d-block">
                 Campo Requerido
               </div>
-              <div *ngIf="submitted && f.pass.errors?.minlength" class="invalid-feedback d-block">
+              <div *ngIf="submitted && f.pass.errors?.minlength " class="invalid-feedback d-block">
                 Mínimo 8 caractéres
               </div>
             </div>
@@ -114,9 +114,9 @@
 
               <label for="" class="text-secondary">Rol</label>
               <!--  <input type="text" class="form-control" placeholder="Seleccionar"
-            formControlName="rol"> -->
+            formControlName="rol"> --> 
             <div class="row">
-              <select formControlName="rol" [(ngModel)]="rolUser"  class="browser-default custom-select custom-select-two">
+              <select formControlName="rol"  [(ngModel)]="rolUser"   class="browser-default custom-select custom-select-two">
                 <option *ngFor="let rol of rolesList" [value]="rol.id" selected>{{rol.name}}</option>
               </select>
             </div>
@@ -128,11 +128,19 @@
           </div>
         </div>
 
-        <div class="modal-footer">
+        <div class="modal-footer" *ngIf="!condUpdate">
           <button type="button" class="btn btn-secondary text-secondary" #closebutton data-dismiss="modal"
             (click)="Clean()">Cancelar</button>
           <button [disabled]="!UserForm.valid " type="submit" class="btn btn-primary"
             (click)="regUser()">Registrar</button>
+
+        </div>
+        
+        <div class="modal-footer" *ngIf="condUpdate">
+          <button type="button" class="btn btn-secondary text-secondary" #closebutton data-dismiss="modal"
+            (click)="cancelUpdate()">Cancelar</button>
+          <button  type="submit" class="btn btn-primary"
+            (click)="updateUserEnd()">Actualizar</button>
 
         </div>
       </form>
