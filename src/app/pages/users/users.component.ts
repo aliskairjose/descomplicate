@@ -84,6 +84,7 @@ export class UsersComponent implements OnInit {
       
     });
     this.closebutton.nativeElement.click();
+    this.users();
   }
 
   onSubmit(){
