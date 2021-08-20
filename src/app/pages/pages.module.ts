@@ -19,6 +19,9 @@ import { CardDataApprovalComponent } from './approval/card-data-approval/card-da
 import { MonitoringComponent } from './monitoring/monitoring.component';
 import { BanksComponent } from './config/banks/banks.component';
 import { AvailabilityComponent } from './availability/availability.component';
+import { RequirementsComponent } from './config/requirements/requirements.component';
+import { InstitutionsComponent } from './config/institutions/institutions.component';
+import { ProcedureComponent } from './config/procedure/procedure.component';
 
 
 @NgModule({
@@ -35,7 +38,10 @@ import { AvailabilityComponent } from './availability/availability.component';
     CardDataApprovalComponent,
     MonitoringComponent,
     BanksComponent,
-    AvailabilityComponent
+    AvailabilityComponent,
+    RequirementsComponent,
+    InstitutionsComponent,
+    ProcedureComponent
   ],
   imports: [
     CommonModule,

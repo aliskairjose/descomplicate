@@ -1,57 +1,147 @@
 <section class="py-5 px-4 ">
-    <div class="container users"> 
-        <div class="card " >
-            <div class="card-body px-0">
-            <div class="card-title px-4 ">
-                <div class="row">
-                    <div class="col-6">
-                            <h5>Listado de usuarios</h5>
-                    </div>
-                    <div class="col-5 text-right">
-                        <label for="" class="text-primary">Crear usuario</label>
-                        <button class="btn btn-primary btn-sm ml-2"><i class="bi bi-plus-lg"></i></button>
-                    </div>
-                    <div class="col-1">
-                        
-                    </div>
-                </div>
+  <div class="container users">
+    <div class="card ">
+      <div class="card-body px-0">
+        <div class="card-title px-4 ">
+          <div class="row">
+            <div class="col-6">
+              <h5>Listado de usuarios</h5>
             </div>
-            <div class="card-text">
-                <table class="table">
-                    <thead >
-                      <tr >
-                      
-                        <th scope="col" class="color-gray" style="width:180px">Usuario</th>
-                        <th scope="col" class="color-gray">Rol</th>
-                        <th scope="col" class="color-gray"></th>
-                        <th scope="col" class="color-gray"></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let data of Item">
-                        <td>  <img src="{{data.src}}" alt="" srcset="" class="img-user ml-2 mr-1"> {{data.name}}</td>
-                        <td>{{data.rol}}</td>
-                        <td></td>
-                        <td class="text-right">
-                            <div class="btn-group dropleft">
-                                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="bi bi-three-dots-vertical"></i>
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#"><i class="bi bi-arrow-clockwise mr-2"></i>Actualizar</a>
-                                    <a class="dropdown-item" href="#"><i class="bi bi-power mr-2"></i>Desactivar</a>
-                               
-                                </div>
-                              </div>
-                        </td>
-                      </tr>
-                
-                    </tbody>
-                  </table>
+            <div class="col-5 text-right">
+              <label for="" class="text-primary">Crear usuario</label>
+              <button class="btn btn-primary btn-sm ml-2" id="btn-create" data-toggle="modal"
+                data-target="#exampleModal"><i class="bi bi-plus-lg"></i></button>
             </div>
-        
-    
+            <div class="col-1">
+
             </div>
+          </div>
         </div>
+        <div class="card-text">
+          <table class="table">
+            <thead>
+              <tr>
+
+                <th scope="col" class="color-gray" style="width:180px">Usuario</th>
+                <th scope="col" class="color-gray"></th>
+                <th scope="col" class="color-gray">Rol</th>
+                <th scope="col" class="color-gray"></th>
+                <th scope="col" class="color-gray"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of userList">
+                <td> <img src="{{data.profile_image}}" alt="" srcset="" class="img-user ml-2 mr-1"> {{data.name}} </td>
+                <td>  {{data.last_name}} </td>
+                <!-- el endpoint tiene aun detalles y no esta listando los ususarios y roles de forma correcta
+                una vez se modifique el endpoint se realizaran los ajustes en el listado -->
+                <td>{{data.roles[0].name}}</td>
+                <td></td>
+                <td class="text-right">
+                  <div class="btn-group dropleft">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false">
+                      <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="#"><i class="bi bi-arrow-clockwise mr-2"></i>Actualizar</a>
+                      <a class="dropdown-item" href="#"><i class="bi bi-power mr-2"></i>Desactivar</a>
+
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+
+      </div>
     </div>
+  </div>
 </section>
+
+<div class="modal fade bd-example-modal-sm" id="exampleModal" tabindex="-1" role="dialog"
+  aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Usuario</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="UserForm" (ngSubmit)="onSubmit()">
+        <div class="modal-body px-4">
+
+          <div class="row">
+            <div class="col-6">
+
+              <label for="" class="text-secondary">Nombre de usuario</label>
+              <input type="text" class="form-control" placeholder="Ingresar nombre" formControlName="name">
+
+              <div *ngIf="submitted && f.name.errors?.required" class="invalid-feedback d-block">
+                Campo Requerido
+              </div>
+
+
+            </div>
+            <div class="col-6">
+
+              <label for="" class="text-secondary">Correo electrónico</label>
+              <input type="text" class="form-control" placeholder="Ingresar nombre" formControlName="mail">
+              <div *ngIf="submitted && f.mail.errors?.required" class="invalid-feedback d-block">
+                Campo Requerido
+              </div>
+              <div *ngIf="submitted && f.mail.errors?.pattern" class="invalid-feedback d-block">
+                Email no tiene un formato correcto
+              </div>
+
+            </div>
+            <div class="col-6">
+
+              <label for="" class="text-secondary">Contraseña</label>
+              <input type="password" class="form-control" placeholder="Ingresar password" formControlName="pass">
+              <div *ngIf="submitted && f.pass.errors?.required" class="invalid-feedback d-block">
+                Campo Requerido
+              </div>
+              <div *ngIf="submitted && f.pass.errors?.minlength" class="invalid-feedback d-block">
+                Mínimo 8 caractéres
+              </div>
+            </div>
+            <div class="col-6">
+
+              <label for="" class="text-secondary">Rol</label>
+              <!--  <input type="text" class="form-control" placeholder="Seleccionar"
+            formControlName="rol"> -->
+            <div class="row">
+              <select formControlName="rol" [(ngModel)]="rolUser"  class="browser-default custom-select custom-select-two">
+                <option *ngFor="let rol of rolesList" [value]="rol.id" selected>{{rol.name}}</option>
+              </select>
+            </div>
+              <div *ngIf="submitted && f.rol.errors?.required" class="invalid-feedback d-block">
+                Campo Requerido
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary text-secondary" #closebutton data-dismiss="modal"
+            (click)="Clean()">Cancelar</button>
+          <button [disabled]="!UserForm.valid " type="submit" class="btn btn-primary"
+            (click)="regUser()">Registrar</button>
+
+        </div>
+      </form>
+
+
+      <!-- type="submit" -->
+
+
+
+    </div>
+  </div>
+</div>
