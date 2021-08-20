@@ -58,3 +58,33 @@
         }
     }
 }
+
+.content-filter{
+    right: 15%;
+    display: none;
+    margin-top: -12%;
+    position: absolute;
+    z-index: 9999;
+    top: 50%;
+    width: 500px;
+
+    .card{
+        .card-header{
+            background: white;
+            .action-filter{
+                justify-content: end;
+                    text-align: right;
+                button{
+                    
+                    color :#304FFE;
+                }
+            }
+          
+        }
+    }
+}
+
+.show_filter{
+    display: unset;
+    transition: linear;
+}
