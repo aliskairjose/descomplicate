@@ -144,6 +144,7 @@ export class UsersComponent implements OnInit {
         "active": true,
         "role_id": this.rolUser,
         "password": this.password,
+        "password_confirmation": this.password,
         "name": this.name
       };
     }
