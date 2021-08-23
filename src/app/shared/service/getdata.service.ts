@@ -16,6 +16,6 @@ export class GetdataService {
   } 
 
   users() : Observable<any> {
-    return this.httpService.get('admin/users');
+    return this.httpService.get('users-crud?roles[]=admin&roles[]=finance&roles[]=office&roles[]=approves');
   } 
 }

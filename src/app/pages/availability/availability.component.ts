@@ -2,15 +2,30 @@ import { HttpserviceService } from 'src/app/shared/service/httpservice.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import jspdf, {jsPDF} from 'jspdf';
 import html2canvas from 'html2canvas';
+import * as moment from 'moment';
+
 @Component({
   selector: 'app-availability',
   templateUrl: './availability.component.html',
   styleUrls: ['./availability.component.scss']
 })
 export class AvailabilityComponent implements OnInit {
-  Item : any;
-
-  constructor(private http:HttpserviceService) { }
+  Item : any ;
+  StatusFilter = false;
+  p: number = 1;
+  Filter = {
+    star_date : '',
+    end_date : '',
+    status : '-1',
+    type: '0' 
+  }
+  filterapi_stardate = '';
+  filterapi_enddate = '';
+  filterapi_type = '';
+  filterapi_status = '';
+  constructor(private http:HttpserviceService) { 
+    moment.locale('es');   
+  }
 
   ngOnInit(): void {
 
@@ -53,7 +68,13 @@ export class AvailabilityComponent implements OnInit {
   }
 
   GetManagers(){
-    this.http.get("users/admin/manager?page=1").subscribe(
+    this.http.get(
+      "manager-available-histories?includes[]=manager.user&order_by=manager_id&order_direction=ASC"+
+      this.filterapi_stardate+
+      this.filterapi_enddate+
+      this.filterapi_type+
+      this.filterapi_status 
+    ).subscribe(
       (res)=>{
       
         this.Item = res.data;
@@ -81,6 +102,66 @@ export class AvailabilityComponent implements OnInit {
           pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
           pdf.save('dowload.pdf');
         });
+  }
+
+
+  GetDataUser(user:any,type:string){
+    if(type === 'name'){
+      return user.full_name+" "+user.last_name;
+    }else{
+      return user.profile_image;
+    }
+
+  }
+
+  GetDateUser(date:any){
+    return moment(date).format("DD MMM YYYY").replace('.', ''); 
+  }
+
+
+  ShowFilter(){
+    this.StatusFilter = !this.StatusFilter;
+  }
+
+  ApplyFilter(){
+     
+     
+      if(this.Filter.star_date.length>=0 && this.Filter.star_date != ""){
+        this.filterapi_stardate = "&start_date="+this.Filter.star_date;
+      }else{
+        this.filterapi_stardate = "";
+      }
+
+      if(this.Filter.end_date.length>=0 && this.Filter.end_date != ""){
+        this.filterapi_enddate = "&end_date="+this.Filter.end_date;
+      }else{
+        this.filterapi_enddate = "";
+      }
+
+      if(this.Filter.type.length>=0 && this.Filter.type != "" && this.Filter.type != "0"){
+        this.filterapi_type = "&manager_type_id="+this.Filter.type;
+      }else{
+        this.filterapi_type = "";
+      }
+
+      if(this.Filter.status.length>=0 && this.Filter.status != "" && this.Filter.status != "-1"){
+        this.filterapi_status = "&available="+this.Filter.status;
+      }else{
+        this.filterapi_status = "";
+      }
+ 
+       this.GetManagers();
+       this.ShowFilter();
+  }
+
+  CleanFilter(){
+    this.Filter = {
+      star_date : '',
+      end_date : '',
+      status : '-1',
+      type: '0' 
+    }
+    this.ApplyFilter();
   }
 
 }

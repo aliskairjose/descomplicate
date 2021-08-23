@@ -11,7 +11,7 @@
                         <div class="d-flex flex-row" >
                          
                             <!-- filter downloand -->
-                            <button class="btn btn-sm text-secondary text-center border-1 mr-2"><img src="../../../assets/icon/filter_list.svg" alt=""></button>
+                            <button class="btn btn-sm text-secondary text-center border-1 mr-2" (click)="ShowFilter()"><img src="../../../assets/icon/filter_list.svg" alt=""></button>
                             <button class="btn btn-sm text-secondary text-center border-1" (click)="generatePDF()"><img src="../../../assets/icon/download.svg" alt=""></button>
                             <!-- filter downloand -->
                         </div>
@@ -36,26 +36,27 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let data of Item">
+                      <tr *ngFor="let data of Item ">
                       
-                        <td>  <img class="img-user" src="{{data.profile_image}}" alt="">{{data.name}}</td>
+                        <td>  <img class="img-user" src="{{GetDataUser(data.manager.user,'photo')}}" alt="">{{GetDataUser(data.manager.user,'name')}}</td>
                         <td>  {{GetTypeManager(data.manager?.manager_type_id)}}</td>
-                        <td>  {{data.fecha}}</td>
+                        <td class="text-capitalize">  {{GetDateUser(data.created_at)}}</td>
                         <td>   </td>
                         <td>   </td>
                         <td>   
                             <div class="box-status">
                                 <div 
-                                [class.point-red]="data.status=='0'"
-                                [class.point-blue]="data.status=='1'">
+                                [class.point-red]="data.available=='0'"
+                                [class.point-blue]="data.available=='1'">
                                 </div>
-                                    {{Getnamestatus(data.status)}}
+                                    {{Getnamestatus(data.available)}}
                             </div>
                         </td>
                       </tr>
                 
                     </tbody>
                   </table>
+                  <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
             </div>
         
     
@@ -63,3 +64,55 @@
         </div>
     </div>
 </section>
+
+
+<div class="content-filter" [class.show_filter]="StatusFilter">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-6" >Filtros</div>
+                <div class="col-6 action-filter" >
+                    <button class="btn" (click)="CleanFilter()">Limpiar</button>
+                    <button class="btn" (click)="ApplyFilter()">Aplicar</button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-6" >
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Tipo de gestor</label>
+                        <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="Filter.type" placeholder="Seleccionar">
+                            <option disabled selected value="0" >Seleccionar</option>
+                          <option value="1">Mensajero socio</option>
+                          <option value="2">Tramitador socio</option>
+                          <option value="3">Abogado socio</option>
+                        </select>
+                      </div>
+                </div>
+                <div class="col-6" >
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Estatus</label>
+                        <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="Filter.status" placeholder="Seleccionar">
+                            <option disabled selected value="-1" >Seleccionar</option>
+                          <option value="0">Inactivo</option>
+                          <option value="1">Activo</option>
+                        </select>
+                      </div>
+                </div>
+                <div class="col-6" >
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Example select</label>
+                        <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="Seleccionar" [(ngModel)]="Filter.star_date">
+                      </div>
+                </div>
+                <div class="col-6" >
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Example select</label>
+                        <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="Seleccionar" [(ngModel)]="Filter.end_date">
+                      </div>
+                </div>  
+            </div>
+        </div>
+      </div>
+</div>

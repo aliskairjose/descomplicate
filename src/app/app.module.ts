@@ -10,7 +10,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/service/auth.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +26,7 @@ import { RouterModule } from '@angular/router';
     HttpClientModule,
     FormsModule, 
     ReactiveFormsModule,
-    
+    NgxPaginationModule
   
   ],
   providers: [
