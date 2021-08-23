@@ -50,8 +50,8 @@
                     </button>
                     <div class="dropdown-menu">
                       <a class="dropdown-item" (click)="editUser(data)" data-target="#exampleModal" data-toggle="modal"><i class="bi bi-arrow-clockwise mr-2"   ></i>Actualizar</a>
-                       <a *ngIf="data.active" class="dropdown-item" ><i class="bi bi-power mr-2"></i>Desactivar</a> 
-                       <a *ngIf="!data.active" class="dropdown-item" ><i class="bi bi-power mr-2"></i>Activar</a> 
+                       <a *ngIf="data.active" (click)="Desactivar(data)" class="dropdown-item" ><i class="bi bi-power mr-2"></i>Desactivar</a> 
+                       <a *ngIf="!data.active" (click)="Activar(data)" class="dropdown-item" ><i class="bi bi-power mr-2"></i>Activar</a> 
 
                     </div>
                   </div>
