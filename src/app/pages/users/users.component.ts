@@ -85,8 +85,12 @@ export class UsersComponent implements OnInit {
   alertSucces(origen: number | undefined) {
     if (origen === 1) {
       this.proceso = 'registrado';
-    } else {
+    } else if (origen === 2)  {
       this.proceso = 'actualizado';
+    } else if (origen === 3)  {
+      this.proceso = 'desactivado';
+    } else {
+      this.proceso = 'activado';
     }
 
     Swal.fire({
@@ -132,6 +136,28 @@ export class UsersComponent implements OnInit {
     this.idUser = data.id;
   }
 
+  Activar(data: any) {
+    this.jsonUpdate = {
+      "active": true
+    };
+    this.UserService.updateAdmin(this.jsonUpdate, data.id).subscribe(
+      async (response) => {
+        this.alertSucces(4);
+      }
+    );
+  }
+
+  Desactivar(data: any) {
+    this.jsonUpdate = {
+      "active": false
+    };
+    this.UserService.updateAdmin(this.jsonUpdate, data.id).subscribe(
+      async (response) => {
+        this.alertSucces(3);
+      }
+    );
+  }
+
   updateUserEnd() {
     if (this.password === '' || this.password === null || this.password === undefined) {
       this.jsonUpdate = {
@@ -144,6 +170,7 @@ export class UsersComponent implements OnInit {
         "active": true,
         "role_id": this.rolUser,
         "password": this.password,
+        "password_confirmation": this.password,
         "name": this.name
       };
     }
