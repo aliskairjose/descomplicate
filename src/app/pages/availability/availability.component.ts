@@ -18,11 +18,21 @@ export class AvailabilityComponent implements OnInit {
     end_date : '',
     status : '-1',
     type: '0' 
+    
+  }
+  paginator = {
+    currentPage : 0,
+    lastPage : 0,
+    perPage : 0, // Registros por página
+    total : 0, // Total de registros
+    id: 'custom',
   }
   filterapi_stardate = '';
   filterapi_enddate = '';
   filterapi_type = '';
   filterapi_status = '';
+  pagesapi = '&page=1';
+  
   constructor(private http:HttpserviceService) { 
     moment.locale('es');   
   }
@@ -70,6 +80,7 @@ export class AvailabilityComponent implements OnInit {
   GetManagers(){
     this.http.get(
       "manager-available-histories?includes[]=manager.user&order_by=manager_id&order_direction=ASC"+
+      this.pagesapi+
       this.filterapi_stardate+
       this.filterapi_enddate+
       this.filterapi_type+
@@ -78,7 +89,8 @@ export class AvailabilityComponent implements OnInit {
       (res)=>{
       
         this.Item = res.data;
-        // console.log( this.Item);
+        this.paginator = res.meta.page;
+        // console.log( res);
       },
       error => {
         console.log(error);
@@ -163,5 +175,12 @@ export class AvailabilityComponent implements OnInit {
     }
     this.ApplyFilter();
   }
+
+  pageChange( page: number ): void {
+    // console.log(page);
+    this.pagesapi = '&page='+page;
+    this.paginator.currentPage = page;
+		this.GetManagers();
+	}
 
 }

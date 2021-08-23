@@ -30,12 +30,19 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let data of userList">
+              <tr *ngFor="let data of userList | paginate: { itemsPerPage: 
+                paginator.perPage, currentPage: paginator.currentPage, 
+                totalItems: paginator.total } ;let i = index">
                 <td> <img src="{{data.profile_image}}" alt="" srcset="" class="img-user ml-2 mr-1"> {{data.name}} </td>
                 <td>  {{data.last_name}} </td>
                 <!-- el endpoint tiene aun detalles y no esta listando los ususarios y roles de forma correcta
                 una vez se modifique el endpoint se realizaran los ajustes en el listado -->
-                <td>{{data.roles[0].name}}</td>
+                <td>
+                  <span *ngIf="data.roles[0].name==='approves'">Aprobaciones</span>
+                  <span *ngIf="data.roles[0].name==='office'">Administrador oficina</span>
+                  <span *ngIf="data.roles[0].name==='admin'">Administrador</span>
+                  <span *ngIf="data.roles[0].name==='finance'">Finanzas</span>
+                </td>
                 <td></td>
                 <td class="text-right">
                   <div class="btn-group dropleft">
@@ -45,7 +52,8 @@
                     </button>
                     <div class="dropdown-menu">
                       <a class="dropdown-item" (click)="editUser(data)" data-target="#exampleModal" data-toggle="modal"><i class="bi bi-arrow-clockwise mr-2"   ></i>Actualizar</a>
-                      <!-- <a class="dropdown-item" href="#"><i class="bi bi-power mr-2"></i>Desactivar</a> -->
+                       <a *ngIf="data.active" (click)="Desactivar(data)" class="dropdown-item" ><i class="bi bi-power mr-2"></i>Desactivar</a> 
+                       <a *ngIf="!data.active" (click)="Activar(data)" class="dropdown-item" ><i class="bi bi-power mr-2"></i>Activar</a> 
 
                     </div>
                   </div>
@@ -54,6 +62,19 @@
 
             </tbody>
           </table>
+          <div class="text-center">
+            <pagination-controls 
+            (pageChange)="pageChange($event)" 
+       
+         
+            previousLabel="Anterior" 
+            nextLabel="Siguiente">
+            
+            </pagination-controls>
+            <!--  -->
+  
+
+          </div>
         </div>
 
 
@@ -89,8 +110,8 @@
             </div>
             <div class="col-6">
 
-              <label for="" class="text-secondary">Correo electrónico</label>
-              <input type="text" class="form-control" placeholder="Ingresar email" formControlName="mail" [(ngModel)]="email" >
+              <label for="" class="text-secondary">Correo electrónico </label>
+              <input type="text" class="form-control" placeholder="Ingresar email" formControlName="mail" [(ngModel)]="email" [readonly]="condUpdate">
               <div *ngIf="submitted && f.mail.errors?.required" class="invalid-feedback d-block">
                 Campo Requerido
               </div>
@@ -117,6 +138,7 @@
             formControlName="rol"> --> 
             <div class="row">
               <select formControlName="rol"  [(ngModel)]="rolUser"   class="browser-default custom-select custom-select-two">
+                <option value="" selected>Seleccione</option>
                 <option *ngFor="let rol of rolesList" [value]="rol.id" selected>{{rol.name}}</option>
               </select>
             </div>

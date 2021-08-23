@@ -34,7 +34,14 @@ export class UsersComponent implements OnInit {
     { src: "../../../../assets/user-img/user.png", name: "Luisa Flores", rol: "Transmitador" },
     { src: "../../../../assets/user-img/user.png", name: "Flor Ramirez", rol: "Transmitador" }
   ];
-
+  paginator = {
+    currentPage : 0,
+    lastPage : 0,
+    perPage : 0, // Registros por página
+    total : 0, // Total de registros
+    id: 'custom',
+  }
+  pagesapi = '&page=1';
 
   constructor(
     public formBuilder: FormBuilder,
@@ -85,8 +92,12 @@ export class UsersComponent implements OnInit {
   alertSucces(origen: number | undefined) {
     if (origen === 1) {
       this.proceso = 'registrado';
-    } else {
+    } else if (origen === 2)  {
       this.proceso = 'actualizado';
+    } else if (origen === 3)  {
+      this.proceso = 'desactivado';
+    } else {
+      this.proceso = 'activado';
     }
 
     Swal.fire({
@@ -115,9 +126,12 @@ export class UsersComponent implements OnInit {
   }
 
   users() {
-    this.GetdataService.users().subscribe(
+  
+    this.GetdataService.users(this.pagesapi).subscribe(
       (response) => {
         this.userList = response.data;
+        // console.log(response);
+        this.paginator = response.meta.page;
       },
       (error) => { }
     );
@@ -132,6 +146,28 @@ export class UsersComponent implements OnInit {
     this.idUser = data.id;
   }
 
+  Activar(data: any) {
+    this.jsonUpdate = {
+      "active": true
+    };
+    this.UserService.updateAdmin(this.jsonUpdate, data.id).subscribe(
+      async (response) => {
+        this.alertSucces(4);
+      }
+    );
+  }
+
+  Desactivar(data: any) {
+    this.jsonUpdate = {
+      "active": false
+    };
+    this.UserService.updateAdmin(this.jsonUpdate, data.id).subscribe(
+      async (response) => {
+        this.alertSucces(3);
+      }
+    );
+  }
+
   updateUserEnd() {
     if (this.password === '' || this.password === null || this.password === undefined) {
       this.jsonUpdate = {
@@ -144,6 +180,7 @@ export class UsersComponent implements OnInit {
         "active": true,
         "role_id": this.rolUser,
         "password": this.password,
+        "password_confirmation": this.password,
         "name": this.name
       };
     }
@@ -169,4 +206,11 @@ export class UsersComponent implements OnInit {
     this.idUser = undefined;
     this.closebutton.nativeElement.click();
   }
+
+  pageChange( page: number ): void {
+    // console.log(page);
+    this.pagesapi = '&page='+page;
+    this.paginator.currentPage = page;
+		this.users();
+	}
 }

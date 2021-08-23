@@ -11,6 +11,9 @@ import { AuthInterceptor } from './shared/service/auth.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+registerLocaleData(localeEs);
 @NgModule({
   declarations: [
     AppComponent,

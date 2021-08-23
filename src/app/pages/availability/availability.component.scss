@@ -71,11 +71,12 @@
     .card{
         .card-header{
             background: white;
+            font-weight: bold;
             .action-filter{
                 justify-content: end;
                     text-align: right;
                 button{
-                    
+                    font-weight: bold;
                     color :#304FFE;
                 }
             }
@@ -84,7 +85,69 @@
     }
 }
 
-.show_filter{
+
+
+// pages
+.custom-pagination .page-number{
+    display: inline-block;
+    /* padding: 5px 12px; */
+    background: #afffe6;
+    margin: 0px 4px;
+    border-radius: 25px;
+}
+
+.page-number.current{
+    background: #ffffff!important;
+    border: 2px solid #458873;
+}
+
+.page-number span{
+    display: block;
+    width: 28px;
+    height: 28px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.pagination-previous,.pagination-next{
+    display: inline-block;
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 600px) {
+    .table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+    }
+    .content-filter {
+        right: 5%;
+        left: 5%;
+        margin-top: -57%;
+        top: 25%;
+        width: 290px;
+    }
+
+    
+  }
+
+  @media only screen and (min-width: 700px) and (max-width: 780px) {
+    .table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+    }
+    .content-filter {
+        margin-top: -12%;
+        top: 25%;
+        right: 15%;
+       
+    }
+
+    
+  }
+
+  .show_filter{
     display: unset;
     transition: linear;
 }

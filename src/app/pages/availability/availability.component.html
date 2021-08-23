@@ -1,13 +1,13 @@
-<section class="py-5 px-4 ">
+<section class="py-2 py-md-5 px-2 px-md-4 ">
     <div class="container monitoring"> 
         <div class="card " >
             <div class="card-body px-0">
             <div class="card-title px-4 ">
                 <div class="row">
-                    <div class="col-4" >
+                    <div class="col-12 col-md-4 mb-2 mb-md-0" >
                             <h5>Listado de gestores</h5>
                     </div>
-                    <div class="col-7 d-flex justify-content-end">
+                    <div class="col-10 col-md-7 d-flex justify-content-end">
                         <div class="d-flex flex-row" >
                          
                             <!-- filter downloand -->
@@ -17,12 +17,13 @@
                         </div>
                     </div>
                     <div class="col-1">
-                        
+                        <!-- <pagination-controls (pageChange)="pageChange($event)" previousLabel="<" nextLabel=">">
+                        </pagination-controls> -->
                     </div>
                 </div>
             </div>
             <div class="card-text"  id="contentToConvert">
-                <table class="table" >
+                <table class="table " >
                     <thead >
                       <tr >
                       
@@ -36,7 +37,9 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let data of Item ">
+                      <tr *ngFor="let data of Item | paginate: { itemsPerPage: 
+                        paginator.perPage, currentPage: paginator.currentPage, 
+                        totalItems: paginator.total } ;let i = index">
                       
                         <td>  <img class="img-user" src="{{GetDataUser(data.manager.user,'photo')}}" alt="">{{GetDataUser(data.manager.user,'name')}}</td>
                         <td>  {{GetTypeManager(data.manager?.manager_type_id)}}</td>
@@ -56,7 +59,22 @@
                 
                     </tbody>
                   </table>
+                  <div class="text-center">
+                    <pagination-controls 
+                    (pageChange)="pageChange($event)" 
+               
+                 
+                    previousLabel="Anterior" 
+                    nextLabel="Siguiente">
+                    
+                    </pagination-controls>
+                    <!--  -->
+          
+    
+                  </div>
+                 
                   <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+               
             </div>
         
     
