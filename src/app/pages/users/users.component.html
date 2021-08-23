@@ -35,7 +35,12 @@
                 <td>  {{data.last_name}} </td>
                 <!-- el endpoint tiene aun detalles y no esta listando los ususarios y roles de forma correcta
                 una vez se modifique el endpoint se realizaran los ajustes en el listado -->
-                <td>{{data.roles[0].name}}</td>
+                <td>
+                  <span *ngIf="data.roles[0].name==='approves'">Aprobaciones</span>
+                  <span *ngIf="data.roles[0].name==='office'">Administrador oficina</span>
+                  <span *ngIf="data.roles[0].name==='admin'">Administrador</span>
+                  <span *ngIf="data.roles[0].name==='finance'">Finanzas</span>
+                </td>
                 <td></td>
                 <td class="text-right">
                   <div class="btn-group dropleft">
