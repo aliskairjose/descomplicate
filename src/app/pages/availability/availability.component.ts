@@ -32,6 +32,7 @@ export class AvailabilityComponent implements OnInit {
   filterapi_type = '';
   filterapi_status = '';
   pagesapi = '&page=1';
+  
   constructor(private http:HttpserviceService) { 
     moment.locale('es');   
   }
