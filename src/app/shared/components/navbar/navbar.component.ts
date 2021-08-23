@@ -37,7 +37,7 @@ export class NavbarComponent implements OnInit {
     this.Pages = [      
       { pages: "dashboard", name_nav: "Dashboard", status: false },
       { pages: "users", name_nav: "Usuarios", status: false },
-      { pages: "approval/tramitadores", name_nav: "Aprobaciones/Tramitadores socios", status: false },
+      { pages: "approval/tramitadores", name_nav: "Tramitadores/Abogados socios por aprobar", status: false },
       { pages: "approval/messengers", name_nav: "Aprobaciones/Mensajeros socios", status: false },
       { pages: "monitoring", name_nav: "Monitoreo de trámites", status: false },
       { pages:"availability", name_nav:"Disponibilidad de Gestores",status:false},
