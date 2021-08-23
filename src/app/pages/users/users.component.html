@@ -122,6 +122,7 @@
             formControlName="rol"> --> 
             <div class="row">
               <select formControlName="rol"  [(ngModel)]="rolUser"   class="browser-default custom-select custom-select-two">
+                <option value="" selected>Seleccione</option>
                 <option *ngFor="let rol of rolesList" [value]="rol.id" selected>{{rol.name}}</option>
               </select>
             </div>
