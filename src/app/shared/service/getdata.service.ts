@@ -15,7 +15,7 @@ export class GetdataService {
     return this.httpService.get('roles?admin=true');
   } 
 
-  users() : Observable<any> {
-    return this.httpService.get('users-crud?roles[]=admin&roles[]=finance&roles[]=office&roles[]=approves');
+  users(option:any) : Observable<any> {
+    return this.httpService.get('users-crud?roles[]=admin&roles[]=finance&roles[]=office&roles[]=approves'+option);
   } 
 }

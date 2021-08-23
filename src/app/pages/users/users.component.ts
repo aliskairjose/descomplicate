@@ -34,7 +34,14 @@ export class UsersComponent implements OnInit {
     { src: "../../../../assets/user-img/user.png", name: "Luisa Flores", rol: "Transmitador" },
     { src: "../../../../assets/user-img/user.png", name: "Flor Ramirez", rol: "Transmitador" }
   ];
-
+  paginator = {
+    currentPage : 0,
+    lastPage : 0,
+    perPage : 0, // Registros por página
+    total : 0, // Total de registros
+    id: 'custom',
+  }
+  pagesapi = '&page=1';
 
   constructor(
     public formBuilder: FormBuilder,
@@ -115,9 +122,12 @@ export class UsersComponent implements OnInit {
   }
 
   users() {
-    this.GetdataService.users().subscribe(
+  
+    this.GetdataService.users(this.pagesapi).subscribe(
       (response) => {
         this.userList = response.data;
+        // console.log(response);
+        this.paginator = response.meta.page;
       },
       (error) => { }
     );
@@ -169,4 +179,11 @@ export class UsersComponent implements OnInit {
     this.idUser = undefined;
     this.closebutton.nativeElement.click();
   }
+
+  pageChange( page: number ): void {
+    // console.log(page);
+    this.pagesapi = '&page='+page;
+    this.paginator.currentPage = page;
+		this.users();
+	}
 }
