@@ -94,8 +94,8 @@
             </div>
             <div class="col-6">
 
-              <label for="" class="text-secondary">Correo electrónico</label>
-              <input type="text" class="form-control" placeholder="Ingresar email" formControlName="mail" [(ngModel)]="email" >
+              <label for="" class="text-secondary">Correo electrónico </label>
+              <input type="text" class="form-control" placeholder="Ingresar email" formControlName="mail" [(ngModel)]="email" [readonly]="condUpdate">
               <div *ngIf="submitted && f.mail.errors?.required" class="invalid-feedback d-block">
                 Campo Requerido
               </div>
