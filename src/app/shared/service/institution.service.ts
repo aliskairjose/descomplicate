@@ -17,8 +17,8 @@ export class InstitutionService {
  * @description Listado de requisitos
  * @returns Listado de requerimientos
  */
-  list(): Observable<BaseResponse<Institution[]>> {
-    return this.http.get( `institutions` );
+  list(option:any=null): Observable<BaseResponse<Institution[]>> {
+    return this.http.get( `institutions`,option );
   }
 
   /**

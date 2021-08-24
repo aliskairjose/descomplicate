@@ -1,6 +1,7 @@
 
 export interface BaseResponse<T> {
 	data: T;
+	meta : any;
 	message: string;
 	status: string;
 }
