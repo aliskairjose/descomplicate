@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { OrderService } from 'src/app/shared/service/order.service';
+import { OrderService, OrderStatus } from 'src/app/shared/service/order.service';
 import { Title } from '@angular/platform-browser';
 import { Order } from '../../../shared/interfaces/order';
+import Swal from 'sweetalert2';
 
 @Component( {
   selector: 'app-payment-verification',
@@ -23,6 +24,21 @@ export class PaymentVerificationComponent implements OnInit {
   ngOnInit(): void {
     this.loadData();
   }
+
+  /**
+   * 
+   * @param order 
+   */
+  updateOrderStatus( id: number, status: OrderStatus ): void {
+    let approved_payment = status;
+    this.orderService.approveDecline( id, approved_payment ).subscribe( response => {
+      console.log( response );
+      if ( response.status === 'Success' ) {
+        Swal.fire( '', response.message, 'success' );
+      }
+    } );
+  }
+
 
   private loadData(): void {
     this.orderService.paymentVerificationList().subscribe( response => {

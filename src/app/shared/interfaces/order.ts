@@ -23,6 +23,7 @@ export interface Order {
   delivery_address?: string;
   delivery_latitude?: string;
   delivery_longitude?: string;
+  reference_number: number;
   procedure: Procedure;
   managers: Manager[];
 }

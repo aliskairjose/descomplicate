@@ -20,7 +20,7 @@
             <div class="row">
               <div class="col">
                 <small class="form-text text-muted">Código</small>
-                <p>LM87234</p>
+                <p>{{order.procedure.id}}</p>
               </div>
               <div class="col">
                 <small class="form-text text-muted">Solicitante</small>
@@ -30,7 +30,7 @@
             <div class="row">
               <div class="col">
                 <small class="form-text text-muted">Código de transparencia/Yappi</small>
-                <p>363987</p>
+                <p>{{order.reference_number}}</p>
               </div>
             </div>
             <div class="row">
@@ -39,6 +39,14 @@
                 <p>{{order.procedure.cost | currency }}</p>
               </div>
             </div>
+          </div>
+          <div>
+            <button type="button" class="btn btn-link" (click)="updateOrderStatus(order.id, 1)">
+              <label for="">Aprobado</label>
+            </button>
+            <button type="button" class="btn btn-link" (click)="updateOrderStatus(order.id, 2)">
+              <label class="text-black-50">Denegado</label>
+            </button>
           </div>
         </div>
       </ng-container>
