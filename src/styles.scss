@@ -1,5 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import "assets/variables";
+// :root {
+//     --pseudo-element: red;
+// }
+
 html,
 body {
     height: 100%;
@@ -72,4 +76,8 @@ input.password {
     border-radius: 100%;
     color: #7c859b;
     font-size: 1rem;
+}
+
+.pointer {
+    cursor: pointer;
 }

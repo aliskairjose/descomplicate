@@ -35,6 +35,7 @@ export class PaymentVerificationComponent implements OnInit {
       console.log( response );
       if ( response.status === 'Success' ) {
         Swal.fire( '', response.message, 'success' );
+        this.loadData();
       }
     } );
   }

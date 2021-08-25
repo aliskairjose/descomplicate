@@ -1,52 +1,67 @@
-
 @import "../../../assets/variables";
 
-.monitoring{
+.monitoring {
+    .status-badge {
+        width: max-content;
+        border: 1px solid lightgrey;
+        border-radius: 18px;
+        padding: 5px 10px;
+        p {
+            margin: 0;
+            &::before {
+                content: "\2b24";
+                margin-right: 5px;
+                // color: var(--pseudo-element);
+            }
+        }
+    }
 
-    .border-1{
-     
+    .border-1 {
         border: 1px solid $gray2;
         border-radius: 5px;
     }
 
-    .border-2{
+    .border-2 {
         border: 1px solid $gray2;
         border-radius: 20px;
     }
 
-    .point-yellow{
+    .point-yellow {
         border-radius: 50px;
-        background: #FBAA35;
+        background: #fbaa35;
         height: 7px;
         width: 7px;
         margin-right: 8px;
     }
 
-    .point-red{
+    .point-red {
         border-radius: 50px;
-        background: #FF1744;
+        background: #ff1744;
         height: 7px;
         width: 7px;
         margin-right: 8px;
     }
 
-    .point-blue{
+    .point-blue {
         border-radius: 50px;
-        background: #3ABBD2;
+        background: #3abbd2;
         height: 7px;
         width: 7px;
         margin-right: 8px;
     }
 
-    .table{
-        thead{
-            th{
+    .table {
+        thead {
+            th {
                 color: $gray4;
                 font-size: 0.8rem;
                 font-weight: 500;
             }
         }
-        .img-user{
+        tbody {
+            font-size: 0.875rem;
+        }
+        .img-user {
             height: 25px;
             width: 25px;
             margin-right: 5px;

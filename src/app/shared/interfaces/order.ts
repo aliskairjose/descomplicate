@@ -1,5 +1,6 @@
 import { Procedure } from './procedure';
 import { Manager } from './manager';
+import { HttpStatusCode } from '@angular/common/http';
 export interface Order {
   id: number;
   applicant_name: string;
@@ -26,4 +27,18 @@ export interface Order {
   reference_number: number;
   procedure: Procedure;
   managers: Manager[];
+  status?: Status;
+  delivery_courier?: string;
+  processor?: string;
+  delivery_courier_image?: string;
+  processor_image?: string;
+}
+
+export interface Status {
+  id: number;
+  manager_type: string;
+  name: string;
+  description: string;
+  created_at: string;
+  updated_at: string;
 }
