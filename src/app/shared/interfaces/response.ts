@@ -3,6 +3,7 @@ export interface BaseResponse<T> {
 	data: T;
 	message: string;
 	status: string;
+	meta?: Meta;
 }
 export interface Response<T> {
 	data: T;

@@ -7,7 +7,7 @@ export interface Procedure {
   institution_id: number;
   created_at: string;
   updated_at: string;
-  requeriments: [],
-  manager_types: [],
-  institution: Institution
+  requeriments: [];
+  manager_types: []
+  institution: Institution;
 }

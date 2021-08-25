@@ -1,1 +1,55 @@
-<p>payment-verification works!</p>
+<section class="py-2 py-md-5 px-2 px-md-4 ">
+  <div class="mb-4 font-weight-bold">Listado de pagos por verificar</div>
+
+  <ng-container *ngIf="orders.length; else noData">
+    <!-- Resultado -->
+    <div class="content">
+      <ng-container *ngFor="let order of orders; let i=index">
+        <!-- PaymentCard -->
+        <div class="payment-card">
+          <div class="payment-card-tittle font-weight-bold">
+            Detalle del pago
+          </div>
+          <div class="payment-card-body">
+            <div class="row">
+              <div class="col">
+                <small class="form-text text-muted">Trámite</small>
+                {{order.procedure.name}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <small class="form-text text-muted">Código</small>
+                LM87234
+              </div>
+              <div class="col">
+                <small class="form-text text-muted">Solicitante</small>
+                {{order.applicant_name}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <small class="form-text text-muted">Código de transparencia/Yappi</small>
+                363987
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <small class="form-text text-muted">Monto pagado</small>
+                {{order.procedure.cost | currency }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+    </div>
+  </ng-container>
+  <ng-template #noData>
+    <div class="alert alert-primary" role="alert">
+      No hay registros disponibles
+    </div>
+  </ng-template>
+
+
+</section>

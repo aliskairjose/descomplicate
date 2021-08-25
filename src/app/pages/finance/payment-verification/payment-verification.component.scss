@@ -1,0 +1,26 @@
+section {
+  .content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .payment-card {
+    padding: 1rem;
+    margin: 0.5rem 0;
+    background-color: #fff;
+    width: 23rem;
+    min-height: 19.187rem;
+    max-height: 23rem;
+    border-radius: 4px;
+    box-shadow: 0px 3px 6px lightgrey;
+    .payment-card-title {
+      margin: 0.5rem;
+    }
+    .payment-card-body {
+      .row {
+        margin: 0.5rem;
+        border-bottom: 1px solid lightgrey;
+      }
+    }
+  }
+}
