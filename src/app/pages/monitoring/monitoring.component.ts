@@ -30,9 +30,7 @@ export class MonitoringComponent implements OnInit {
       if ( response.status === 'Success' ) {
         this.item = [ ...response.data ];
 
-        const source = from( response.data ).pipe( pluck( 'status' ) );
-        source.subscribe( item => {
-          console.log( item );
+        from( response.data ).pipe( pluck( 'status' ) ).subscribe( item => {
           if ( item?.id === 1 ) { this.pendings++; }
           if ( item?.id === 7 ) { this.inProcess++; }
           if ( item?.id === 8 ) { this.culminated++; }

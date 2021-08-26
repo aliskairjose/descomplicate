@@ -14,11 +14,6 @@
         }
         p {
             margin: 0;
-            // &::before {
-            //     content: "\2b24";
-            //     margin-right: 5px;
-            //     // color: var(--pseudo-element);
-            // }
         }
     }
 
@@ -71,6 +66,7 @@
             height: 25px;
             width: 25px;
             margin-right: 5px;
+            border-radius: 100%;
         }
         .box-status {
             padding: 5px;
