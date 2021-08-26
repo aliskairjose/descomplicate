@@ -47,7 +47,9 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr *ngFor="let data of item">
+								<tr *ngFor="let data of item | paginate: { itemsPerPage: 
+                paginator.perPage, currentPage: paginator.currentPage, 
+                totalItems: paginator.total }">
 									<td> {{data.id}}</td>
 									<td> {{data.procedure.name}}</td>
 									<td> {{data.procedure.institution.name}}</td>

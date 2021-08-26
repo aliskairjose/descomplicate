@@ -4,7 +4,9 @@
   <ng-container *ngIf="orders.length; else noData">
     <!-- Resultado -->
     <div class="content">
-      <ng-container *ngFor="let order of orders; let i=index">
+      <ng-container *ngFor="let order of orders | paginate: { itemsPerPage: 
+                paginator.perPage, currentPage: paginator.currentPage, 
+                totalItems: paginator.total }">
         <!-- PaymentCard -->
         <div class="payment-card">
           <div class="payment-card-tittle font-weight-bold">

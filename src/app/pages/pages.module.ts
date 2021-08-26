@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA,LOCALE_ID, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -22,10 +22,11 @@ import { AvailabilityComponent } from './availability/availability.component';
 import { RequirementsComponent } from './config/requirements/requirements.component';
 import { InstitutionsComponent } from './config/institutions/institutions.component';
 import { ProcedureComponent } from './config/procedure/procedure.component';
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { PaymentVerificationComponent } from './finance/payment-verification/payment-verification.component'; // <-- import the module
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-@NgModule({
+@NgModule( {
   declarations: [
     LoginAdminComponent,
     PasswordRecoveryComponent,
@@ -51,12 +52,13 @@ import { PaymentVerificationComponent } from './finance/payment-verification/pay
     SharedModule,
     ReactiveFormsModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgbModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [
     // { provide: LOCALE_ID, useValue: 'es' },
- 
+
   ],
-})
+} )
 export class PagesModule { }

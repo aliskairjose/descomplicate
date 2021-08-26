@@ -13,7 +13,7 @@ export interface Response<T> {
 }
 
 export interface Meta {
-	page?: Page;
+	page: Page;
 }
 
 export interface Page {
