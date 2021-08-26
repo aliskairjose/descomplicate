@@ -50,7 +50,10 @@
           </div>
         </div>
       </ng-container>
-
+      <div class="text-center">
+        <pagination-controls (pageChange)="pageChange($event)" previousLabel="Anterior" nextLabel="Siguiente">
+        </pagination-controls>
+      </div>
     </div>
   </ng-container>
   <ng-template #noData>

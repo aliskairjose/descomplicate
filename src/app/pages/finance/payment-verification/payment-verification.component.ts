@@ -3,6 +3,7 @@ import { OrderService, OrderStatus } from 'src/app/shared/service/order.service'
 import { Title } from '@angular/platform-browser';
 import { Order } from '../../../shared/interfaces/order';
 import Swal from 'sweetalert2';
+import { Page } from '../../../shared/interfaces/response';
 
 @Component( {
   selector: 'app-payment-verification',
@@ -12,6 +13,8 @@ import Swal from 'sweetalert2';
 export class PaymentVerificationComponent implements OnInit {
 
   orders: Order[] = [];
+  paginator!: Page;
+  page = 1;
 
   constructor(
     private titleService: Title,
@@ -40,11 +43,17 @@ export class PaymentVerificationComponent implements OnInit {
     } );
   }
 
+  pageChange( page: number ): void {
+    this.page = page;
+    this.paginator.currentPage = page;
+    this.loadData();
+  }
 
   private loadData(): void {
-    this.orderService.paymentVerificationList().subscribe( response => {
+    this.orderService.paymentVerificationList( this.page ).subscribe( response => {
       console.log( response );
       if ( response.status === 'Success' ) {
+        this.paginator = response.meta?.page as Page;
         this.orders = [ ...response.data ];
       }
     } );

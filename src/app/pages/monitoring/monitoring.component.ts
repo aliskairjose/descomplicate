@@ -28,7 +28,6 @@ export class MonitoringComponent implements OnInit {
   }
 
   pageChange( page: number ): void {
-    // console.log(page);
     this.page = page;
     this.paginator.currentPage = page;
     this.loadData();
