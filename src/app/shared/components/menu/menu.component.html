@@ -39,7 +39,7 @@
             </a>
         </li>
         <li [routerLink]="['/pages/availability']" routerLinkActive="active">
-            <a >
+            <a>
                 <div class="icon-menu option5"></div>
                 <label for="" class="m-0 title-option">Disponibilidad</label>
             </a>
@@ -59,13 +59,15 @@
                     <a>{{item== "active" ? 'CC':'Cuentas Compensadas'}}</a>
                 </li>
                 <li>
-                    <a>{{item== "active" ? 'VDP':'Verificacion de Pagos'}}</a>
+                    <a [routerLink]="['/pages/finance/payment-verification']" routerLinkActive="active">
+                        {{item== "active" ? 'VDP':'Verificacion de Pagos'}}
+                    </a>
+                    <!-- <a>{{item== "active" ? 'VDP':'Verificacion de Pagos'}}</a> -->
                 </li>
             </ul>
         </li>
         <li>
             <a href="#Approval" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-
                 <div class="icon-menu option7"></div>
                 <label for="" class="m-0 title-option">Aprobaciones</label>
                 <i class="bi bi-chevron-down"></i>
@@ -73,13 +75,11 @@
             <ul class="collapse list-unstyled" id="Approval">
                 <li>
                     <a [routerLink]="['/pages/approval/tramitadores']" routerLinkActive="active">
-
                         {{item== "active" ? 'TS':'Tramitadores / Abogados socios por aprobar'}}
                     </a>
                 </li>
                 <li>
                     <a [routerLink]="['/pages/approval/messengers']" routerLinkActive="active">
-
                         {{item== "active" ? 'MS':'Mensajeros socios'}}
                     </a>
                 </li>
@@ -106,7 +106,7 @@
                 </li>
                 <li>
                     <a [routerLink]="['/pages/config/procedure']" routerLinkActive="active">
-                        {{item== "active" ? 'TRA':'Tramites'}}
+                        {{item== "active" ? 'TRA':'Trámites'}}
                     </a>
                 </li>
                 <li>

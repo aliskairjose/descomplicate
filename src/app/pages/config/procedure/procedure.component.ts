@@ -9,6 +9,7 @@ import { ProcedureService } from 'src/app/shared/service/procedure.service';
 import { RequirementService } from 'src/app/shared/service/requirement.service';
 import Swal from 'sweetalert2';
 import { InstitutionService } from '../../../shared/service/institution.service';
+import { Page } from '../../../shared/interfaces/response';
 
 @Component( {
   selector: 'app-procedure',
@@ -23,6 +24,8 @@ export class ProcedureComponent implements OnInit {
   isEdit = false;
   institutions: Institution[] = [];
   requirements: Requirement[] = [];
+  paginator!: Page;
+  page = 1;
 
   constructor(
     private fb: FormBuilder,
@@ -33,7 +36,7 @@ export class ProcedureComponent implements OnInit {
   ) {
     this.createForm();
     this.titleService.setTitle( 'Descomplicate - Requisitos' );
-    forkJoin( [ this.instService.list(), this.reqService.list() ] ).
+    forkJoin( [ this.instService.list( this.page ), this.reqService.list( this.page ) ] ).
       subscribe( ( [ instResponse, requirementsResponse ] ) => {
         this.requirements = [ ...requirementsResponse.data ];
         this.institutions = [ ...instResponse.data ];
@@ -49,7 +52,7 @@ export class ProcedureComponent implements OnInit {
   onSubmit(): void {
     this.submitted = true;
     if ( this.form.valid ) {
-      ( this.procedure ) ? this.updateProcedure() : this.createProcedure();
+      ( this.procedure.id != undefined ) ? this.updateProcedure() : this.createProcedure();
     }
   }
 
@@ -72,9 +75,10 @@ export class ProcedureComponent implements OnInit {
   }
 
   private loadData(): void {
-    this.procedureSrv.list().subscribe( response => {
+    this.procedureSrv.list( this.page ).subscribe( response => {
       if ( response.status === 'Success' ) {
         this.procedures = [ ...response.data ];
+        this.paginator = response.meta?.page as Page;
       }
     } );
   }
@@ -122,5 +126,19 @@ export class ProcedureComponent implements OnInit {
     );
   }
 
+  pageChange( page: number ): void {
+    this.page = page;
+    this.paginator.currentPage = page;
+    this.loadData();
+  }
+
+  Clean() {
+
+    if ( this.isEdit ) {
+      this.procedure = <Procedure> {};
+      this.isEdit = !this.isEdit;
+
+    }
+  }
 
 }

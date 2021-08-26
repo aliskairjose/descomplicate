@@ -34,7 +34,7 @@
                 paginator.perPage, currentPage: paginator.currentPage, 
                 totalItems: paginator.total } ;let i = index">
                 <td> <img src="{{data.profile_image}}" alt="" srcset="" class="img-user ml-2 mr-1"> {{data.name}} </td>
-                <td>  {{data.last_name}} </td>
+                <td> {{data.last_name}} </td>
                 <!-- el endpoint tiene aun detalles y no esta listando los ususarios y roles de forma correcta
                 una vez se modifique el endpoint se realizaran los ajustes en el listado -->
                 <td>
@@ -51,9 +51,12 @@
                       <i class="bi bi-three-dots-vertical"></i>
                     </button>
                     <div class="dropdown-menu">
-                      <a class="dropdown-item" (click)="editUser(data)" data-target="#exampleModal" data-toggle="modal"><i class="bi bi-arrow-clockwise mr-2"   ></i>Actualizar</a>
-                       <a *ngIf="data.active" (click)="Desactivar(data)" class="dropdown-item" ><i class="bi bi-power mr-2"></i>Desactivar</a> 
-                       <a *ngIf="!data.active" (click)="Activar(data)" class="dropdown-item" ><i class="bi bi-power mr-2"></i>Activar</a> 
+                      <a class="dropdown-item" (click)="editUser(data)" data-target="#exampleModal"
+                        data-toggle="modal"><i class="bi bi-arrow-clockwise mr-2"></i>Actualizar</a>
+                      <a *ngIf="data.active" (click)="Desactivar(data)" class="dropdown-item"><i
+                          class="bi bi-power mr-2"></i>Desactivar</a>
+                      <a *ngIf="!data.active" (click)="Activar(data)" class="dropdown-item"><i
+                          class="bi bi-power mr-2"></i>Activar</a>
 
                     </div>
                   </div>
@@ -63,16 +66,11 @@
             </tbody>
           </table>
           <div class="text-center">
-            <pagination-controls 
-            (pageChange)="pageChange($event)" 
-       
-         
-            previousLabel="Anterior" 
-            nextLabel="Siguiente">
-            
+            <pagination-controls (pageChange)="pageChange($event)" previousLabel="Anterior" nextLabel="Siguiente">
+
             </pagination-controls>
             <!--  -->
-  
+
 
           </div>
         </div>
@@ -100,7 +98,8 @@
             <div class="col-6">
 
               <label for="" class="text-secondary">Nombre de usuario</label>
-              <input type="text" class="form-control" placeholder="Ingresar nombre" formControlName="name" [(ngModel)]="name">
+              <input type="text" class="form-control" placeholder="Ingresar nombre" formControlName="name"
+                [(ngModel)]="name">
 
               <div *ngIf="submitted && f.name.errors?.required" class="invalid-feedback d-block">
                 Campo Requerido
@@ -111,7 +110,8 @@
             <div class="col-6">
 
               <label for="" class="text-secondary">Correo electrónico </label>
-              <input type="text" class="form-control" placeholder="Ingresar email" formControlName="mail" [(ngModel)]="email" [readonly]="condUpdate">
+              <input type="text" class="form-control" placeholder="Ingresar email" formControlName="mail"
+                [(ngModel)]="email" [readonly]="condUpdate">
               <div *ngIf="submitted && f.mail.errors?.required" class="invalid-feedback d-block">
                 Campo Requerido
               </div>
@@ -123,7 +123,8 @@
             <div class="col-6">
 
               <label for="" class="text-secondary">Contraseña</label>
-              <input type="password" class="form-control" placeholder="Ingresar password" formControlName="pass" [(ngModel)]="password">
+              <input type="password" class="form-control" placeholder="Ingresar password" formControlName="pass"
+                [(ngModel)]="password">
               <div *ngIf="submitted && f.pass.errors?.required && !condUpdate" class="invalid-feedback d-block">
                 Campo Requerido
               </div>
@@ -135,13 +136,14 @@
 
               <label for="" class="text-secondary">Rol</label>
               <!--  <input type="text" class="form-control" placeholder="Seleccionar"
-            formControlName="rol"> --> 
-            <div class="row">
-              <select formControlName="rol"  [(ngModel)]="rolUser"   class="browser-default custom-select custom-select-two">
-                <option value="" selected>Seleccione</option>
-                <option *ngFor="let rol of rolesList" [value]="rol.id" selected>{{rol.name}}</option>
-              </select>
-            </div>
+            formControlName="rol"> -->
+              <div class="row">
+                <select formControlName="rol" [(ngModel)]="rolUser"
+                  class="browser-default custom-select custom-select-two">
+                  <option value="" selected>Seleccione</option>
+                  <option *ngFor="let rol of rolesList" [value]="rol.id" selected>{{rol.name}}</option>
+                </select>
+              </div>
               <div *ngIf="submitted && f.rol.errors?.required" class="invalid-feedback d-block">
                 Campo Requerido
               </div>
@@ -157,12 +159,11 @@
             (click)="regUser()">Registrar</button>
 
         </div>
-        
+
         <div class="modal-footer" *ngIf="condUpdate">
           <button type="button" class="btn btn-secondary text-secondary" #closebutton data-dismiss="modal"
             (click)="cancelUpdate()">Cancelar</button>
-          <button  type="submit" class="btn btn-primary"
-            (click)="updateUserEnd()">Actualizar</button>
+          <button type="submit" class="btn btn-primary" (click)="updateUserEnd()">Actualizar</button>
 
         </div>
       </form>

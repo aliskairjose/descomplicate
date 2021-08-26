@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Institution } from 'src/app/shared/interfaces/institution';
 import { InstitutionService } from 'src/app/shared/service/institution.service';
+import { Page } from '../../../shared/interfaces/response';
 
 @Component( {
   selector: 'app-institutions',
@@ -17,6 +18,9 @@ export class InstitutionsComponent implements OnInit {
   institutions: Institution[] = [];
   institution!: Institution;
   isEdit = false;
+
+  paginator!: Page;
+  page = 1;
 
   constructor(
     private titleSrv: Title,
@@ -36,7 +40,7 @@ export class InstitutionsComponent implements OnInit {
   onSubmit(): void {
     this.submitted = true;
     if ( this.form.valid ) {
-      ( this.institution ) ? this.updateInstitution() : this.createInstitution();
+      ( this.institution.id != undefined ) ? this.updateInstitution() : this.createInstitution();
     }
   }
 
@@ -57,9 +61,11 @@ export class InstitutionsComponent implements OnInit {
   }
 
   private loadData(): void {
-    this.iSrv.list().subscribe( response => {
+    this.iSrv.list( this.page ).subscribe( response => {
+      // console.log(response);
       if ( response.status === 'Success' ) {
         this.institutions = [ ...response.data ];
+        this.paginator = response.meta?.page as Page;
       }
     } )
   }
@@ -102,5 +108,20 @@ export class InstitutionsComponent implements OnInit {
         this.loadData();
       }
     } );
+  }
+
+  Clean() {
+
+    if ( this.isEdit ) {
+      this.institution = <Institution> {};
+      this.isEdit = !this.isEdit;
+
+    }
+  }
+
+  pageChange( page: number ): void {
+    this.page = page;
+    this.paginator.currentPage = page;
+    this.loadData();
   }
 }

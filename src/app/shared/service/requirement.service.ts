@@ -18,8 +18,8 @@ export class RequirementService {
    * @description Listado de requisitos
    * @returns Listado de requerimientos
    */
-  list(): Observable<BaseResponse<Requirement[]>> {
-    return this.http.get( `requeriments` );
+  list( page = 1 ): Observable<BaseResponse<Requirement[]>> {
+    return this.http.get( `requeriments?page=${page}`, );
   }
 
   /**

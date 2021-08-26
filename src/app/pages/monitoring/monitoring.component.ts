@@ -1,51 +1,51 @@
 import { Component, OnInit } from '@angular/core';
+import { OrderService } from '../../shared/service/order.service';
+import { Order } from '../../shared/interfaces/order';
+import { from } from 'rxjs';
+import { pluck } from 'rxjs/operators';
+import { ThrowStmt } from '@angular/compiler';
+import { Page } from '../../shared/interfaces/response';
 
-@Component({
+@Component( {
   selector: 'app-monitoring',
   templateUrl: './monitoring.component.html',
-  styleUrls: ['./monitoring.component.scss']
-})
+  styleUrls: [ './monitoring.component.scss' ]
+} )
 export class MonitoringComponent implements OnInit {
-  Item = [
-    {
-      code:"LC212312",doc_name:"Licencia de Conducir",institute:"INTT",src_messages:"../../../../assets/user-img/user.png",
-      name_messages:"Mark Torres",src_tramitador:"../../../../assets/user-img/user.png",name_tramitador:"Luis Escalona",status:"0"}
-      ,
-    {
-      code:"LC212312",doc_name:"Pago de solvencias municipales",institute:"INTT",src_messages:"../../../../assets/user-img/user.png",
-      name_messages:"Rob Morales",src_tramitador:"../../../../assets/user-img/user.png",name_tramitador:"Luis Escalona",status:"1"}
-      ,
-    {
-      code:"LC212312",doc_name:"Licencia",institute:"INTT",src_messages:"../../../../assets/user-img/user.png",
-      name_messages:"Luisa Flores",src_tramitador:"../../../../assets/user-img/user.png",name_tramitador:"Luis Escalona",status:"0"
-    },
-    {
-      code:"LC212312",doc_name:"Pago de solvencias municipales",institute:"INTT",src_messages:"../../../../assets/user-img/user.png",
-      name_messages:"Flor Ramirez",src_tramitador:"../../../../assets/user-img/user.png",name_tramitador:"Luis Escalona",status:"2"
-    }
-  ]
-  constructor() { }
+  item: Order[] = [];
+  pendings = 0;
+  culminated = 0;
+  inProcess = 0;
+  paginator!: Page;
+  page = 1;
+
+  constructor(
+    private orderService: OrderService,
+  ) { }
 
   ngOnInit(): void {
+    this.loadData();
   }
 
+  pageChange( page: number ): void {
+    this.page = page;
+    this.paginator.currentPage = page;
+    this.loadData();
+  }
 
-  Getnamestatus(status:string){
-    let name = "";
-   
-      switch (status) {
-        case "0":
-            name = "Pendiente";
-          break;
-          case "1": 
-            name = "Procesado";
-          break;
-          case "2":
-              name = "Entregado";
-          break;
+  private loadData(): void {
+    this.orderService.procedureList( this.page ).subscribe( response => {
+      if ( response.status === 'Success' ) {
+        this.item = [ ...response.data ];
+        this.paginator = response.meta?.page as Page;
+
+        from( response.data ).pipe( pluck( 'status' ) ).subscribe( item => {
+          if ( item?.id === 1 ) { this.pendings++; }
+          if ( item?.id === 7 ) { this.inProcess++; }
+          if ( item?.id === 8 ) { this.culminated++; }
+        } );
       }
-
-      return name;
+    } )
   }
 
 }

@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
 import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 registerLocaleData(localeEs);
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ registerLocaleData(localeEs);
     HttpClientModule,
     FormsModule, 
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgbModule
   
   ],
   providers: [

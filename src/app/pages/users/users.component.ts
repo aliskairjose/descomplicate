@@ -5,16 +5,17 @@ import Swal from 'sweetalert2';
 import { GetdataService } from '../../shared/service/getdata.service';
 import { AuthService } from '../../shared/service/auth.service';
 import { UserService } from '../../shared/service/user.service';
+import { Page } from '../../shared/interfaces/response';
 
 
-@Component({
+@Component( {
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
-})
+  styleUrls: [ './users.component.scss' ]
+} )
 export class UsersComponent implements OnInit {
   submitted: boolean = false;
-  @ViewChild('closebutton')
+  @ViewChild( 'closebutton' )
   closebutton!: { nativeElement: { click: () => void; }; };
   UserForm: FormGroup;
   btn: boolean = false;
@@ -34,14 +35,9 @@ export class UsersComponent implements OnInit {
     { src: "../../../../assets/user-img/user.png", name: "Luisa Flores", rol: "Transmitador" },
     { src: "../../../../assets/user-img/user.png", name: "Flor Ramirez", rol: "Transmitador" }
   ];
-  paginator = {
-    currentPage : 0,
-    lastPage : 0,
-    perPage : 0, // Registros por página
-    total : 0, // Total de registros
-    id: 'custom',
-  }
-  pagesapi = '&page=1';
+
+  paginator!: Page;
+  page = 1;
 
   constructor(
     public formBuilder: FormBuilder,
@@ -49,13 +45,13 @@ export class UsersComponent implements OnInit {
     private AuthService: AuthService,
     private UserService: UserService
   ) {
-    this.UserForm = this.formBuilder.group({
-      name: ['', [Validators.required,],],
-      mail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'),],],
-      pass: new FormControl('', [Validators.required, Validators.minLength(8)]),
-      rol: ['', [Validators.required,],],
+    this.UserForm = this.formBuilder.group( {
+      name: [ '', [ Validators.required, ], ],
+      mail: [ '', [ Validators.required, Validators.pattern( '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$' ), ], ],
+      pass: new FormControl( '', [ Validators.required, Validators.minLength( 8 ) ] ),
+      rol: [ '', [ Validators.required, ], ],
 
-    });
+    } );
 
   }
 
@@ -79,33 +75,33 @@ export class UsersComponent implements OnInit {
       "email": this.UserForm.value.mail,
       "role_id": this.UserForm.value.rol
     }
-    this.AuthService.register(this.dataRegister).subscribe(
-      (response) => {
-        this.alertSucces(1);
+    this.AuthService.register( this.dataRegister ).subscribe(
+      ( response ) => {
+        this.alertSucces( 1 );
       },
-      (error) => {
+      ( error ) => {
 
       }
     );
   }
 
-  alertSucces(origen: number | undefined) {
-    if (origen === 1) {
+  alertSucces( origen: number | undefined ) {
+    if ( origen === 1 ) {
       this.proceso = 'registrado';
-    } else if (origen === 2)  {
+    } else if ( origen === 2 ) {
       this.proceso = 'actualizado';
-    } else if (origen === 3)  {
+    } else if ( origen === 3 ) {
       this.proceso = 'desactivado';
     } else {
       this.proceso = 'activado';
     }
 
-    Swal.fire({
+    Swal.fire( {
       icon: 'success',
       title: 'Muy bien !',
       text: 'Usuario ' + this.proceso + ' con éxito !',
 
-    });
+    } );
     this.closebutton.nativeElement.click();
     this.users();
   }
@@ -118,58 +114,57 @@ export class UsersComponent implements OnInit {
 
   roles() {
     this.GetdataService.roles().subscribe(
-      (response) => {
+      ( response ) => {
         this.rolesList = response.data;
       },
-      (error) => { }
+      ( error ) => { }
     );
   }
 
   users() {
-  
-    this.GetdataService.users(this.pagesapi).subscribe(
-      (response) => {
+
+    this.GetdataService.users( this.page ).subscribe(
+      ( response ) => {
         this.userList = response.data;
-        // console.log(response);
         this.paginator = response.meta.page;
       },
-      (error) => { }
+      ( error ) => { }
     );
   }
 
-  editUser(data: any) {
+  editUser( data: any ) {
     this.condUpdate = true;
     this.password = '';
     this.name = data.name;
     this.email = data.email;
-    this.rolUser = data.roles[0].id;
+    this.rolUser = data.roles[ 0 ].id;
     this.idUser = data.id;
   }
 
-  Activar(data: any) {
+  Activar( data: any ) {
     this.jsonUpdate = {
       "active": true
     };
-    this.UserService.updateAdmin(this.jsonUpdate, data.id).subscribe(
-      async (response) => {
-        this.alertSucces(4);
+    this.UserService.updateAdmin( this.jsonUpdate, data.id ).subscribe(
+      async ( response ) => {
+        this.alertSucces( 4 );
       }
     );
   }
 
-  Desactivar(data: any) {
+  Desactivar( data: any ) {
     this.jsonUpdate = {
       "active": false
     };
-    this.UserService.updateAdmin(this.jsonUpdate, data.id).subscribe(
-      async (response) => {
-        this.alertSucces(3);
+    this.UserService.updateAdmin( this.jsonUpdate, data.id ).subscribe(
+      async ( response ) => {
+        this.alertSucces( 3 );
       }
     );
   }
 
   updateUserEnd() {
-    if (this.password === '' || this.password === null || this.password === undefined) {
+    if ( this.password === '' || this.password === null || this.password === undefined ) {
       this.jsonUpdate = {
         "active": true,
         "role_id": this.rolUser,
@@ -185,9 +180,9 @@ export class UsersComponent implements OnInit {
       };
     }
 
-    this.UserService.updateAdmin(this.jsonUpdate, this.idUser).subscribe(
-      async (response) => {
-        this.alertSucces(2);
+    this.UserService.updateAdmin( this.jsonUpdate, this.idUser ).subscribe(
+      async ( response ) => {
+        this.alertSucces( 2 );
         this.condUpdate = false;
         this.name = '';
         this.email = '';
@@ -209,8 +204,8 @@ export class UsersComponent implements OnInit {
 
   pageChange( page: number ): void {
     // console.log(page);
-    this.pagesapi = '&page='+page;
+    this.page = page;
     this.paginator.currentPage = page;
-		this.users();
-	}
+    this.users();
+  }
 }

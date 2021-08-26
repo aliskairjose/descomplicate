@@ -1,8 +1,10 @@
 
 export interface BaseResponse<T> {
 	data: T;
+	// meta: any;
 	message: string;
 	status: string;
+	meta?: Meta;
 }
 export interface Response<T> {
 	data: T;
@@ -11,12 +13,12 @@ export interface Response<T> {
 }
 
 export interface Meta {
-	page?: Page;
+	page: Page;
 }
 
 export interface Page {
-	currentPage?: number;
-	lastPage?: number;
-	perPage?: number; // Registros por página
-	total?: number; // Total de registros
+	currentPage: number;
+	lastPage: number;
+	perPage: number; // Registros por página
+	total: number; // Total de registros
 }
