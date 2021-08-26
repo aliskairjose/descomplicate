@@ -29,8 +29,8 @@ export class OrderService {
    * @description Listado de tramites
    * @returns 
    */
-  procedureList( page = 1 ): Observable<BaseResponse<Order[]>> {
-    return this.http.get( `orders?page=${page}&with[]=status&with[]=managers&with[]=procedure.institution` );
+  procedureList( page = 1, params: any ): Observable<BaseResponse<Order[]>> {
+    return this.http.get( `orders?page=${page}&with[]=status&with[]=managers&with[]=procedure.institution`, { params } );
   }
 
   /**
