@@ -9,6 +9,7 @@ import { ProcedureService } from 'src/app/shared/service/procedure.service';
 import { RequirementService } from 'src/app/shared/service/requirement.service';
 import Swal from 'sweetalert2';
 import { InstitutionService } from '../../../shared/service/institution.service';
+import { Page } from '../../../shared/interfaces/response';
 
 @Component( {
   selector: 'app-procedure',
@@ -23,19 +24,9 @@ export class ProcedureComponent implements OnInit {
   isEdit = false;
   institutions: Institution[] = [];
   requirements: Requirement[] = [];
-  option = {
-    params : {
-      page :"1"
-    }
-  
-  }
-  paginator = {
-    currentPage : 0,
-    lastPage : 0,
-    perPage : 0, // Registros por página
-    total : 0, // Total de registros
-    id: 'custom',
-  }
+  paginator!: Page;
+  page = 1;
+
   constructor(
     private fb: FormBuilder,
     private titleService: Title,
@@ -45,7 +36,7 @@ export class ProcedureComponent implements OnInit {
   ) {
     this.createForm();
     this.titleService.setTitle( 'Descomplicate - Requisitos' );
-    forkJoin( [ this.instService.list(this.option), this.reqService.list(this.option) ] ).
+    forkJoin( [ this.instService.list( this.page ), this.reqService.list( this.page ) ] ).
       subscribe( ( [ instResponse, requirementsResponse ] ) => {
         this.requirements = [ ...requirementsResponse.data ];
         this.institutions = [ ...instResponse.data ];
@@ -84,10 +75,10 @@ export class ProcedureComponent implements OnInit {
   }
 
   private loadData(): void {
-    this.procedureSrv.list(this.option).subscribe( response => {
+    this.procedureSrv.list( this.page ).subscribe( response => {
       if ( response.status === 'Success' ) {
         this.procedures = [ ...response.data ];
-        this.paginator = response.meta.page;
+        this.paginator = response.meta?.page as Page;
       }
     } );
   }
@@ -136,18 +127,17 @@ export class ProcedureComponent implements OnInit {
   }
 
   pageChange( page: number ): void {
-    // console.log(page);
-    this.option.params.page = String(page);
+    this.page = page;
     this.paginator.currentPage = page;
-		this.loadData();
-	}
+    this.loadData();
+  }
 
-  Clean(){
-  
-    if( this.isEdit){
-      this.procedure =  <Procedure>{};
+  Clean() {
+
+    if ( this.isEdit ) {
+      this.procedure = <Procedure> {};
       this.isEdit = !this.isEdit;
-     
+
     }
   }
 

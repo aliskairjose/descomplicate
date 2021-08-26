@@ -18,8 +18,8 @@ export class ProcedureService {
    * @description Listado de requisitos
    * @returns Listado de requerimientos
    */
-  list(option:any): Observable<BaseResponse<Procedure[]>> {
-    return this.http.get( `procedures?includes[]=requeriments&includes[]=managerTypes&includes[]=institution`,option );
+  list( page = 1 ): Observable<BaseResponse<Procedure[]>> {
+    return this.http.get( `procedures?includes[]=requeriments&includes[]=managerTypes&includes[]=institution&page=${page}` );
   }
 
   /**

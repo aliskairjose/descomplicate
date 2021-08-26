@@ -4,6 +4,7 @@ import { RequirementService } from '../../../shared/service/requirement.service'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Requirement } from 'src/app/shared/interfaces/requirement';
+import { Page } from '../../../shared/interfaces/response';
 
 @Component( {
   selector: 'app-requirements',
@@ -18,18 +19,14 @@ export class RequirementsComponent implements OnInit {
   requirement!: Requirement;
   isEdit = false;
   option = {
-    params : {
-      page :"1"
+    params: {
+      page: "1"
     }
-  
+
   }
-  paginator = {
-    currentPage : 0,
-    lastPage : 0,
-    perPage : 0, // Registros por página
-    total : 0, // Total de registros
-    id: 'custom',
-  }
+  paginator!: Page;
+  page = 1;
+
   constructor(
     private fb: FormBuilder,
     private titleService: Title,
@@ -48,7 +45,7 @@ export class RequirementsComponent implements OnInit {
   onSubmit(): void {
     this.submitted = true;
     if ( this.form.valid ) {
-      ( this.requirement.id != undefined ) ?   this.updateRequirement() : this.createRequirement();
+      ( this.requirement.id != undefined ) ? this.updateRequirement() : this.createRequirement();
     }
   }
 
@@ -68,11 +65,11 @@ export class RequirementsComponent implements OnInit {
   }
 
   private loadData(): void {
-    this.regSrv.list(this.option).subscribe( response => {
+    this.regSrv.list( this.page ).subscribe( response => {
       // console.log(response);
       if ( response.status === 'Success' ) {
         this.requirements = [ ...response.data ];
-        this.paginator = response.meta.page;
+        this.paginator = response.meta?.page as Page;
       }
     } );
   }
@@ -117,17 +114,17 @@ export class RequirementsComponent implements OnInit {
 
   pageChange( page: number ): void {
     // console.log(page);
-    this.option.params.page = String(page);
+    this.option.params.page = String( page );
     this.paginator.currentPage = page;
-		this.loadData();
-	}
+    this.loadData();
+  }
 
-  Clean(){
-  
-    if( this.isEdit){
-      this.requirement =  <Requirement>{};
+  Clean() {
+
+    if ( this.isEdit ) {
+      this.requirement = <Requirement> {};
       this.isEdit = !this.isEdit;
-     
+
     }
   }
 
