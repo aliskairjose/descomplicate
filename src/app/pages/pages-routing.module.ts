@@ -25,6 +25,7 @@ import { ProcedureComponent } from './config/procedure/procedure.component';
 
 //availability
 import { AvailabilityComponent } from './availability/availability.component';
+import { PaymentVerificationComponent } from './finance/payment-verification/payment-verification.component';
 
 
 const routes: Routes = [
@@ -38,9 +39,9 @@ const routes: Routes = [
     component: DashboardComponent
   },
   {
-     path : "users",
-     component: UsersComponent
-   },
+    path: "users",
+    component: UsersComponent
+  },
   {
     path: "approval/tramitadores",
     component: TramitadoresPartnersComponent
@@ -50,7 +51,7 @@ const routes: Routes = [
     component: MessengersPartnersComponent
   },
   {
-    path : "monitoring",
+    path: "monitoring",
     component: MonitoringComponent
   },
   {
@@ -58,7 +59,7 @@ const routes: Routes = [
     component: BanksComponent
   },
   {
-    path : "availability",
+    path: "availability",
     component: AvailabilityComponent
   },
   {
@@ -72,6 +73,9 @@ const routes: Routes = [
   {
     path: "config/procedure",
     component: ProcedureComponent
+  }, {
+    path: 'finance/payment-verification',
+    component: PaymentVerificationComponent
   }
 ];
 

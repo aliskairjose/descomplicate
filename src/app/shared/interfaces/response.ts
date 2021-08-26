@@ -4,6 +4,7 @@ export interface BaseResponse<T> {
 	meta : any;
 	message: string;
 	status: string;
+	meta?: Meta;
 }
 export interface Response<T> {
 	data: T;

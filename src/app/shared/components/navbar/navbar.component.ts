@@ -34,17 +34,18 @@ export class NavbarComponent implements OnInit {
   }
 
   InitPages() {
-    this.Pages = [      
+    this.Pages = [
       { pages: "dashboard", name_nav: "Dashboard", status: false },
       { pages: "users", name_nav: "Usuarios", status: false },
       { pages: "approval/tramitadores", name_nav: "Tramitadores/Abogados socios por aprobar", status: false },
       { pages: "approval/messengers", name_nav: "Aprobaciones/Mensajeros socios", status: false },
       { pages: "monitoring", name_nav: "Monitoreo de trámites", status: false },
-      { pages:"availability", name_nav:"Disponibilidad de Gestores",status:false},
+      { pages: "availability", name_nav: "Disponibilidad de Gestores", status: false },
       { pages: "config/banks", name_nav: "Configuración/Entidades Bancarias", status: false },
       { pages: "config/requirements", name_nav: "Configuración/Requisitos", status: false },
       { pages: "config/institutions", name_nav: "Configuración/Instituciones", status: false },
-      { pages: "config/procedure", name_nav: "Configuración/Trámites", status: false },
+      { pages: "config/procedure", name_nav: "Configuración/Tramites", status: false },
+      { pages: "finance/payment-verification", name_nav: "Verificacion de Pagos", status: false },
     ]
   }
 
