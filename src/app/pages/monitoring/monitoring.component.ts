@@ -9,6 +9,7 @@ import { ProcedureService } from '../../shared/service/procedure.service';
 import { Procedure } from '../../shared/interfaces/procedure';
 import { InstitutionService } from '../../shared/service/institution.service';
 import { Institution } from 'src/app/shared/interfaces/institution';
+import { Manager } from '../../shared/interfaces/manager';
 
 @Component( {
   selector: 'app-monitoring',
@@ -30,12 +31,15 @@ export class MonitoringComponent implements OnInit {
     ready: 0,
     procedure_id: 0,
     institution_id: 0,
+    managers: []
   }
   tramitadores: any[] = [];
   mensajeros: any[] = [];
   modal: any;
   institution: any;
   procedure: any;
+  mensajero: any;
+  tramitador: any;
 
   constructor(
     private modalService: NgbModal,
@@ -100,9 +104,18 @@ export class MonitoringComponent implements OnInit {
       this.params.institution_id = id;
       this.institution = this.institutions.find( item => item.id == id );
       this.procedureService.list( 1, id ).subscribe( response => this.procedures.push( ...response.data ) );
-    } else {
+    }
+    if ( type === 'procedure' ) {
       this.params.procedure_id = id;
       this.procedure = this.procedures.find( item => item.id == id );
+    }
+    if ( type === 'mensajero' ) {
+      this.params.managers.push( id );
+      this.mensajero = this.mensajeros.find( item => item.id == id );
+    }
+    if ( type === 'tramitador' ) {
+      this.params.managers.push( id );
+      this.tramitador = this.tramitadores.find( item => item.id == id )
     }
   }
 
