@@ -22,20 +22,20 @@ export class MonitoringComponent implements OnInit {
   inProcess = 0;
   paginator!: Page;
   page = 1;
-  procedures: Procedure[] = [];
-  institutions: Institution[] = [];
+  procedures: any[] = [ { id: 0, name: 'Seleccionar' } ];
+  institutions: any[] = [];
   params: any = {
     process: 0,
     pending: 0,
     ready: 0,
     procedure_id: 0,
     institution_id: 0,
-    // start_date: null,
-    // end_date: null,
   }
   tramitadores: any[] = [];
   mensajeros: any[] = [];
   modal: any;
+  institution: any;
+  procedure: any;
 
   constructor(
     private modalService: NgbModal,
@@ -47,9 +47,12 @@ export class MonitoringComponent implements OnInit {
   ) {
     forkJoin( [ this.institutionService.list(), this.orderService.mensajeros(), this.orderService.tramitadores() ] )
       .subscribe( ( [ response, mensajeroRespose, tramitadorResponse ] ) => {
-        this.institutions = [ ...response.data ]
+        this.institutions = [ ...response.data ];
         this.mensajeros = [ ...mensajeroRespose.data ];
         this.tramitadores = [ ...tramitadorResponse.data ];
+        this.institutions.unshift( { id: 0, name: 'Seleccionar' } );
+        this.mensajeros.unshift( { id: 0, name: 'Seleccionar' } );
+        this.tramitadores.unshift( { id: 0, name: 'Seleccionar' } );
       } );
   }
 
@@ -95,11 +98,11 @@ export class MonitoringComponent implements OnInit {
     const id = event.target.value;
     if ( type === 'institution' ) {
       this.params.institution_id = id;
-      this.procedureService.list( 1, id ).subscribe( response => {
-        this.procedures = [ ...response.data ];
-      } );
+      this.institution = this.institutions.find( item => item.id == id );
+      this.procedureService.list( 1, id ).subscribe( response => this.procedures.push( ...response.data ) );
     } else {
       this.params.procedure_id = id;
+      this.procedure = this.procedures.find( item => item.id == id );
     }
   }
 
