@@ -35,6 +35,7 @@ export class MonitoringComponent implements OnInit {
   }
   tramitadores: any[] = [];
   mensajeros: any[] = [];
+  modal: any;
 
   constructor(
     private modalService: NgbModal,
@@ -84,7 +85,10 @@ export class MonitoringComponent implements OnInit {
   }
 
   openFilterModal( filterModal: any ): void {
-    this.modalService.open( filterModal );
+    this.modal = this.modalService.open( filterModal );
+    this.modal.result.then( () => {
+      this.loadData();
+    } );
   }
 
   onChange( event: any, type: string ): void {
