@@ -4,7 +4,7 @@ import { Order } from '../../shared/interfaces/order';
 import { from, forkJoin } from 'rxjs';
 import { pluck } from 'rxjs/operators';
 import { Page } from '../../shared/interfaces/response';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbDateParserFormatter, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProcedureService } from '../../shared/service/procedure.service';
 import { Procedure } from '../../shared/interfaces/procedure';
 import { InstitutionService } from '../../shared/service/institution.service';
@@ -24,27 +24,36 @@ export class MonitoringComponent implements OnInit {
   page = 1;
   procedures: Procedure[] = [];
   institutions: Institution[] = [];
-  params = {
+  params: any = {
     process: 0,
     pending: 0,
     ready: 0,
     procedure_id: 0,
-    institution_id: 0
+    institution_id: 0,
+    // start_date: null,
+    // end_date: null,
   }
+  tramitadores: any[] = [];
+  mensajeros: any[] = [];
 
   constructor(
     private modalService: NgbModal,
     public activeModal: NgbActiveModal,
     private orderService: OrderService,
     private procedureService: ProcedureService,
+    private formatter: NgbDateParserFormatter,
     private institutionService: InstitutionService,
   ) {
-    this.institutionService.list().subscribe( response => { this.institutions = [ ...response.data ] } );
+    forkJoin( [ this.institutionService.list(), this.orderService.mensajeros(), this.orderService.tramitadores() ] )
+      .subscribe( ( [ response, mensajeroRespose, tramitadorResponse ] ) => {
+        this.institutions = [ ...response.data ]
+        this.mensajeros = [ ...mensajeroRespose.data ];
+        this.tramitadores = [ ...tramitadorResponse.data ];
+      } );
   }
 
   ngOnInit(): void {
     this.loadData();
-    console.log( this.params )
   }
 
   pageChange( page: number ): void {
@@ -78,11 +87,21 @@ export class MonitoringComponent implements OnInit {
     this.modalService.open( filterModal );
   }
 
-  onInstitutionChange( event: any ): void {
+  onChange( event: any, type: string ): void {
     const id = event.target.value;
-    this.procedureService.list( 1, id ).subscribe( response => {
-      this.procedures = [ ...response.data ];
-    } )
+    if ( type === 'institution' ) {
+      this.params.institution_id = id;
+      this.procedureService.list( 1, id ).subscribe( response => {
+        this.procedures = [ ...response.data ];
+      } );
+    } else {
+      this.params.procedure_id = id;
+    }
+  }
+
+  onDateSelect( event: any, type: string ): void {
+    if ( type === 'start_date' ) { this.params.start_date = this.formatter.format( event ) }
+    if ( type === 'end_date' ) { this.params.end_date = this.formatter.format( event ) }
   }
 
   private loadData(): void {

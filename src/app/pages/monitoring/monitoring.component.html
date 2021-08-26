@@ -100,7 +100,7 @@
 				<div class="col">
 					<div class="form-group">
 						<label for="">Institución</label>
-						<select class="form-control" name="" id="" (change)="onInstitutionChange($event)">
+						<select class="form-control" name="" id="" (change)="onChange($event, 'institution')">
 							<option value="">Seleccionar</option>
 							<option *ngFor="let i of institutions" [value]="i.id">{{i.name}}</option>
 						</select>
@@ -109,7 +109,7 @@
 				<div class="col">
 					<div class="form-group">
 						<label for="">Trámite</label>
-						<select class="form-control" name="" id="">
+						<select class="form-control" name="" id="" (change)="onChange($event, 'procedure')">
 							<option value="">Seleccionar</option>
 							<option *ngFor="let p of procedures" [value]=p.id>{{p.name}}</option>
 						</select>
@@ -121,9 +121,8 @@
 					<div class="form-group">
 						<label for="">Mensajero</label>
 						<select class="form-control" name="" id="">
-							<option></option>
-							<option></option>
-							<option></option>
+							<option value="">Seleccione</option>
+							<option *ngFor="let m of mensajeros" [value]="m.id">{{m.name}}</option>
 						</select>
 					</div>
 				</div>
@@ -131,32 +130,29 @@
 					<div class="form-group">
 						<label for="">Tramitador</label>
 						<select class="form-control" name="" id="">
-							<option></option>
-							<option></option>
-							<option></option>
+							<option value="">Seleccione</option>
+							<option *ngFor="let t of tramitadores" [value]="t.id">{{t.name}}</option>
 						</select>
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col">
-					<div class="form-group">
-						<label for=""></label>
-						<select class="form-control" name="" id="">
-							<option></option>
-							<option></option>
-							<option></option>
-						</select>
+					<div class="input-group">
+						<input class="form-control" placeholder="Fecha inicio" name="start_date" #di="ngbDatepicker" ngbDatepicker
+							(dateSelect)="onDateSelect($event, 'start_date')">
+						<div class="input-group-append">
+							<button class="btn btn-outline-secondary calendar" (click)="di.toggle()" type="button"></button>
+						</div>
 					</div>
 				</div>
 				<div class="col">
-					<div class="form-group">
-						<label for=""></label>
-						<select class="form-control" name="" id="">
-							<option></option>
-							<option></option>
-							<option></option>
-						</select>
+					<div class="input-group">
+						<input class="form-control" placeholder="Fecha inicio" name="end_date" #di="ngbDatepicker" ngbDatepicker
+							(dateSelect)="onDateSelect($event, 'end_date')">
+						<div class="input-group-append">
+							<button class="btn btn-outline-secondary calendar" (click)="di.toggle()" type="button"></button>
+						</div>
 					</div>
 				</div>
 			</div>

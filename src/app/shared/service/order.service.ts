@@ -43,4 +43,12 @@ export class OrderService {
     return this.http.put( `orders/${id}`, { approved_payment } );
   }
 
+  tramitadores(): Observable<any> {
+    return this.http.get( `users-crud?roles[]=manager.processor&roles[]=manager.lawyer` )
+  }
+
+  mensajeros(): Observable<any> {
+    return this.http.get( `users-crud?roles[]=manager.messenger` );
+  }
+
 }

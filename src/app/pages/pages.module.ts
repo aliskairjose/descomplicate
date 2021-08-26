@@ -24,7 +24,7 @@ import { InstitutionsComponent } from './config/institutions/institutions.compon
 import { ProcedureComponent } from './config/procedure/procedure.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PaymentVerificationComponent } from './finance/payment-verification/payment-verification.component'; // <-- import the module
-import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbActiveModal, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule( {
   declarations: [
@@ -53,7 +53,8 @@ import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     FormsModule,
     NgxPaginationModule,
-    NgbModule
+    NgbModule,
+    NgbDatepickerModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [
