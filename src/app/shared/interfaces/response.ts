@@ -16,8 +16,8 @@ export interface Meta {
 }
 
 export interface Page {
-	currentPage?: number;
-	lastPage?: number;
-	perPage?: number; // Registros por página
-	total?: number; // Total de registros
+	currentPage: number;
+	lastPage: number;
+	perPage: number; // Registros por página
+	total: number; // Total de registros
 }

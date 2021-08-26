@@ -21,16 +21,16 @@ export class OrderService {
    * @description Lista los pagos por verificar
    * @returns 
    */
-  paymentVerificationList(): Observable<BaseResponse<Order[]>> {
-    return this.http.get( `orders?page=1&approved_payment=0&with[]=procedure` );
+  paymentVerificationList( page = 1 ): Observable<BaseResponse<Order[]>> {
+    return this.http.get( `orders?page=${page}&approved_payment=0&with[]=procedure` );
   }
 
   /**
    * @description Listado de tramites
    * @returns 
    */
-  procedureList(): Observable<BaseResponse<Order[]>> {
-    return this.http.get( `orders?page=1&with[]=status&with[]=managers&with[]=procedure.institution` );
+  procedureList( page = 1 ): Observable<BaseResponse<Order[]>> {
+    return this.http.get( `orders?page=${page}&with[]=status&with[]=managers&with[]=procedure.institution` );
   }
 
   /**

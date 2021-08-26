@@ -71,6 +71,10 @@
 								</tr>
 							</tbody>
 						</table>
+						<div class="text-center">
+							<pagination-controls (pageChange)="pageChange($event)" previousLabel="Anterior" nextLabel="Siguiente">
+							</pagination-controls>
+						</div>
 					</ng-container>
 					<ng-template #noData>
 						<div class="alert alert-info text-center my-4" role="alert">

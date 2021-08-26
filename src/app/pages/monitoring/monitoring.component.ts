@@ -4,6 +4,7 @@ import { Order } from '../../shared/interfaces/order';
 import { from } from 'rxjs';
 import { pluck } from 'rxjs/operators';
 import { ThrowStmt } from '@angular/compiler';
+import { Page } from '../../shared/interfaces/response';
 
 @Component( {
   selector: 'app-monitoring',
@@ -15,6 +16,8 @@ export class MonitoringComponent implements OnInit {
   pendings = 0;
   culminated = 0;
   inProcess = 0;
+  paginator!: Page;
+  page = 1;
 
   constructor(
     private orderService: OrderService,
@@ -24,11 +27,18 @@ export class MonitoringComponent implements OnInit {
     this.loadData();
   }
 
+  pageChange( page: number ): void {
+    // console.log(page);
+    this.page = page;
+    this.paginator.currentPage = page;
+    this.loadData();
+  }
 
   private loadData(): void {
-    this.orderService.procedureList().subscribe( response => {
+    this.orderService.procedureList( this.page ).subscribe( response => {
       if ( response.status === 'Success' ) {
         this.item = [ ...response.data ];
+        this.paginator = response.meta?.page as Page;
 
         from( response.data ).pipe( pluck( 'status' ) ).subscribe( item => {
           if ( item?.id === 1 ) { this.pendings++; }
