@@ -1,6 +1,10 @@
 @import "../../../assets/variables";
 
 .monitoring {
+    .status-circle {
+        font-size: 0.5625rem;
+        margin-right: 5px;
+    }
     .status-badge {
         display: flex;
         align-items: center;
@@ -8,10 +12,6 @@
         border: 1px solid lightgrey;
         border-radius: 18px;
         padding: 5px 10px;
-        .status-circle {
-            font-size: 0.5625rem;
-            margin-right: 5px;
-        }
         p {
             margin: 0;
         }
@@ -25,30 +25,6 @@
     .border-2 {
         border: 1px solid $gray2;
         border-radius: 20px;
-    }
-
-    .point-yellow {
-        border-radius: 50px;
-        background: #fbaa35;
-        height: 7px;
-        width: 7px;
-        margin-right: 8px;
-    }
-
-    .point-red {
-        border-radius: 50px;
-        background: #ff1744;
-        height: 7px;
-        width: 7px;
-        margin-right: 8px;
-    }
-
-    .point-blue {
-        border-radius: 50px;
-        background: #3abbd2;
-        height: 7px;
-        width: 7px;
-        margin-right: 8px;
     }
 
     .table {

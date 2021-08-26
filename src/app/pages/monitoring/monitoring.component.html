@@ -10,19 +10,22 @@
 						<div class="col-7 d-flex justify-content-end">
 							<div class="d-flex flex-row">
 								<!-- button status -->
-								<button class="btn btn-sm text-secondary border-1 mr-2 d-flex align-items-center flex-row">
-									<div class="point-yellow"></div> Pendientes: {{pendings}}
+								<button class="btn btn-sm text-secondary border-1 mr-2 d-flex align-items-center flex-row"
+									(click)="filter('pending')">
+									<i class="bi bi-circle-fill status-circle" style="color: #fbaa35;"></i> Pendientes: {{pendings}}
 								</button>
-								<button class="btn btn-sm text-secondary border-1 mr-2 d-flex align-items-center flex-row">
-									<div class="point-red"></div> Culminados: {{culminated}}
+								<button class="btn btn-sm text-secondary border-1 mr-2 d-flex align-items-center flex-row"
+									(click)="filter('culminate')">
+									<i class="bi bi-circle-fill status-circle" style="color: #ff1744;"></i> Culminados: {{culminated}}
 								</button>
-								<button class="btn btn-sm text-secondary border-1 mr-3 d-flex align-items-center flex-row">
-									<div class="point-blue"></div> En proceso: {{inProcess}}
+								<button class="btn btn-sm text-secondary border-1 mr-3 d-flex align-items-center flex-row"
+									(click)="filter('inProccess')">
+									<i class="bi bi-circle-fill status-circle" style="color: #3abbd2;"></i> En proceso: {{inProcess}}
 								</button>
 								<!-- button status -->
 								<!-- filter downloand -->
 								<button class="btn btn-sm text-secondary text-center border-1 mr-2">
-									<img src="/assets/icon/filter_list.svg" alt=""></button>
+									<img src="/assets/icon/filter_list.svg" alt="" (click)="openFilterModal(filterModal)"></button>
 								<button class="btn btn-sm text-secondary text-center border-1"><img src="/assets/icon/download.svg"
 										alt=""></button>
 								<!-- filter downloand -->
@@ -47,8 +50,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr *ngFor="let data of item | paginate: { itemsPerPage: 
-                paginator.perPage, currentPage: paginator.currentPage, 
+								<tr *ngFor="let data of item | paginate: { itemsPerPage: paginator.perPage, currentPage: paginator.currentPage, 
                 totalItems: paginator.total }">
 									<td> {{data.id}}</td>
 									<td> {{data.procedure.name}}</td>
@@ -66,9 +68,7 @@
 										</div>
 									</td>
 									<td>
-										<div [appProcetureStatus]="data?.status" class="status-badge">
-											<!-- <i class="bi bi-circle-fill"></i> -->
-										</div>
+										<div [appProcetureStatus]="data?.status" class="status-badge"></div>
 									</td>
 								</tr>
 							</tbody>
@@ -89,7 +89,7 @@
 	</div>
 
 	<ng-template #filterModal>
-
+		Open modal
 	</ng-template>
 
 

@@ -5,6 +5,7 @@ import { from } from 'rxjs';
 import { pluck } from 'rxjs/operators';
 import { ThrowStmt } from '@angular/compiler';
 import { Page } from '../../shared/interfaces/response';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component( {
   selector: 'app-monitoring',
@@ -20,6 +21,8 @@ export class MonitoringComponent implements OnInit {
   page = 1;
 
   constructor(
+    private modalService: NgbModal,
+    public activeModal: NgbActiveModal,
     private orderService: OrderService,
   ) { }
 
@@ -31,6 +34,15 @@ export class MonitoringComponent implements OnInit {
     this.page = page;
     this.paginator.currentPage = page;
     this.loadData();
+  }
+
+  // Filtrado desde los botones
+  filter( type: string ): void {
+
+  }
+
+  openFilterModal( filterModal: any ): void {
+    this.modalService.open( filterModal );
   }
 
   private loadData(): void {
