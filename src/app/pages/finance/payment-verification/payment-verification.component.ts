@@ -35,7 +35,6 @@ export class PaymentVerificationComponent implements OnInit {
   updateOrderStatus( id: number, status: OrderStatus ): void {
     let approved_payment = status;
     this.orderService.approveDecline( id, approved_payment ).subscribe( response => {
-      console.log( response );
       if ( response.status === 'Success' ) {
         Swal.fire( '', response.message, 'success' );
         this.loadData();
@@ -51,7 +50,6 @@ export class PaymentVerificationComponent implements OnInit {
 
   private loadData(): void {
     this.orderService.paymentVerificationList( this.page ).subscribe( response => {
-      console.log( response );
       if ( response.status === 'Success' ) {
         this.paginator = response.meta?.page as Page;
         this.orders = [ ...response.data ];
