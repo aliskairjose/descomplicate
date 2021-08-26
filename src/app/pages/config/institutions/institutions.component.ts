@@ -18,6 +18,20 @@ export class InstitutionsComponent implements OnInit {
   institution!: Institution;
   isEdit = false;
 
+  option = {
+    params : {
+      page :"1"
+    }
+  
+  }
+  paginator = {
+    currentPage : 0,
+    lastPage : 0,
+    perPage : 0, // Registros por página
+    total : 0, // Total de registros
+    id: 'custom',
+  }
+
   constructor(
     private titleSrv: Title,
     private fb: FormBuilder,
@@ -36,7 +50,7 @@ export class InstitutionsComponent implements OnInit {
   onSubmit(): void {
     this.submitted = true;
     if ( this.form.valid ) {
-      ( this.institution ) ? this.updateInstitution() : this.createInstitution();
+      ( this.institution.id != undefined ) ? this.updateInstitution() : this.createInstitution();
     }
   }
 
@@ -57,9 +71,11 @@ export class InstitutionsComponent implements OnInit {
   }
 
   private loadData(): void {
-    this.iSrv.list().subscribe( response => {
+    this.iSrv.list(this.option).subscribe( response => {
+      // console.log(response);
       if ( response.status === 'Success' ) {
         this.institutions = [ ...response.data ];
+        this.paginator = response.meta.page;
       }
     } )
   }
@@ -103,4 +119,20 @@ export class InstitutionsComponent implements OnInit {
       }
     } );
   }
+
+  Clean(){
+  
+    if( this.isEdit){
+      this.institution =  <Institution>{};
+      this.isEdit = !this.isEdit;
+     
+    }
+  }
+
+  pageChange( page: number ): void {
+    // console.log(page);
+    this.option.params.page = String(page);
+    this.paginator.currentPage = page;
+		this.loadData();
+	}
 }

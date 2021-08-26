@@ -44,7 +44,7 @@ export class NavbarComponent implements OnInit {
       { pages: "config/banks", name_nav: "Configuración/Entidades Bancarias", status: false },
       { pages: "config/requirements", name_nav: "Configuración/Requisitos", status: false },
       { pages: "config/institutions", name_nav: "Configuración/Instituciones", status: false },
-      { pages: "config/procedure", name_nav: "Configuración/Tramites", status: false },
+      { pages: "config/procedure", name_nav: "Configuración/Trámites", status: false },
     ]
   }
 

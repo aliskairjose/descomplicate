@@ -16,7 +16,9 @@
           </div>
         </div>
         <div class="card-text px-2">
-          <div class="col-12" *ngFor="let data of institutions">
+          <div class="col-12" *ngFor="let data of institutions | paginate: { itemsPerPage: 
+            paginator.perPage, currentPage: paginator.currentPage, 
+            totalItems: paginator.total } ;let i = index">
             <div class="row">
               <div class="col-6 col-md-3">
                 <label for="" class="text-secondary">Nombre</label>
@@ -33,6 +35,21 @@
               </div>
             </div>
           </div>
+                  <!--  -->
+                  <div class="text-center" >
+                    <pagination-controls 
+                    (pageChange)="pageChange($event)" 
+              
+                
+                    previousLabel="Anterior" 
+                    nextLabel="Siguiente">
+                    
+                    </pagination-controls>
+                    <!--  -->
+          
+
+                  </div>
+            <!--  -->
         </div>
       </div>
     </div>
@@ -67,7 +84,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary text-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-secondary text-secondary" data-dismiss="modal" (click)="Clean()">Cancelar</button>
           <button type="submit" class="btn btn-primary">Registrar</button>
         </div>
       </form>
