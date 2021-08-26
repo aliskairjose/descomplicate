@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../../shared/service/order.service';
 import { Order } from '../../shared/interfaces/order';
+import { from } from 'rxjs';
+import { pluck } from 'rxjs/operators';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component( {
   selector: 'app-monitoring',
@@ -9,6 +12,9 @@ import { Order } from '../../shared/interfaces/order';
 } )
 export class MonitoringComponent implements OnInit {
   item: Order[] = [];
+  pendings = 0;
+  culminated = 0;
+  inProcess = 0;
 
   constructor(
     private orderService: OrderService,
@@ -23,6 +29,14 @@ export class MonitoringComponent implements OnInit {
     this.orderService.procedureList().subscribe( response => {
       if ( response.status === 'Success' ) {
         this.item = [ ...response.data ];
+
+        const source = from( response.data ).pipe( pluck( 'status' ) );
+        source.subscribe( item => {
+          console.log( item );
+          if ( item?.id === 1 ) { this.pendings++; }
+          if ( item?.id === 7 ) { this.inProcess++; }
+          if ( item?.id === 8 ) { this.culminated++; }
+        } );
       }
     } )
   }
