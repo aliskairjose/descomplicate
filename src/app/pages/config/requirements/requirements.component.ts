@@ -17,7 +17,19 @@ export class RequirementsComponent implements OnInit {
   requirements: Requirement[] = [];
   requirement!: Requirement;
   isEdit = false;
-
+  option = {
+    params : {
+      page :"1"
+    }
+  
+  }
+  paginator = {
+    currentPage : 0,
+    lastPage : 0,
+    perPage : 0, // Registros por página
+    total : 0, // Total de registros
+    id: 'custom',
+  }
   constructor(
     private fb: FormBuilder,
     private titleService: Title,
@@ -36,7 +48,7 @@ export class RequirementsComponent implements OnInit {
   onSubmit(): void {
     this.submitted = true;
     if ( this.form.valid ) {
-      ( this.requirement ) ? this.updateRequirement() : this.createRequirement();
+      ( this.requirement.id != undefined ) ?   this.updateRequirement() : this.createRequirement();
     }
   }
 
@@ -56,9 +68,11 @@ export class RequirementsComponent implements OnInit {
   }
 
   private loadData(): void {
-    this.regSrv.list().subscribe( response => {
+    this.regSrv.list(this.option).subscribe( response => {
+      // console.log(response);
       if ( response.status === 'Success' ) {
         this.requirements = [ ...response.data ];
+        this.paginator = response.meta.page;
       }
     } );
   }
@@ -99,6 +113,22 @@ export class RequirementsComponent implements OnInit {
         name: [ '', Validators.required ]
       }
     );
+  }
+
+  pageChange( page: number ): void {
+    // console.log(page);
+    this.option.params.page = String(page);
+    this.paginator.currentPage = page;
+		this.loadData();
+	}
+
+  Clean(){
+  
+    if( this.isEdit){
+      this.requirement =  <Requirement>{};
+      this.isEdit = !this.isEdit;
+     
+    }
   }
 
 }

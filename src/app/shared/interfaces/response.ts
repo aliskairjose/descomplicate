@@ -1,9 +1,10 @@
 
 export interface BaseResponse<T> {
 	data: T;
+	meta : any;
 	message: string;
 	status: string;
-	meta?: Meta;
+	// meta?: Meta;
 }
 export interface Response<T> {
 	data: T;

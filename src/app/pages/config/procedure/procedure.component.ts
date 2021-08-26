@@ -23,7 +23,19 @@ export class ProcedureComponent implements OnInit {
   isEdit = false;
   institutions: Institution[] = [];
   requirements: Requirement[] = [];
-
+  option = {
+    params : {
+      page :"1"
+    }
+  
+  }
+  paginator = {
+    currentPage : 0,
+    lastPage : 0,
+    perPage : 0, // Registros por página
+    total : 0, // Total de registros
+    id: 'custom',
+  }
   constructor(
     private fb: FormBuilder,
     private titleService: Title,
@@ -33,7 +45,7 @@ export class ProcedureComponent implements OnInit {
   ) {
     this.createForm();
     this.titleService.setTitle( 'Descomplicate - Requisitos' );
-    forkJoin( [ this.instService.list(), this.reqService.list() ] ).
+    forkJoin( [ this.instService.list(this.option), this.reqService.list(this.option) ] ).
       subscribe( ( [ instResponse, requirementsResponse ] ) => {
         this.requirements = [ ...requirementsResponse.data ];
         this.institutions = [ ...instResponse.data ];
@@ -49,7 +61,7 @@ export class ProcedureComponent implements OnInit {
   onSubmit(): void {
     this.submitted = true;
     if ( this.form.valid ) {
-      ( this.procedure ) ? this.updateProcedure() : this.createProcedure();
+      ( this.procedure.id != undefined ) ? this.updateProcedure() : this.createProcedure();
     }
   }
 
@@ -72,9 +84,10 @@ export class ProcedureComponent implements OnInit {
   }
 
   private loadData(): void {
-    this.procedureSrv.list().subscribe( response => {
+    this.procedureSrv.list(this.option).subscribe( response => {
       if ( response.status === 'Success' ) {
         this.procedures = [ ...response.data ];
+        this.paginator = response.meta.page;
       }
     } );
   }
@@ -122,5 +135,20 @@ export class ProcedureComponent implements OnInit {
     );
   }
 
+  pageChange( page: number ): void {
+    // console.log(page);
+    this.option.params.page = String(page);
+    this.paginator.currentPage = page;
+		this.loadData();
+	}
+
+  Clean(){
+  
+    if( this.isEdit){
+      this.procedure =  <Procedure>{};
+      this.isEdit = !this.isEdit;
+     
+    }
+  }
 
 }
