@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../../shared/service/order.service';
 import { Order } from '../../shared/interfaces/order';
-import { from } from 'rxjs';
+import { from, forkJoin } from 'rxjs';
 import { pluck } from 'rxjs/operators';
 import { Page } from '../../shared/interfaces/response';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ProcedureService } from '../../shared/service/procedure.service';
+import { Procedure } from '../../shared/interfaces/procedure';
+import { InstitutionService } from '../../shared/service/institution.service';
+import { Institution } from 'src/app/shared/interfaces/institution';
 
 @Component( {
   selector: 'app-monitoring',
@@ -18,18 +22,24 @@ export class MonitoringComponent implements OnInit {
   inProcess = 0;
   paginator!: Page;
   page = 1;
-
+  procedures: Procedure[] = [];
+  institutions: Institution[] = [];
   params = {
     process: 0,
     pending: 0,
-    ready: 0
+    ready: 0,
+    procedure_id: 0,
+    institution_id: 0
   }
 
   constructor(
     private modalService: NgbModal,
     public activeModal: NgbActiveModal,
     private orderService: OrderService,
+    private procedureService: ProcedureService,
+    private institutionService: InstitutionService,
   ) {
+    this.institutionService.list().subscribe( response => { this.institutions = [ ...response.data ] } );
   }
 
   ngOnInit(): void {
@@ -68,6 +78,13 @@ export class MonitoringComponent implements OnInit {
     this.modalService.open( filterModal );
   }
 
+  onInstitutionChange( event: any ): void {
+    const id = event.target.value;
+    this.procedureService.list( 1, id ).subscribe( response => {
+      this.procedures = [ ...response.data ];
+    } )
+  }
+
   private loadData(): void {
     this.orderService.procedureList( this.page, this.params ).subscribe( response => {
       this.pendings = 0;
@@ -82,8 +99,6 @@ export class MonitoringComponent implements OnInit {
           if ( item?.id === 7 ) { this.inProcess++; }
           if ( item?.id === 8 ) { this.culminated++; }
         } );
-        console.log( this.params )
-
       }
     } )
   }
