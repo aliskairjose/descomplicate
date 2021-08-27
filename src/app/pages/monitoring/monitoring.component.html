@@ -88,29 +88,32 @@
 		</div>
 	</div>
 
+	<!-- Modal -->
 	<ng-template #filterModal>
 		<div class="modal-header">
 			<h5 class="modal-title" id="modal-basic-title">Filtros</h5>
-			<button type="button" class="btn btn-link pointer" (click)="modal.close()">
-				<label for="">Aplicar</label>
+			<button type="button" class="btn btn-link" (click)="modal.close()">
+				Aplicar
 			</button>
 		</div>
 		<div class="modal-body">
 			<div class="row">
 				<div class="col">
 					<div class="form-group">
-						<label for="">Institución {{params.institution_id}}</label>
-						<select class="form-control" name="" id="" (change)="onChange($event, 'institution')">
-							<option *ngFor="let i of institutions" [selected]="params.institution_id" [value]="i.id">{{i.name}}
+						<label for="">Institución</label>
+						<select class="form-control" name="" id="" (change)="onChange($event, 'institution')"
+							[(ngModel)]="params.institution_id">
+							<option *ngFor="let i of institutions" [value]="i.id">{{i.name}}
 							</option>
 						</select>
 					</div>
 				</div>
 				<div class="col">
 					<div class="form-group">
-						<label for="">Trámite</label>
-						<select class="form-control" name="" id="" (change)="onChange($event, 'procedure')">
-							<option *ngFor="let p of procedures" [selected]="params.procedure_id" [value]=p.id>{{p.name}}</option>
+						<label for="">Trámite {{params.procedure_id}}</label>
+						<select class="form-control" name="" id="" (change)="onChange($event, 'procedure')"
+							[(ngModel)]="params.procedure_id">
+							<option *ngFor="let p of procedures" [value]=p.id>{{p.name}}</option>
 						</select>
 					</div>
 				</div>
@@ -153,6 +156,9 @@
 					</div>
 				</div>
 			</div>
+		</div>
+		<div class="modal-footer">
+			{{params | json}}
 		</div>
 	</ng-template>
 

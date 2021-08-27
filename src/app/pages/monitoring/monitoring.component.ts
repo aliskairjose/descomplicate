@@ -95,16 +95,19 @@ export class MonitoringComponent implements OnInit {
 
   onChange( event: any, type: string ): void {
     const id = event.target.value;
-    console.log( id, type );
     if ( type === 'institution' ) {
       this.params.institution_id = id;
       if ( id == 0 ) {
+        this.params.procedure_id = 0;
         this.procedures = [ { id: 0, name: 'Seleccionar' } ];
-        this.params.prodecure_id = 0;
         return;
       }
-      this.procedureService.list( 1, id ).subscribe( response => this.procedures.push( ...response.data ) );
+      this.procedureService.list( 1, id ).subscribe( response => {
+        console.log( response.data );
+        this.procedures.push( ...response.data )
+      } );
     }
+
     if ( type === 'procedure' ) {
       this.params.procedure_id = id;
     }
@@ -116,6 +119,7 @@ export class MonitoringComponent implements OnInit {
       this.params.managers.push( id );
       this.tramitador = this.tramitadores.find( item => item.id == id )
     }
+
   }
 
   onDateSelect( event: any, type: string ): void {
