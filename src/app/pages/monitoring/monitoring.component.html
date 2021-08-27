@@ -99,10 +99,10 @@
 			<div class="row">
 				<div class="col">
 					<div class="form-group">
-						<label for="">Institución</label>
+						<label for="">Institución {{params.institution_id}}</label>
 						<select class="form-control" name="" id="" (change)="onChange($event, 'institution')">
-							<option value="institution.id" *ngIf="institution">{{institution.name}}</option>
-							<option *ngFor="let i of institutions" [value]="i.id">{{i.name}}</option>
+							<option *ngFor="let i of institutions" [selected]="params.institution_id" [value]="i.id">{{i.name}}
+							</option>
 						</select>
 					</div>
 				</div>
@@ -110,8 +110,7 @@
 					<div class="form-group">
 						<label for="">Trámite</label>
 						<select class="form-control" name="" id="" (change)="onChange($event, 'procedure')">
-							<option value="procedure.id" *ngIf="procedure">{{procedure.name}}</option>
-							<option *ngFor="let p of procedures" [value]=p.id>{{p.name}}</option>
+							<option *ngFor="let p of procedures" [selected]="params.procedure_id" [value]=p.id>{{p.name}}</option>
 						</select>
 					</div>
 				</div>
@@ -121,7 +120,6 @@
 					<div class="form-group">
 						<label for="">Mensajero</label>
 						<select class="form-control" name="" id="" (change)="onChange($event, 'mensajero')">
-							<option value="mensajero.id" *ngIf="mensajero">{{mensajero.name}}</option>
 							<option *ngFor="let m of mensajeros" [value]="m.id">{{m.name}}</option>
 						</select>
 					</div>
@@ -130,7 +128,6 @@
 					<div class="form-group">
 						<label for="">Tramitador</label>
 						<select class="form-control" name="" id="" (change)="onChange($event, 'tramitador')">
-							<option value="tramitador.id" *ngIf="tramitador">{{tramitador.name}}</option>
 							<option *ngFor="let t of tramitadores" [value]="t.id">{{t.name}}</option>
 						</select>
 					</div>

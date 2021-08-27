@@ -24,7 +24,7 @@ export class MonitoringComponent implements OnInit {
   paginator!: Page;
   page = 1;
   procedures: any[] = [ { id: 0, name: 'Seleccionar' } ];
-  institutions: any[] = [];
+  institutions: any[] = [ { id: 0, name: 'Seleccionar' } ];
   params: any = {
     process: 0,
     pending: 0,
@@ -33,10 +33,10 @@ export class MonitoringComponent implements OnInit {
     institution_id: 0,
     managers: []
   }
-  tramitadores: any[] = [];
-  mensajeros: any[] = [];
+  tramitadores: any[] = [ { id: 0, name: 'Seleccionar' } ];
+  mensajeros: any[] = [ { id: 0, name: 'Seleccionar' } ];
   modal: any;
-  institution: any;
+  institution: any = null;
   procedure: any;
   mensajero: any;
   tramitador: any;
@@ -51,12 +51,9 @@ export class MonitoringComponent implements OnInit {
   ) {
     forkJoin( [ this.institutionService.list(), this.orderService.mensajeros(), this.orderService.tramitadores() ] )
       .subscribe( ( [ response, mensajeroRespose, tramitadorResponse ] ) => {
-        this.institutions = [ ...response.data ];
-        this.mensajeros = [ ...mensajeroRespose.data ];
-        this.tramitadores = [ ...tramitadorResponse.data ];
-        this.institutions.unshift( { id: 0, name: 'Seleccionar' } );
-        this.mensajeros.unshift( { id: 0, name: 'Seleccionar' } );
-        this.tramitadores.unshift( { id: 0, name: 'Seleccionar' } );
+        this.institutions.push( ...response.data );
+        this.mensajeros.push( ...mensajeroRespose.data );
+        this.tramitadores.push( ...tramitadorResponse.data );
       } );
   }
 
@@ -93,21 +90,23 @@ export class MonitoringComponent implements OnInit {
 
   openFilterModal( filterModal: any ): void {
     this.modal = this.modalService.open( filterModal );
-    this.modal.result.then( () => {
-      this.loadData();
-    } );
+    this.modal.result.then( () => { this.loadData(); } );
   }
 
   onChange( event: any, type: string ): void {
     const id = event.target.value;
+    console.log( id, type );
     if ( type === 'institution' ) {
       this.params.institution_id = id;
-      this.institution = this.institutions.find( item => item.id == id );
+      if ( id == 0 ) {
+        this.procedures = [ { id: 0, name: 'Seleccionar' } ];
+        this.params.prodecure_id = 0;
+        return;
+      }
       this.procedureService.list( 1, id ).subscribe( response => this.procedures.push( ...response.data ) );
     }
     if ( type === 'procedure' ) {
       this.params.procedure_id = id;
-      this.procedure = this.procedures.find( item => item.id == id );
     }
     if ( type === 'mensajero' ) {
       this.params.managers.push( id );
