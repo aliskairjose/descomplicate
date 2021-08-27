@@ -31,15 +31,16 @@ export class MonitoringComponent implements OnInit {
     ready: 0,
     procedure_id: 0,
     institution_id: 0,
-    managers: []
   }
   tramitadores: any[] = [ { id: 0, name: 'Seleccionar' } ];
   mensajeros: any[] = [ { id: 0, name: 'Seleccionar' } ];
   modal: any;
   institution: any = null;
   procedure: any;
-  mensajero: any;
-  tramitador: any;
+  mensajero_id = 0;
+  tramitador_id = 0;
+  start_date: any;
+  end_date: any;
 
   constructor(
     private modalService: NgbModal,
@@ -90,44 +91,30 @@ export class MonitoringComponent implements OnInit {
 
   openFilterModal( filterModal: any ): void {
     this.modal = this.modalService.open( filterModal );
-    this.modal.result.then( () => { this.loadData(); } );
+    this.modal.result.then( () => {
+      console.log( this.start_date, this.end_date );
+      if ( this.start_date ) { this.params.start_date = this.formatter.format( this.start_date ); }
+      if ( this.end_date ) { this.params.end_date = this.formatter.format( this.end_date ); }
+      this.loadData();
+    } );
   }
 
-  onChange( event: any, type: string ): void {
+  onChange( event: any ): void {
     const id = event.target.value;
-    if ( type === 'institution' ) {
-      this.params.institution_id = id;
-      if ( id == 0 ) {
-        this.params.procedure_id = 0;
-        this.procedures = [ { id: 0, name: 'Seleccionar' } ];
-        return;
-      }
-      this.procedureService.list( 1, id ).subscribe( response => {
-        this.procedures.push( ...response.data )
-      } );
+    this.params.institution_id = id;
+    if ( id == 0 ) {
+      this.params.procedure_id = 0;
+      this.procedures = [ { id: 0, name: 'Seleccionar' } ];
+      return;
     }
+    this.procedureService.list( 1, id ).subscribe( response => {
+      this.procedures.push( ...response.data )
+    } );
 
-    if ( type === 'procedure' ) {
-      this.params.procedure_id = id;
-    }
-    if ( type === 'mensajero' ) {
-      this.params.managers.push( id );
-      this.mensajero = this.mensajeros.find( item => item.id == id );
-    }
-    if ( type === 'tramitador' ) {
-      this.params.managers.push( id );
-      this.tramitador = this.tramitadores.find( item => item.id == id )
-    }
-
-  }
-
-  onDateSelect( event: any, type: string ): void {
-    if ( type === 'start_date' ) { this.params.start_date = this.formatter.format( event ) }
-    if ( type === 'end_date' ) { this.params.end_date = this.formatter.format( event ) }
   }
 
   private loadData(): void {
-    this.orderService.procedureList( this.page, this.params ).subscribe( response => {
+    this.orderService.procedureList( this.page, this.params, this.mensajero_id, this.tramitador_id ).subscribe( response => {
       this.pendings = 0;
       this.inProcess = 0;
       this.culminated = 0;
