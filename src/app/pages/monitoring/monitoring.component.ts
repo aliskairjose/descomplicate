@@ -103,7 +103,6 @@ export class MonitoringComponent implements OnInit {
         return;
       }
       this.procedureService.list( 1, id ).subscribe( response => {
-        console.log( response.data );
         this.procedures.push( ...response.data )
       } );
     }
