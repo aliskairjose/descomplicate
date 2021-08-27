@@ -10,12 +10,12 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/service/auth.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
+import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-registerLocaleData(localeEs);
-@NgModule({
+registerLocaleData( localeEs );
+@NgModule( {
   declarations: [
     AppComponent,
     PagesComponent
@@ -28,17 +28,16 @@ registerLocaleData(localeEs);
     NgxSpinnerModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
     NgxPaginationModule,
     NgbModule
-  
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es' },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [ AppComponent ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
-})
+} )
 export class AppModule { }
