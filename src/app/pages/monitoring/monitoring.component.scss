@@ -1,6 +1,10 @@
 @import "../../../assets/variables";
 
 .monitoring {
+    .selected-filter {
+        box-shadow: 3px 3px 5px lightblue;
+    }
+
     .status-circle {
         font-size: 0.5625rem;
         margin-right: 5px;
