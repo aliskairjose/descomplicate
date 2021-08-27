@@ -16,6 +16,15 @@ export class BanksComponent implements OnInit {
   submitted :boolean = false;
   id_bank : string = "";
   btn : boolean = false;
+  page = "1";
+  paginator = {
+    currentPage : 0,
+    lastPage : 0,
+    perPage : 0, // Registros por página
+    total : 0, // Total de registros
+    id: 'custom',
+  }
+  
   constructor(private http: HttpserviceService) { }
 
   ngOnInit(): void {
@@ -26,13 +35,21 @@ export class BanksComponent implements OnInit {
 
 
   GetBanks(){
-    this.http.get("banks").subscribe(
+    this.http.get("banks?page="+this.page).subscribe(
       (res)=>{
-        // console.log(res);
+        console.log(res);
           this.Item = res.data;
+          this.paginator = res.meta.page;
       }
     );
   }
+
+  pageChange( page: number ): void {
+    // console.log(page);
+    this.page = String(page);
+    this.paginator.currentPage = page;
+		this.GetBanks();
+	}
 
 
   onSubmit(){
@@ -111,7 +128,10 @@ export class BanksComponent implements OnInit {
     }
 
     Clean(){
-     
+      if(  this.btn ){
+        this.btn = !this.btn;
+      }
+      this.submitted = false;
       this.Bank.patchValue({
         name : "",
         address :""
