@@ -131,9 +131,9 @@
               <div class="form-group">
                 <label for="requeriments" class="text-secondary">Requisitos</label>
                 <select class="form-control" name="requeriments" id="requeriments" formControlName="requeriments"
-                  multiple>
+                  multiple [compareWith]="compareObjects">
                   <option value="" selected>Seleccione</option>
-                  <option *ngFor="let r of requirements" [value]="r.id">{{r.name}}</option>
+                  <option *ngFor="let r of requirements" [ngValue]="r.id">{{r.name}}</option>
                 </select>
                 <small id="helpId" class="text-muted">Ctrl+click para multiple selección</small>
                 <div *ngIf="submitted && f.requeriments.errors?.required" class="invalid-feedback d-block">

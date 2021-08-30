@@ -88,6 +88,7 @@ export class ProcedureComponent implements OnInit {
     this.form.controls.cost.patchValue( pro.cost );
     this.form.controls.institution_id.patchValue( pro.institution_id );
     this.form.controls.managerTypes.patchValue( pro.manager_types );
+    this.form.controls.requeriments.patchValue( pro.requeriments );
   }
 
   delete( id: number ): void {
