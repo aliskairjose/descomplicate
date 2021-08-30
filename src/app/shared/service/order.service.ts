@@ -29,8 +29,15 @@ export class OrderService {
    * @description Listado de tramites
    * @returns 
    */
-  procedureList( page = 1, params: any ): Observable<BaseResponse<Order[]>> {
-    return this.http.get( `orders?page=${page}&with[]=status&with[]=managers&with[]=procedure.institution`, { params } );
+  procedureList( page = 1, params: any, mensajeroID: number, tramitadorID: number ): Observable<BaseResponse<Order[]>> {
+    let url = `orders?page=${page}&with[]=status&with[]=managers&with[]=procedure.institution`;
+    if ( mensajeroID > 0 ) {
+      url = `${url}&manager[]=${mensajeroID}`;
+    }
+    if ( tramitadorID > 0 ) {
+      url = `${url}&manager[]=${tramitadorID}`;
+    }
+    return this.http.get( url, { params } );
   }
 
   /**

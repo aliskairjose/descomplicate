@@ -16,7 +16,9 @@
                 </div>
             </div>
             <div class="card-text px-2">
-                        <div class="col-12" *ngFor="let data of Item">
+                        <div class="col-12" *ngFor="let data of Item | paginate: { itemsPerPage: 
+                            paginator.perPage, currentPage: paginator.currentPage, 
+                            totalItems: paginator.total } ;let i = index">
                                 <div class="row">
                                     <div class="col-6 col-md-3">
                                             <label for=""  class="text-secondary">Nombre</label>
@@ -34,7 +36,23 @@
                         </div>
                 </div>
             </div>
+                <!--  -->
+         <div class="text-center" >
+            <pagination-controls 
+            (pageChange)="pageChange($event)" 
+      
+        
+            previousLabel="Anterior" 
+            nextLabel="Siguiente">
+            
+            </pagination-controls>
+            <!--  -->
+  
+
+          </div>
+    <!--  -->
         </div>
+     
     </div>
 </section>
 

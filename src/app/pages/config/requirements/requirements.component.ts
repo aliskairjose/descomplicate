@@ -45,7 +45,7 @@ export class RequirementsComponent implements OnInit {
   onSubmit(): void {
     this.submitted = true;
     if ( this.form.valid ) {
-      ( this.requirement.id != undefined ) ? this.updateRequirement() : this.createRequirement();
+      ( this.isEdit) ?   this.updateRequirement() : this.createRequirement();
     }
   }
 
@@ -80,6 +80,7 @@ export class RequirementsComponent implements OnInit {
         document.getElementById( "close" )?.click();
         this.requirements.push( response.data );
         Swal.fire( '', response.message, 'success' );
+        this.loadData();
       }
     } );
   }
