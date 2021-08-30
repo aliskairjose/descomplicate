@@ -19,8 +19,8 @@
         </div>
         <div class="card-text px-2">
           <div class="col-12" *ngFor="let data of procedures | paginate: { itemsPerPage: 
-            paginator.perPage, currentPage: paginator.currentPage, 
-            totalItems: paginator.total } ;let i = index">
+            paginator?.perPage, currentPage: paginator?.currentPage, 
+            totalItems: paginator?.total } ;let i = index">
             <div class="row justify-content-between">
               <div class="w-25">
                 <label for="" class="text-secondary">Trámite</label>
@@ -115,11 +115,11 @@
               <div class="form-group">
                 <label for="managerTypes" class="text-secondary">Tipo de gestoría</label>
                 <select class="form-control" name="managerTypes" id="managerTypes" formControlName="managerTypes"
-                  multiple>
+                  multiple [compareWith]="compareObjects">
                   <option value="" selected>Seleccione</option>
-                  <option value="1">Abogado socio</option>
-                  <option value="2">Tramitador socio</option>
-                  <option value="3">Mensajero socio</option>
+                  <option [ngValue]="type.value" selected="i=1"
+                    *ngFor="let type of types;let i=index; trackBy:trackByType">
+                    {{type.name}}</option>
                 </select>
                 <small id="helpId" class="text-muted">Ctrl+click para multiple selección</small>
                 <div *ngIf="submitted && f.managerTypes.errors?.required" class="invalid-feedback d-block">

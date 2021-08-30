@@ -92,7 +92,6 @@ export class MonitoringComponent implements OnInit {
   openFilterModal( filterModal: any ): void {
     this.modal = this.modalService.open( filterModal );
     this.modal.result.then( () => {
-      console.log( this.start_date, this.end_date );
       if ( this.start_date ) { this.params.start_date = this.formatter.format( this.start_date ); }
       if ( this.end_date ) { this.params.end_date = this.formatter.format( this.end_date ); }
       this.loadData();

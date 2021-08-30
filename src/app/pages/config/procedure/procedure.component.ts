@@ -26,6 +26,21 @@ export class ProcedureComponent implements OnInit {
   requirements: Requirement[] = [];
   paginator!: Page;
   page = 1;
+  types = [
+    {
+      value: 1,
+      name: 'Abogado socio',
+    },
+    {
+      value: 2,
+      name: 'Tramitador socio',
+    },
+    {
+      value: 3,
+      name: 'Mensajero socio',
+    },
+  ]
+  managerTypesSelected: any[] = []
 
   constructor(
     private fb: FormBuilder,
@@ -56,6 +71,9 @@ export class ProcedureComponent implements OnInit {
     }
   }
 
+  trackByType( index: number, item: any ): number {
+    return item.id;
+  }
   add(): void {
     this.isEdit = false;
     this.createForm();
@@ -64,14 +82,20 @@ export class ProcedureComponent implements OnInit {
   update( pro: Procedure ): void {
     this.isEdit = true;
     this.procedure = { ...pro };
+    this.managerTypesSelected = this.procedure.manager_types;
     this.form.controls.name.patchValue( pro.name );
     this.form.controls.estimated_time.patchValue( pro.estimated_time );
     this.form.controls.cost.patchValue( pro.cost );
     this.form.controls.institution_id.patchValue( pro.institution_id );
+    this.form.controls.managerTypes.patchValue( pro.manager_types );
   }
 
   delete( id: number ): void {
     this.deleteProcedure( id );
+  }
+
+  compareObjects( o1: any, o2: any ): boolean {
+    return ( o1 === o2.id );
   }
 
   private loadData(): void {
@@ -135,7 +159,7 @@ export class ProcedureComponent implements OnInit {
   Clean() {
 
     if ( this.isEdit ) {
-      this.procedure = <Procedure> {};
+      this.procedure = <Procedure> { };
       this.isEdit = !this.isEdit;
 
     }
