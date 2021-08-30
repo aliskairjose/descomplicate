@@ -40,7 +40,7 @@ export class InstitutionsComponent implements OnInit {
   onSubmit(): void {
     this.submitted = true;
     if ( this.form.valid ) {
-      ( this.institution.id != undefined ) ? this.updateInstitution() : this.createInstitution();
+      ( this.isEdit ) ? this.updateInstitution() : this.createInstitution();
     }
   }
 
@@ -86,6 +86,7 @@ export class InstitutionsComponent implements OnInit {
         document.getElementById( "close" )?.click();
         this.institutions.push( response.data );
         Swal.fire( '', response.message, 'success' );
+        this.loadData();
       }
     } );
   }
