@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpserviceService } from 'src/app/shared/service/httpservice.service';
+import { StorageService } from 'src/app/shared/service/storage.service';
 
 @Component( {
   selector: 'app-dashboard',
@@ -15,10 +16,12 @@ export class DashboardComponent implements OnInit {
   porcentaje_ordes = 0;
   porcentaje_messengers = 0;
   porcentaje_processors = 0;
-  constructor( private http: HttpserviceService ) { }
+  display_name = "";
+  constructor( private http: HttpserviceService, private storage: StorageService ) { }
 
   ngOnInit(): void {
     this.GetData();
+    this.GetDataUserSession();
   }
 
 
@@ -45,6 +48,13 @@ export class DashboardComponent implements OnInit {
     this.porcentaje_ordes = ( 100 * this.active_ordes ) / this.Report.orders.total;
     this.porcentaje_processors = ( 100 * this.active_processors ) / this.Report.Processors.total;
 
+
+  }
+
+  GetDataUserSession() {
+    let data = this.storage.getItem( "user" );
+
+    this.display_name = data.name;
 
   }
 

@@ -67,7 +67,7 @@ export class ProcedureComponent implements OnInit {
   onSubmit(): void {
     this.submitted = true;
     if ( this.form.valid ) {
-      ( this.procedure.id != undefined ) ? this.updateProcedure() : this.createProcedure();
+      ( this.isEdit ) ? this.updateProcedure() : this.createProcedure();
     }
   }
 
