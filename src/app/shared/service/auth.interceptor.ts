@@ -1,19 +1,19 @@
 
 import { Injectable } from '@angular/core';
 import {
-  HttpRequest,
+	HttpRequest,
 	HttpHandler,
 	HttpEvent,
 	HttpInterceptor,
 	HttpErrorResponse,
 	HttpResponse
 } from '@angular/common/http';
-import { Observable,throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { TOKEN } from '../constants/global-constans';
 import { catchError, map } from 'rxjs/operators';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { StorageService } from './storage.service';
-import Swal from 'sweetalert2';
+import Swal, { SweetAlertIcon } from 'sweetalert2';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
@@ -45,7 +45,7 @@ export class AuthInterceptor implements HttpInterceptor {
 		} ),
 			catchError( ( response: HttpErrorResponse ) => {
 				this.spinner.hide();
-			
+
 				// const errors = response.error.errors;
 				// let mensaje = "";
 
@@ -58,15 +58,43 @@ export class AuthInterceptor implements HttpInterceptor {
 				// 	}
 				// 	Swal.fire( '', mensaje, 'error' );
 				// }else{
-						
+
 
 				// }
 
-				const message = response.error.message;
-				Swal.fire( '', message, 'error' );
+				// const message = response.error.message;
+				// Swal.fire( '', message, 'error' );
+				this.swalAlert( 'error', response.error.message, response.error.errors, this.errorsToHtmlList );
 
 				return throwError( response );
 			} )
 		);
+	}
+
+	private swalAlert(
+		icon: SweetAlertIcon,
+		title = 'Error',
+		errors: string[],
+		callBack: { ( errors: string[] ): string; ( arg0: string[] ): any; }
+	): void {
+
+		const html = callBack( errors );
+		Swal.fire( { title, html, icon } );
+	}
+
+	private errorsToHtmlList( errors: any ): string {
+		const isObject = errors instanceof Object && !Array.isArray( errors );
+		if ( errors == null || !isObject ) { return ''; }
+
+		const ul = document.createElement( 'ul' );
+
+		// tslint:disable-next-line: forin
+		for ( const key in errors ) {
+			const li = document.createElement( 'li' );
+			li.innerText = `${errors[ key ][ 0 ]}`;
+			ul.appendChild( li );
+		}
+
+		return ul.outerHTML;
 	}
 }
