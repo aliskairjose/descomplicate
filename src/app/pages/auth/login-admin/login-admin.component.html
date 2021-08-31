@@ -11,7 +11,7 @@
 			
 									<form  class="form p-2 px-md-4 mt-4" [formGroup]="FormLogin" (ngSubmit)="onSubmit()">
 										<div class="form-floating mb-4">
-											<label for="email" class="label-form">Correo electronico</label>
+											<label for="email" class="label-form">Correo electrónico</label>
 											<input  type="email" class="form-control" id="email"
 												placeholder="Ingresa tu correo" maxlength="40" 
 												formControlName="email" />
@@ -19,7 +19,7 @@
 													Campo Requerido
 												</div>
 												<div *ngIf="submitted && f.email.errors?.email" class="invalid-feedback d-block">
-													Email Invalido
+													Correo electrónico inválido
 												</div>
 										
 										</div>
