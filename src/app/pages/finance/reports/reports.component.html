@@ -24,39 +24,27 @@
           </div>
         </div>
         <div class="card-text">
-          <!-- <ng-container *ngIf="item.length; else noData">
+          <ng-container *ngIf="reports.length; else noData">
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col" class="color-gray">Código de Trámite</th>
+                  <th scope="col" class="color-gray">Solicitante</th>
+                  <th scope="col" class="color-gray">DNI</th>
+                  <th scope="col" class="color-gray">Correo electrónico</th>
                   <th scope="col" class="color-gray">Trámite</th>
-                  <th scope="col" class="color-gray">Institución</th>
-                  <th scope="col" class="color-gray">Mensajero</th>
-                  <th scope="col" class="color-gray">Tramitador</th>
-                  <th scope="col" class="color-gray">Estatus</th>
+                  <th scope="col" class="color-gray">Monto</th>
+                  <th scope="col" class="color-gray">Estado</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let data of item | paginate: { itemsPerPage: paginator.perPage, currentPage: paginator.currentPage, 
+                <tr *ngFor="let data of reports | paginate: { itemsPerPage: paginator.perPage, currentPage: paginator.currentPage, 
                 totalItems: paginator.total }">
-                  <td> {{data.id}}</td>
-                  <td> {{data.procedure.name}}</td>
-                  <td> {{data.procedure.institution.name}}</td>
-                  <td>
-                    <div style="width: max-content;">
-                      <img class="img-user" [src]="data?.delivery_courier_image" alt="">
-                      {{data?.delivery_courier}}
-                    </div>
-                  </td>
-                  <td>
-                    <div style="width: max-content;">
-                      <img class="img-user" [src]="data?.processor_image" alt="">
-                      {{data?.processor}}
-                    </div>
-                  </td>
-                  <td>
-                    <div [appProcetureStatus]="data?.status" class="status-badge"></div>
-                  </td>
+                  <td> </td>
+                  <td> </td>
+                  <td> </td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
                 </tr>
               </tbody>
             </table>
@@ -69,7 +57,7 @@
             <div class="alert alert-info text-center my-4" role="alert">
               No hay registros disponibles
             </div>
-          </ng-template> -->
+          </ng-template>
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import Swal from 'sweetalert2';
+import { Page } from '../../../shared/interfaces/response';
 
 @Component( {
   selector: 'app-reports',
@@ -12,6 +13,9 @@ export class ReportsComponent implements OnInit {
   end_date: any;
   start_date: any;
   modal: any;
+  reports = [];
+  paginator!: Page;
+  page = 1;
 
   constructor(
     private titleService: Title,
@@ -27,4 +31,13 @@ export class ReportsComponent implements OnInit {
 
   }
 
+  pageChange( page: number ): void {
+    this.page = page;
+    this.paginator.currentPage = page;
+    this.loadData();
+  }
+
+  private loadData(): void {
+
+  }
 }
