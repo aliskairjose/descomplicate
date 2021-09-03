@@ -8,13 +8,6 @@ export enum OrderStatus {
   Approve = 1,
   Decline = 2
 }
-
-export enum ApprovePayment {
-  Pending = 0,
-  Approve = 1,
-  Reject = 2,
-  All = ''
-}
 @Injectable( {
   providedIn: 'root'
 } )

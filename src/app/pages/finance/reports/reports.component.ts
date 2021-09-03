@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { NgbCalendar, NgbDateParserFormatter, NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import Swal from 'sweetalert2';
+import { NgbCalendar, NgbDateParserFormatter, NgbActiveModal, NgbModal, NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import Swal, { SweetAlertIcon } from 'sweetalert2';
 import { Page } from '../../../shared/interfaces/response';
-import { OrderService, ApprovePayment } from '../../../shared/service/order.service';
-
+import { OrderService } from '../../../shared/service/order.service';
 @Component( {
   selector: 'app-reports',
   templateUrl: './reports.component.html',
@@ -19,6 +18,8 @@ export class ReportsComponent implements OnInit {
   paginator!: Page;
   page = 1;
   paymentStatus: any = '';
+  fromDate!: NgbDate;
+  toDate!: NgbDate;
 
   constructor(
     private titleService: Title,
@@ -31,6 +32,7 @@ export class ReportsComponent implements OnInit {
   ) {
     this.titleService.setTitle( 'Descomplicate-Reporte Verificación de pago' );
     this.start_date = this.end_date = this.formatter.format( this.calendar.getToday() );
+    this.fromDate = this.toDate = this.calendar.getToday();
     this.loadData();
   }
 
@@ -38,10 +40,15 @@ export class ReportsComponent implements OnInit {
   }
 
   openFilterModal( filterModal: any ): void {
-    this.modal = this.modalService.open( filterModal, { backdrop: 'static' } );
+    this.modal = this.modalService.open( filterModal );
     this.modal.result.then( () => {
-      // if ( this.start_date ) { this.params.start_date = this.formatter.format( this.start_date ); }
-      // if ( this.end_date ) { this.params.end_date = this.formatter.format( this.end_date ); }
+      if ( this.fromDate.after( this.toDate ) ) {
+        const message = 'La fecha final no puede ser anterior a la fecha de inicio';
+        Swal.fire( '', message, 'warning' );
+        return;
+      }
+      this.start_date = this.formatter.format( this.fromDate );
+      this.end_date = this.formatter.format( this.toDate );
       this.loadData();
     } );
   }

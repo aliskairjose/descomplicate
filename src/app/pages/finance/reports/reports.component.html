@@ -87,26 +87,28 @@
       </div>
       <div class="row">
         <div class="col">
-          <div class="input-group">
-            <input class="form-control" placeholder="Fecha inicio" name="start_date" #di="ngbDatepicker" ngbDatepicker
-              [(ngModel)]="start_date">
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary calendar" (click)="di.toggle()" type="button"></button>
+          <div class="form-group">
+            <label for="status">Fecha inicio</label>
+            <div class="input-group">
+              <input class="form-control" name="start_date" #di="ngbDatepicker" ngbDatepicker [(ngModel)]="fromDate">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="di.toggle()" type="button"></button>
+              </div>
             </div>
           </div>
         </div>
         <div class="col">
-          <div class="input-group">
-            <input class="form-control" placeholder="Fecha fin" name="end_date" #d="ngbDatepicker" ngbDatepicker
-              [(ngModel)]="end_date">
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+          <div class="form-group">
+            <label for="status">Fecha fin</label>
+            <div class="input-group">
+              <input class="form-control" name="end_date" #d="ngbDatepicker" ngbDatepicker [(ngModel)]="toDate">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="modal-footer">
     </div>
   </ng-template>
 
