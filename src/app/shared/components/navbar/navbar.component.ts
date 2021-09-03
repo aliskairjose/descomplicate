@@ -53,19 +53,17 @@ export class NavbarComponent implements OnInit {
 
 
   addNewItem() {
-    let value = "";
-
-    if ( this.status_menu ) {
-      this.status_menu = !this.status_menu;
-      value = "";
-    } else {
-      this.status_menu = !this.status_menu;
-      value = "active";
-    }
+    // let value = "";
+    // if ( this.status_menu ) {
+    //   this.status_menu = !this.status_menu;
+    //   value = "";
+    // } else {
+    //   this.status_menu = !this.status_menu;
+    //   value = "active";
+    // }
+    this.status_menu = !this.status_menu;
+    const value = ( this.status_menu ) ? '' : 'active';
     this.newItemEvent.emit( value );
   }
-
-
-
 
 }
