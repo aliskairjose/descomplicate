@@ -72,7 +72,39 @@
       </button>
     </div>
     <div class="modal-body">
-
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="status">Estatus</label>
+            <select class="form-control" name="status" id="status" [(ngModel)]="paymentStatus">
+              <option value="" selected>Todos</option>
+              <option value="0">Pendiente</option>
+              <option value="1">Aprobado</option>
+              <option value="2">Rechazado</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="input-group">
+            <input class="form-control" placeholder="Fecha inicio" name="start_date" #di="ngbDatepicker" ngbDatepicker
+              [(ngModel)]="start_date">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="di.toggle()" type="button"></button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="input-group">
+            <input class="form-control" placeholder="Fecha fin" name="end_date" #d="ngbDatepicker" ngbDatepicker
+              [(ngModel)]="end_date">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="modal-footer">
     </div>

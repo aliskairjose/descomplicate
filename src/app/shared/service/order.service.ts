@@ -10,9 +10,10 @@ export enum OrderStatus {
 }
 
 export enum ApprovePayment {
-  Pending,
-  Approve,
-  Reject
+  Pending = 0,
+  Approve = 1,
+  Reject = 2,
+  All = ''
 }
 @Injectable( {
   providedIn: 'root'
@@ -64,7 +65,7 @@ export class OrderService {
     return this.http.get( `users-crud?roles[]=manager.messenger` );
   }
 
-  reportPaymentVerification( page = 1, start_date: string, end_date: string, status: ApprovePayment ): Observable<any> {
+  reportPaymentVerification( page = 1, start_date: string, end_date: string, status: any ): Observable<any> {
     return this.http.post( `orders?page=${page}&approved_payment=${status}&start_date=${start_date}&end_date=${end_date}` )
   }
 
