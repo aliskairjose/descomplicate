@@ -40,7 +40,7 @@ export class ReportsComponent implements OnInit {
   }
 
   openFilterModal( filterModal: any ): void {
-    this.modal = this.modalService.open( filterModal );
+    this.modal = this.modalService.open( filterModal, { size: 'lg' } );
     this.modal.result.then( () => {
       if ( this.fromDate.after( this.toDate ) ) {
         const message = 'La fecha final no puede ser anterior a la fecha de inicio';
