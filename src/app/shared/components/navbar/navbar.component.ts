@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit {
   }
 
   ngDoCheck() {
-    let pages_active = this.act_router.snapshot.firstChild?.routeConfig?.path;
+    const pages_active = this.act_router.snapshot.firstChild?.routeConfig?.path;
     const result_obj: any = this.Pages.find( item => item.pages === pages_active );
     this.Routername = result_obj.name_nav;
   }
