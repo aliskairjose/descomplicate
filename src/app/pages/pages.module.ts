@@ -25,6 +25,7 @@ import { ProcedureComponent } from './config/procedure/procedure.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PaymentVerificationComponent } from './finance/payment-verification/payment-verification.component'; // <-- import the module
 import { NgbModule, NgbActiveModal, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReportsComponent } from './finance/reports/reports.component';
 
 @NgModule( {
   declarations: [
@@ -44,7 +45,8 @@ import { NgbModule, NgbActiveModal, NgbDatepickerModule } from '@ng-bootstrap/ng
     RequirementsComponent,
     InstitutionsComponent,
     ProcedureComponent,
-    PaymentVerificationComponent
+    PaymentVerificationComponent,
+    ReportsComponent
   ],
   imports: [
     CommonModule,
