@@ -44,7 +44,11 @@
                   <td> {{data.applicant_email}} </td>
                   <td> {{data.procedure.name}} </td>
                   <td> {{data.total | currency}} </td>
-                  <td> {{data.approved_payment}} </td>
+                  <td>
+                    <ng-container *ngIf="data.approved_payment === 0">Pendiente</ng-container>
+                    <ng-container *ngIf="data.approved_payment === 1">Aprobado</ng-container>
+                    <ng-container *ngIf="data.approved_payment === 2">Rechazado</ng-container>
+                  </td>
                 </tr>
               </tbody>
             </table>
