@@ -14,8 +14,6 @@ export class NavbarComponent implements OnInit {
   Pages = [ { pages: "", name_nav: "", status: false } ];
   Routername = "";
   constructor( private act_router: ActivatedRoute ) {
-
-
   }
 
   ngOnInit(): void {
@@ -23,14 +21,9 @@ export class NavbarComponent implements OnInit {
   }
 
   ngDoCheck() {
-    console.log();
     let pages_active = this.act_router.snapshot.firstChild?.routeConfig?.path;
-
-    let result_obj = this.Pages.filter( function ( elemento ) {
-      return elemento.pages == pages_active;
-    } )
-
-    this.Routername = result_obj[ 0 ].name_nav;
+    const result_obj: any = this.Pages.find( item => item.pages === pages_active );
+    this.Routername = result_obj.name_nav;
   }
 
   InitPages() {
@@ -50,17 +43,7 @@ export class NavbarComponent implements OnInit {
     ]
   }
 
-
-
   addNewItem() {
-    // let value = "";
-    // if ( this.status_menu ) {
-    //   this.status_menu = !this.status_menu;
-    //   value = "";
-    // } else {
-    //   this.status_menu = !this.status_menu;
-    //   value = "active";
-    // }
     this.status_menu = !this.status_menu;
     const value = ( this.status_menu ) ? '' : 'active';
     this.newItemEvent.emit( value );
