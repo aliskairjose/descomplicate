@@ -42,11 +42,11 @@ export class ReportsComponent implements OnInit {
   openFilterModal( filterModal: any ): void {
     this.modal = this.modalService.open( filterModal, { size: 'lg' } );
     this.modal.result.then( () => {
-      if ( this.fromDate.after( this.toDate ) ) {
-        const message = 'La fecha final no puede ser anterior a la fecha de inicio';
-        Swal.fire( '', message, 'warning' );
-        return;
-      }
+      // if ( this.fromDate.after( this.toDate ) ) {
+      //   const message = 'La fecha final no puede ser anterior a la fecha de inicio';
+      //   Swal.fire( '', message, 'warning' );
+      //   return;
+      // }
       this.start_date = this.formatter.format( this.fromDate );
       this.end_date = this.formatter.format( this.toDate );
       this.loadData();
