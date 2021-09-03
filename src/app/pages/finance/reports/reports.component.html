@@ -39,12 +39,12 @@
               <tbody>
                 <tr *ngFor="let data of reports | paginate: { itemsPerPage: paginator.perPage, currentPage: paginator.currentPage, 
                 totalItems: paginator.total }">
-                  <td> </td>
-                  <td> </td>
-                  <td> </td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td> {{data.applicant_name}} </td>
+                  <td> {{data.applicant_dni}} </td>
+                  <td> {{data.applicant_email}} </td>
+                  <td> {{data.procedure.name}} </td>
+                  <td> {{data.total | currency}} </td>
+                  <td> {{data.approved_payment}} </td>
                 </tr>
               </tbody>
             </table>

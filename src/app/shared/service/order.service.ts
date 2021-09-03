@@ -59,7 +59,7 @@ export class OrderService {
   }
 
   reportPaymentVerification( page = 1, start_date: string, end_date: string, status: any ): Observable<any> {
-    return this.http.post( `orders?page=${page}&approved_payment=${status}&start_date=${start_date}&end_date=${end_date}` )
+    return this.http.post( `orders?page=${page}&approved_payment=${status}&start_date=${start_date}&end_date=${end_date}` );
   }
 
 }

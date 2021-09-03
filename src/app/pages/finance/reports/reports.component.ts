@@ -14,7 +14,7 @@ export class ReportsComponent implements OnInit {
   end_date: any;
   start_date: any;
   modal: any;
-  reports = [];
+  reports: any[] = [];
   paginator!: Page;
   page = 1;
   paymentStatus: any = '';
@@ -62,6 +62,7 @@ export class ReportsComponent implements OnInit {
   private loadData( page = 1 ): void {
     this.orderService.reportPaymentVerification( page, this.start_date, this.end_date, this.paymentStatus ).subscribe( response => {
       console.log( response );
+      this.reports = [ ...response.data ];
       this.paginator = response.meta?.page as Page;
     } );
   }
