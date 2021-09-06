@@ -59,6 +59,18 @@ export class ReportsComponent implements OnInit {
     this.loadData();
   }
 
+  download(): void {
+    this.orderService.downloadFinanceReport( this.start_date, this.end_date, this.paymentStatus ).subscribe( response => {
+      const blob = new Blob( [ response ], { type: 'application/pdf' } );
+
+      var downloadURL = window.URL.createObjectURL( response );
+      var link = document.createElement( 'a' );
+      link.href = downloadURL;
+      link.download = "Reporte Verificación de Pagos.pdf";
+      link.click();
+    } );
+  }
+
   private loadData( page = 1 ): void {
     this.orderService.reportPaymentVerification( page, this.start_date, this.end_date, this.paymentStatus ).subscribe( response => {
       console.log( response );
