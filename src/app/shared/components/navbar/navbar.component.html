@@ -1,24 +1,20 @@
 <nav class="navbar navbar-expand-lg navbar-light py-0" [class.mobile]="status_menu">
-        <a class="navbar-brand"  >    
-            <button type="button"  class="btn btn-info" (click)="addNewItem()">
-                <i class="bi bi-justify"></i>
-            <!-- <span>Toggle Sidebar</span> -->
-        </button>
-        </a>
-  <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button> -->
+  <a class="navbar-brand">
+    <button type="button" class="btn btn-info" (click)="addNewItem()">
+      <i class="bi bi-justify"></i>
+    </button>
+  </a>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item ">
-        <a class="nav-link" >{{Routername}} </a>
+        <a class="nav-link">{{Routername}} </a>
       </li>
-    
+
     </ul>
     <form class="form-inline my-2 my-lg-0">
-     
-      <button class="btn btn-notification my-2 my-sm-0" type="button" >  <i class="bi bi-bell-fill"></i></button>
+
+      <button class="btn btn-notification my-2 my-sm-0" type="button"> <i class="bi bi-bell-fill"></i></button>
     </form>
   </div>
 </nav>

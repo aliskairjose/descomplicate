@@ -62,7 +62,11 @@
                     <a [routerLink]="['/pages/finance/payment-verification']" routerLinkActive="active">
                         {{item== "active" ? 'VDP':'Verificacion de Pagos'}}
                     </a>
-                    <!-- <a>{{item== "active" ? 'VDP':'Verificacion de Pagos'}}</a> -->
+                </li>
+                <li>
+                    <a [routerLink]="['/pages/finance/report']" routerLinkActive="active">
+                        {{item== "active" ? 'RVDP':'Reporte Verificacion de Pagos'}}
+                    </a>
                 </li>
             </ul>
         </li>

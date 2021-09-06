@@ -112,6 +112,18 @@ export class MonitoringComponent implements OnInit {
 
   }
 
+  download(): void {
+    this.orderService.downloadReport().subscribe( response => {
+      const blob = new Blob( [ response ], { type: 'application/pdf' } );
+
+      var downloadURL = window.URL.createObjectURL( response );
+      var link = document.createElement( 'a' );
+      link.href = downloadURL;
+      link.download = "Reporte Listado de Trámites.pdf";
+      link.click();
+    } );
+  }
+
   private loadData(): void {
     this.orderService.procedureList( this.page, this.params, this.mensajero_id, this.tramitador_id ).subscribe( response => {
       this.pendings = 0;

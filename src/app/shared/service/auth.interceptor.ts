@@ -34,20 +34,15 @@ export class AuthInterceptor implements HttpInterceptor {
 		if ( !request.headers.has( 'Content-Type' ) ) {
 			request = request.clone( { headers: request.headers.set( 'Content-Type', 'application/json' ) } );
 		}
-
 		request = request.clone( { headers: request.headers.set( 'Accept', 'application/json' ) } );
 
 		return next.handle( request ).pipe( map( ( event: HttpEvent<any> ) => {
-			if ( event instanceof HttpResponse ) {
-				this.spinner.hide();
-			}
+			if ( event instanceof HttpResponse ) { this.spinner.hide(); }
 			return event;
 		} ),
 			catchError( ( response: HttpErrorResponse ) => {
 				this.spinner.hide();
-
 				this.swalAlert( 'error', response.error.message, response.error.errors, this.errorsToHtmlList );
-
 				return throwError( response );
 			} )
 		);

@@ -40,6 +40,10 @@ export class OrderService {
     return this.http.get( url, { params } );
   }
 
+  downloadReport(): Observable<Blob> {
+    return this.http.get( `orders?with[]=status&with[]=managers&with[]=procedure.institution&to_export=monitoring`, { responseType: 'blob' } );
+  }
+
   /**
    * 
    * @param id id de la orden a Aprobar/Rechacar
@@ -57,5 +61,14 @@ export class OrderService {
   mensajeros(): Observable<any> {
     return this.http.get( `users-crud?roles[]=manager.messenger` );
   }
+
+  reportPaymentVerification( page = 1, start_date: string, end_date: string, status: any ): Observable<any> {
+    return this.http.get( `orders?page=${page}&approved_payment=${status}&start_date=${start_date}&end_date=${end_date}&with[]=procedure` );
+  }
+
+  downloadFinanceReport( start_date: string, end_date: string, status: any ): Observable<Blob> {
+    return this.http.get( `orders?approved_payment=${status}&start_date=${start_date}&end_date=${end_date}&with[]=procedure&to_export=pay`, { responseType: 'blob' } );
+  }
+
 
 }
