@@ -13,6 +13,7 @@ export class NavbarComponent implements OnInit {
   status_menu: boolean = false;
   Pages = [ { pages: "", name_nav: "", status: false } ];
   Routername = "";
+
   constructor( private act_router: ActivatedRoute ) {
   }
 
@@ -44,8 +45,8 @@ export class NavbarComponent implements OnInit {
   }
 
   addNewItem() {
-    this.status_menu = !this.status_menu;
     const value = ( this.status_menu ) ? '' : 'active';
+    this.status_menu = !this.status_menu;
     this.newItemEvent.emit( value );
   }
 
