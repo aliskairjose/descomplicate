@@ -4,77 +4,78 @@
 			<div class="card-body px-0">
 				<div class="card-title px-4 ">
 					<div class="row">
-						<div class="col-4">
+						<div class="col-12 col-md-4">
 							<h5>Listado de trámites</h5>
 						</div>
-						<div class="col-7 d-flex justify-content-end">
-							<div class="d-flex flex-row">
-								<!-- button status -->
-								<button class="btn btn-sm text-secondary border-1 mr-2 d-flex align-items-center flex-row"
-									(click)="filter('pending')" [ngClass]="{'selected-filter': params.pending === 1}">
-									<i class="bi bi-circle-fill status-circle" style="color: #fbaa35;"></i> Pendientes: {{pendings}}
-								</button>
-								<button class="btn btn-sm text-secondary border-1 mr-2 d-flex align-items-center flex-row"
-									(click)="filter('ready')" [ngClass]="{'selected-filter': params.ready === 1}">
-									<i class="bi bi-circle-fill status-circle" style="color: #ff1744;"></i> Culminados: {{culminated}}
-								</button>
-								<button class="btn btn-sm text-secondary border-1 mr-3 d-flex align-items-center flex-row"
-									(click)="filter('process')" [ngClass]="{'selected-filter': params.process === 1}">
-									<i class="bi bi-circle-fill status-circle" style="color: #3abbd2;"></i> En proceso: {{inProcess}}
-								</button>
-								<!-- button status -->
-								<!-- filter downloand -->
-								<button class="btn btn-sm text-secondary text-center border-1 mr-2">
-									<img src="/assets/icon/filter_list.svg" alt="" (click)="openFilterModal(filterModal)">
-								</button>
-								<button class="btn btn-sm text-secondary text-center border-1" (click)="exportToExcel()">
-									<img src="/assets/icon/download.svg" alt="">
-								</button>
-								<!-- filter downloand -->
+						<div class="col-12 col-md-8 d-flex justify-content-end">
+							<div class="table-responsive">
+								<div class="d-flex flex-row">
+									<!-- button status -->
+									<button class="btn btn-sm text-secondary border-1 mr-2 d-flex align-items-center flex-row"
+										(click)="filter('pending')" [ngClass]="{'selected-filter': params.pending === 1}">
+										<i class="bi bi-circle-fill status-circle" style="color: #fbaa35;"></i> Pendientes: {{pendings}}
+									</button>
+									<button class="btn btn-sm text-secondary border-1 mr-2 d-flex align-items-center flex-row"
+										(click)="filter('ready')" [ngClass]="{'selected-filter': params.ready === 1}">
+										<i class="bi bi-circle-fill status-circle" style="color: #ff1744;"></i> Culminados: {{culminated}}
+									</button>
+									<button class="btn btn-sm text-secondary border-1 mr-3 d-flex align-items-center flex-row"
+										(click)="filter('process')" [ngClass]="{'selected-filter': params.process === 1}">
+										<i class="bi bi-circle-fill status-circle" style="color: #3abbd2;"></i> En proceso: {{inProcess}}
+									</button>
+									<!-- button status -->
+									<!-- filter downloand -->
+									<button class="btn btn-sm text-secondary text-center border-1 mr-2">
+										<img src="/assets/icon/filter_list.svg" alt="" (click)="openFilterModal(filterModal)">
+									</button>
+									<button class="btn btn-sm text-secondary text-center border-1" (click)="exportToExcel()">
+										<img src="/assets/icon/download.svg" alt="">
+									</button>
+									<!-- filter downloand -->
+								</div>
 							</div>
-						</div>
-						<div class="col-1">
-
 						</div>
 					</div>
 				</div>
 				<div class="card-text">
 					<ng-container *ngIf="item.length; else noData">
-						<table class="table">
-							<thead>
-								<tr>
-									<th scope="col" class="color-gray">Código de Trámite</th>
-									<th scope="col" class="color-gray">Trámite</th>
-									<th scope="col" class="color-gray">Institución</th>
-									<th scope="col" class="color-gray">Mensajero</th>
-									<th scope="col" class="color-gray">Tramitador</th>
-									<th scope="col" class="color-gray">Estatus</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr *ngFor="let data of item | paginate: { itemsPerPage: paginator.perPage, currentPage: paginator.currentPage, 
-                totalItems: paginator.total }">
-									<td> {{data.id}}</td>
-									<td> {{data.procedure.name}}</td>
-									<td> {{data.procedure.institution.name}}</td>
-									<td>
-										<div style="width: max-content;">
-											<img class="img-user" [src]="data?.delivery_courier_image" alt="">
-											{{data?.delivery_courier}}
-										</div>
-									</td>
-									<td>
-										<div style="width: max-content;">
-											<img class="img-user" [src]="data?.processor_image" alt="">
-											{{data?.processor}}
-										</div>
-									</td>
-									<td>
-										<div [appProcetureStatus]="data?.status" class="status-badge"></div>
-									</td>
-								</tr>
-							</tbody>
-						</table>
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr>
+										<th scope="col" class="color-gray">Código de Trámite</th>
+										<th scope="col" class="color-gray">Trámite</th>
+										<th scope="col" class="color-gray">Institución</th>
+										<th scope="col" class="color-gray">Mensajero</th>
+										<th scope="col" class="color-gray">Tramitador</th>
+										<th scope="col" class="color-gray">Estatus</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr *ngFor="let data of item | paginate: { itemsPerPage: paginator.perPage, currentPage: paginator.currentPage, 
+									totalItems: paginator.total }">
+										<td> {{data.id}}</td>
+										<td> {{data.procedure.name}}</td>
+										<td> {{data.procedure.institution.name}}</td>
+										<td>
+											<div style="width: max-content;">
+												<img class="img-user" [src]="data?.delivery_courier_image" alt="">
+												{{data?.delivery_courier}}
+											</div>
+										</td>
+										<td>
+											<div style="width: max-content;">
+												<img class="img-user" [src]="data?.processor_image" alt="">
+												{{data?.processor}}
+											</div>
+										</td>
+										<td>
+											<div [appProcetureStatus]="data?.status" class="status-badge"></div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 						<div class="text-center">
 							<pagination-controls (pageChange)="pageChange($event)" previousLabel="Anterior" nextLabel="Siguiente">
 							</pagination-controls>
