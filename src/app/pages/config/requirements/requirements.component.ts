@@ -18,12 +18,6 @@ export class RequirementsComponent implements OnInit {
   requirements: Requirement[] = [];
   requirement!: Requirement;
   isEdit = false;
-  option = {
-    params: {
-      page: "1"
-    }
-
-  }
   paginator!: Page;
   page = 1;
 
@@ -45,7 +39,7 @@ export class RequirementsComponent implements OnInit {
   onSubmit(): void {
     this.submitted = true;
     if ( this.form.valid ) {
-      ( this.isEdit) ?   this.updateRequirement() : this.createRequirement();
+      ( this.isEdit ) ? this.updateRequirement() : this.createRequirement();
     }
   }
 
@@ -65,8 +59,7 @@ export class RequirementsComponent implements OnInit {
   }
 
   private loadData(): void {
-    this.regSrv.list( this.page ).subscribe( response => {
-      // console.log(response);
+    this.regSrv.list( { page: this.page } ).subscribe( response => {
       if ( response.status === 'Success' ) {
         this.requirements = [ ...response.data ];
         this.paginator = response.meta?.page as Page;
@@ -114,8 +107,7 @@ export class RequirementsComponent implements OnInit {
   }
 
   pageChange( page: number ): void {
-    // console.log(page);
-    this.option.params.page = String( page );
+    this.page = page;
     this.paginator.currentPage = page;
     this.loadData();
   }

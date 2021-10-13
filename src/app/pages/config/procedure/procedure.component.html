@@ -53,6 +53,7 @@
   </div>
 </section>
 
+<!-- Modal crear tramite -->
 <div class="modal fade bd-example-modal-sm" id="exampleModal" tabindex="-1" role="dialog"
   aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -116,7 +117,6 @@
                 <label for="managerTypes" class="text-secondary">Tipo de gestoría</label>
                 <select class="form-control" name="managerTypes" id="managerTypes" formControlName="managerTypes"
                   multiple [compareWith]="compareObjects">
-                  <option value="" selected>Seleccione</option>
                   <option [ngValue]="type.value" selected="i=1"
                     *ngFor="let type of types;let i=index; trackBy:trackByType">
                     {{type.name}}</option>
@@ -132,7 +132,6 @@
                 <label for="requeriments" class="text-secondary">Requisitos</label>
                 <select class="form-control" name="requeriments" id="requeriments" formControlName="requeriments"
                   multiple [compareWith]="compareObjects">
-                  <option value="" selected>Seleccione</option>
                   <option *ngFor="let r of requirements" [ngValue]="r.id">{{r.name}}</option>
                 </select>
                 <small id="helpId" class="text-muted">Ctrl+click para multiple selección</small>

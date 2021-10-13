@@ -51,7 +51,7 @@ export class ProcedureComponent implements OnInit {
   ) {
     this.createForm();
     this.titleService.setTitle( 'Descomplicate - Requisitos' );
-    forkJoin( [ this.instService.list( this.page ), this.reqService.list( this.page ) ] ).
+    forkJoin( [ this.instService.list( this.page ), this.reqService.list() ] ).
       subscribe( ( [ instResponse, requirementsResponse ] ) => {
         this.requirements = [ ...requirementsResponse.data ];
         this.institutions = [ ...instResponse.data ];
@@ -160,7 +160,7 @@ export class ProcedureComponent implements OnInit {
   Clean() {
 
     if ( this.isEdit ) {
-      this.procedure = <Procedure> { };
+      this.procedure = <Procedure> {};
       this.isEdit = !this.isEdit;
 
     }

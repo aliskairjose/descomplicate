@@ -6,10 +6,8 @@ import { pluck } from 'rxjs/operators';
 import { Page } from '../../shared/interfaces/response';
 import { NgbActiveModal, NgbDateParserFormatter, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProcedureService } from '../../shared/service/procedure.service';
-import { Procedure } from '../../shared/interfaces/procedure';
 import { InstitutionService } from '../../shared/service/institution.service';
-import { Institution } from 'src/app/shared/interfaces/institution';
-import { Manager } from '../../shared/interfaces/manager';
+import { ExcelService } from '../../shared/service/excel.service';
 
 @Component( {
   selector: 'app-monitoring',
@@ -18,6 +16,7 @@ import { Manager } from '../../shared/interfaces/manager';
 } )
 export class MonitoringComponent implements OnInit {
   item: Order[] = [];
+  excelData: any[] = [];
   pendings = 0;
   culminated = 0;
   inProcess = 0;
@@ -49,6 +48,7 @@ export class MonitoringComponent implements OnInit {
     private procedureService: ProcedureService,
     private formatter: NgbDateParserFormatter,
     private institutionService: InstitutionService,
+    private excelService: ExcelService
   ) {
     forkJoin( [ this.institutionService.list(), this.orderService.mensajeros(), this.orderService.tramitadores() ] )
       .subscribe( ( [ response, mensajeroRespose, tramitadorResponse ] ) => {
@@ -133,6 +133,17 @@ export class MonitoringComponent implements OnInit {
         this.item = [ ...response.data ];
         this.paginator = response.meta?.page as Page;
 
+        from( this.item ).subscribe( i => {
+          this.excelData.push( {
+            'Código de trámite': i.id,
+            'Trámite': i.procedure.name,
+            'Institución': i.procedure.institution.name,
+            'Mensajero': i.delivery_courier,
+            'Tramitador': i.processor,
+            'Estatus': i.status?.name,
+          } )
+        } )
+
         from( response.data ).pipe( pluck( 'status' ) ).subscribe( item => {
           if ( item?.id === 1 ) { this.pendings++; }
           if ( item?.id === 7 ) { this.inProcess++; }
@@ -140,6 +151,10 @@ export class MonitoringComponent implements OnInit {
         } );
       }
     } )
+  }
+
+  exportToExcel(): void {
+    this.excelService.exportAsExcelFile( this.excelData, 'Listado de trámites' );
   }
 
 }
