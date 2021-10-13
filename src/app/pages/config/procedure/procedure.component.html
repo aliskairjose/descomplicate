@@ -117,7 +117,6 @@
                 <label for="managerTypes" class="text-secondary">Tipo de gestoría</label>
                 <select class="form-control" name="managerTypes" id="managerTypes" formControlName="managerTypes"
                   multiple [compareWith]="compareObjects">
-                  <option value="" selected>Seleccione</option>
                   <option [ngValue]="type.value" selected="i=1"
                     *ngFor="let type of types;let i=index; trackBy:trackByType">
                     {{type.name}}</option>
@@ -128,12 +127,24 @@
                 </div>
               </div>
             </div>
+            <!-- <div class="col">
+              <div class="form-group">
+                <label for="">Requisitos</label>
+                <input list="browsers" name="browser" class="form-control" formControlName="requeriments" multiple>
+                <datalist id="browsers">
+                  <option value="" selected>Seleccione</option>
+                  <option *ngFor="let r of requirements" [ngValue]="r.id">{{r.name}}</option>
+                </datalist>
+                <div *ngIf="submitted && f.requeriments.errors?.required" class="invalid-feedback d-block">
+                  Campo Requerido
+                </div>
+              </div>
+            </div> -->
             <div class="col">
               <div class="form-group">
                 <label for="requeriments" class="text-secondary">Requisitos</label>
                 <select class="form-control" name="requeriments" id="requeriments" formControlName="requeriments"
                   multiple [compareWith]="compareObjects">
-                  <option value="" selected>Seleccione</option>
                   <option *ngFor="let r of requirements" [ngValue]="r.id">{{r.name}}</option>
                 </select>
                 <small id="helpId" class="text-muted">Ctrl+click para multiple selección</small>
