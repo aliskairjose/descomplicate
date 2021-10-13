@@ -91,10 +91,15 @@
             <div class="col">
               <div class="form-group">
                 <label for="institution_id" class="text-secondary">Institución</label>
-                <select class="form-control" name="institution_id" id="institution_id" formControlName="institution_id">
+                <!-- <select class="form-control" name="institution_id" id="institution_id" formControlName="institution_id">
                   <option value="" selected>Selecciones</option>
                   <option *ngFor="let i of institutions" [value]="i.id">{{i.name}}</option>
-                </select>
+                </select> -->
+                <input type="text" list="institutions" class="form-control" formControlName="institution"
+                  (change)="selectInstitution($event)">
+                <datalist id="institutions">
+                  <option *ngFor="let i of institutions">{{i.name}}</option>
+                </datalist>
                 <div *ngIf="submitted && f.institution_id.errors?.required" class="invalid-feedback d-block">
                   Campo Requerido
                 </div>
