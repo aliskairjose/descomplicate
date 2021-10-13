@@ -18,12 +18,6 @@ export class RequirementsComponent implements OnInit {
   requirements: Requirement[] = [];
   requirement!: Requirement;
   isEdit = false;
-  option = {
-    params: {
-      page: "1"
-    }
-
-  }
   paginator!: Page;
   page = 1;
 
@@ -113,8 +107,7 @@ export class RequirementsComponent implements OnInit {
   }
 
   pageChange( page: number ): void {
-    // console.log(page);
-    this.option.params.page = String( page );
+    this.page = page;
     this.paginator.currentPage = page;
     this.loadData();
   }
