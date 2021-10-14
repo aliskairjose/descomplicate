@@ -67,7 +67,7 @@
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="modal-body">
           <div class="row">
-            <div class="col">
+            <div class="col-12">
               <div class="form-group">
                 <label for="name">Nombre del trámite</label>
                 <input type="text" class="form-control" name="name" id="name" placeholder="Ingresar nombre"
@@ -77,30 +77,31 @@
                 </div>
               </div>
             </div>
-            <div class="col">
-              <div class="d-flex flex-column mb-3 m-r-1">
-                <label for="" class="text-secondary">Precio del tramite ($)</label>
-                <input type="text" class="form-control" placeholder="Ingrese precio" formControlName="cost">
-                <div *ngIf="submitted && f.cost.errors?.required" class="invalid-feedback d-block">
-                  Campo Requerido
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
+            <div class="col-12">
               <div class="form-group">
                 <label for="institution_id" class="text-secondary">Institución</label>
                 <!-- <select class="form-control" name="institution_id" id="institution_id" formControlName="institution_id">
-                  <option value="" selected>Selecciones</option>
-                  <option *ngFor="let i of institutions" [value]="i.id">{{i.name}}</option>
-                </select> -->
+                              <option value="" selected>Selecciones</option>
+                              <option *ngFor="let i of institutions" [value]="i.id">{{i.name}}</option>
+                            </select> -->
                 <input type="text" list="institutions" class="form-control" formControlName="institution"
                   (change)="selectInstitution($event)">
                 <datalist id="institutions">
                   <option *ngFor="let i of institutions">{{i.name}}</option>
                 </datalist>
                 <div *ngIf="submitted && f.institution_id.errors?.required" class="invalid-feedback d-block">
+                  Campo Requerido
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+
+            <div class="col">
+              <div class="d-flex flex-column mb-3 m-r-1">
+                <label for="" class="text-secondary">Precio del tramite ($)</label>
+                <input type="text" class="form-control" placeholder="Ingrese precio" formControlName="cost">
+                <div *ngIf="submitted && f.cost.errors?.required" class="invalid-feedback d-block">
                   Campo Requerido
                 </div>
               </div>
@@ -117,7 +118,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col">
+            <div class="col-12">
               <div class="form-group">
                 <label for="managerTypes" class="text-secondary">Tipo de gestoría</label>
                 <select class="form-control" name="managerTypes" id="managerTypes" formControlName="managerTypes"
@@ -132,7 +133,7 @@
                 </div>
               </div>
             </div>
-            <div class="col">
+            <div class="col-12">
               <div class="form-group">
                 <label for="requeriments" class="text-secondary">Requisitos</label>
                 <input type="text" id="req" class="form-control" list="Suggestions" multiple />
