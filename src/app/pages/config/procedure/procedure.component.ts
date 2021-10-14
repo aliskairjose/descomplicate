@@ -51,7 +51,7 @@ export class ProcedureComponent implements OnInit {
   ) {
     this.createForm();
     this.titleService.setTitle( 'Descomplicate - Requisitos' );
-    forkJoin( [ this.instService.list( this.page ), this.reqService.list() ] ).
+    forkJoin( [ this.instService.list(), this.reqService.list() ] ).
       subscribe( ( [ instResponse, requirementsResponse ] ) => {
         this.requirements = [ ...requirementsResponse.data ];
         this.institutions = [ ...instResponse.data ];
@@ -71,6 +71,12 @@ export class ProcedureComponent implements OnInit {
     }
   }
 
+  selectInstitution( event: any ): void {
+    const value = event.target.value;
+    const inst = this.institutions.find( item => item.name === value );
+    this.form.controls.institution_id.setValue( inst?.id );
+  }
+
   trackByType( index: number, item: any ): number {
     return item.id;
   }
@@ -82,6 +88,8 @@ export class ProcedureComponent implements OnInit {
   update( pro: Procedure ): void {
     this.isEdit = true;
     this.procedure = { ...pro };
+    const result = this.institutions.find( item => item.id === pro.institution_id );
+    this.form.controls.institution.patchValue( result?.name );
     this.managerTypesSelected = this.procedure.manager_types;
     this.form.controls.name.patchValue( pro.name );
     this.form.controls.estimated_time.patchValue( pro.estimated_time );
@@ -145,6 +153,7 @@ export class ProcedureComponent implements OnInit {
         cost: [ '', [ Validators.required ] ],
         estimated_time: [ '1' ],
         institution_id: [ '', [ Validators.required ] ],
+        institution: [ '', [ Validators.required ] ],
         requeriments: [ '', [ Validators.required ] ],
         managerTypes: [ '', [ Validators.required ] ]
       }

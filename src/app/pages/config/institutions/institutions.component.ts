@@ -61,8 +61,7 @@ export class InstitutionsComponent implements OnInit {
   }
 
   private loadData(): void {
-    this.iSrv.list( this.page ).subscribe( response => {
-      // console.log(response);
+    this.iSrv.list( { page: this.page } ).subscribe( response => {
       if ( response.status === 'Success' ) {
         this.institutions = [ ...response.data ];
         this.paginator = response.meta?.page as Page;
