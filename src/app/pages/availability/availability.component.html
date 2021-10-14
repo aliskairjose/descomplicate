@@ -1,140 +1,121 @@
 <section class="py-2 py-md-5 px-2 px-md-4 ">
-    <div class="container monitoring">
-        <div class="card ">
-            <div class="card-body px-0">
-                <div class="card-title px-4 ">
-                    <div class="row">
-                        <div class="col-12 col-md-4 mb-2 mb-md-0">
-                            <h5>Listado de gestores</h5>
-                        </div>
-                        <div class="col-10 col-md-7 d-flex justify-content-end">
-                            <div class="d-flex flex-row">
+	<div class="container monitoring">
+		<div class="card ">
+			<div class="card-body px-0">
+				<div class="card-title px-4 ">
+					<div class="row">
+						<div class="col-12 col-md-4 mb-2 mb-md-0">
+							<h5>Listado de gestores</h5>
+						</div>
+						<div class="col-10 col-md-8 d-flex justify-content-end">
+							<div class="table-reponsive">
+								<div class="d-flex flex-row">
+									<!-- filter downloand -->
+									<button class="btn btn-sm text-secondary text-center border-1 mr-2" (click)="ShowFilter()"><img
+											src="/assets/icon/filter_list.svg" alt=""></button>
+									<button class="btn btn-sm text-secondary text-center border-1" (click)="generatePDF()"><img
+											src="/assets/icon/download.svg" alt=""></button>
+									<!-- filter downloand -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card-text" id="contentToConvert">
+					<div class="table-responsive">
+						<table class="table ">
+							<thead>
+								<tr>
+									<th scope="col" class="color-gray">Usuario</th>
+									<th scope="col" class="color-gray">Tipo de Gestor</th>
+									<th scope="col" class="color-gray">Fecha</th>
+									<th scope="col" class="color-gray">Estatus</th>
 
-                                <!-- filter downloand -->
-                                <button class="btn btn-sm text-secondary text-center border-1 mr-2"
-                                    (click)="ShowFilter()"><img src="../../../assets/icon/filter_list.svg"
-                                        alt=""></button>
-                                <button class="btn btn-sm text-secondary text-center border-1"
-                                    (click)="generatePDF()"><img src="../../../assets/icon/download.svg"
-                                        alt=""></button>
-                                <!-- filter downloand -->
-                            </div>
-                        </div>
-                        <div class="col-1">
-                            <!-- <pagination-controls (pageChange)="pageChange($event)" previousLabel="<" nextLabel=">">
-                        </pagination-controls> -->
-                        </div>
-                    </div>
-                </div>
-                <div class="card-text" id="contentToConvert">
-                    <table class="table ">
-                        <thead>
-                            <tr>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let data of Item | paginate: { itemsPerPage: 
+													paginator.perPage, currentPage: paginator.currentPage, 
+													totalItems: paginator.total } ;let i = index">
+									<td>
+										<img class="img-user" [src]="data.manager.user.profile_image" alt="">
+										{{data.manager.user.full_name}}
+									</td>
+									<td> {{GetTypeManager(data.manager?.manager_type_id)}}</td>
+									<td class="text-capitalize"> {{data.created_at | date}}</td>
+									<td>
+										<div class="box-status">
+											<div [class.point-red]="data.available=='0'" [class.point-blue]="data.available=='1'">
+											</div>
+											{{Getnamestatus(data.available)}}
+										</div>
+									</td>
+								</tr>
 
-                                <th scope="col" class="color-gray">Usuario</th>
-                                <th scope="col" class="color-gray">Tipo de Gestor</th>
-                                <th scope="col" class="color-gray">Fecha</th>
-                                <th scope="col" class="color-gray"></th>
-                                <th scope="col" class="color-gray"></th>
-                                <th scope="col" class="color-gray">Estatus</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let data of Item | paginate: { itemsPerPage: 
-                        paginator.perPage, currentPage: paginator.currentPage, 
-                        totalItems: paginator.total } ;let i = index">
-
-                                <td> <img class="img-user" src="{{GetDataUser(data.manager.user,'photo')}}"
-                                        alt="">{{GetDataUser(data.manager.user,'name')}}</td>
-                                <td> {{GetTypeManager(data.manager?.manager_type_id)}}</td>
-                                <td class="text-capitalize"> {{GetDateUser(data.created_at)}}</td>
-                                <td> </td>
-                                <td> </td>
-                                <td>
-                                    <div class="box-status">
-                                        <div [class.point-red]="data.available=='0'"
-                                            [class.point-blue]="data.available=='1'">
-                                        </div>
-                                        {{Getnamestatus(data.available)}}
-                                    </div>
-                                </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                    <div class="text-center">
-                        <pagination-controls (pageChange)="pageChange($event)" previousLabel="Anterior"
-                            nextLabel="Siguiente">
-
-                        </pagination-controls>
-                        <!--  -->
-
-
-                    </div>
-
-                    <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
-
-                </div>
-
-
-            </div>
-        </div>
-    </div>
+							</tbody>
+						</table>
+					</div>
+					<div class="text-center">
+						<pagination-controls (pageChange)="pageChange($event)" previousLabel="Anterior" nextLabel="Siguiente">
+						</pagination-controls>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 
-
 <div class="content-filter" [class.show_filter]="StatusFilter">
-    <div class="card">
-        <div class="card-header">
-            <div class="row">
-                <div class="col-6">Filtros</div>
-                <div class="col-6 action-filter">
-                    <button class="btn" (click)="CleanFilter()">Limpiar</button>
-                    <button class="btn" (click)="ApplyFilter()">Aplicar</button>
-                </div>
-            </div>
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect1">Tipo de gestor</label>
-                        <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="Filter.type"
-                            placeholder="Seleccionar">
-                            <option disabled selected value="0">Seleccionar</option>
-                            <option value="1">Mensajero socio</option>
-                            <option value="2">Tramitador socio</option>
-                            <option value="3">Abogado socio</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect1">Estatus</label>
-                        <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="Filter.status"
-                            placeholder="Seleccionar">
-                            <option disabled selected value="-1">Seleccionar</option>
-                            <option value="0">Inactivo</option>
-                            <option value="1">Activo</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect1">Example select</label>
-                        <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="Seleccionar"
-                            [(ngModel)]="Filter.star_date">
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect1">Example select</label>
-                        <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="Seleccionar"
-                            [(ngModel)]="Filter.end_date">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="card">
+		<div class="card-header">
+			<div class="row">
+				<div class="col-6">Filtros</div>
+				<div class="col-6 action-filter">
+					<button class="btn" (click)="CleanFilter()">Limpiar</button>
+					<button class="btn" (click)="ApplyFilter()">Aplicar</button>
+				</div>
+			</div>
+		</div>
+		<div class="card-body">
+			<div class="row">
+				<div class="col-6">
+					<div class="form-group">
+						<label for="exampleFormControlSelect1">Tipo de gestor</label>
+						<select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="Filter.type"
+							placeholder="Seleccionar">
+							<option disabled selected value="0">Seleccionar</option>
+							<option value="1">Mensajero socio</option>
+							<option value="2">Tramitador socio</option>
+							<option value="3">Abogado socio</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-6">
+					<div class="form-group">
+						<label for="exampleFormControlSelect1">Estatus</label>
+						<select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="Filter.status"
+							placeholder="Seleccionar">
+							<option disabled selected value="-1">Seleccionar</option>
+							<option value="0">Inactivo</option>
+							<option value="1">Activo</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-6">
+					<div class="form-group">
+						<label for="exampleFormControlSelect1">Example select</label>
+						<input type="date" class="form-control" id="exampleFormControlInput1" placeholder="Seleccionar"
+							[(ngModel)]="Filter.star_date">
+					</div>
+				</div>
+				<div class="col-6">
+					<div class="form-group">
+						<label for="exampleFormControlSelect1">Example select</label>
+						<input type="date" class="form-control" id="exampleFormControlInput1" placeholder="Seleccionar"
+							[(ngModel)]="Filter.end_date">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

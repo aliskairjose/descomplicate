@@ -3,6 +3,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import jspdf, { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import * as moment from 'moment';
+import { ExcelService } from '../../shared/service/excel.service';
+import { from } from 'rxjs';
 
 @Component( {
   selector: 'app-availability',
@@ -11,6 +13,7 @@ import * as moment from 'moment';
 } )
 export class AvailabilityComponent implements OnInit {
   Item: any;
+  excelData: any[] = [];
   StatusFilter = false;
   p: number = 1;
   Filter = {
@@ -33,7 +36,10 @@ export class AvailabilityComponent implements OnInit {
   filterapi_status = '';
   pagesapi = '&page=1';
 
-  constructor( private http: HttpserviceService ) {
+  constructor(
+    private http: HttpserviceService,
+    private excelService: ExcelService
+  ) {
     moment.locale( 'es' );
   }
 
@@ -71,7 +77,6 @@ export class AvailabilityComponent implements OnInit {
       case 1:
         name = "Activo";
         break;
-
     }
 
     return name;
@@ -89,7 +94,14 @@ export class AvailabilityComponent implements OnInit {
       ( res ) => {
         this.Item = res.data;
         this.paginator = res.meta.page;
-        // console.log( res);
+        from( this.Item ).subscribe( ( i: any ) => {
+          this.excelData.push( {
+            Usuario: i.manager.user.full_name,
+            'Tipo de gestor': this.GetTypeManager( i.manager.manager_type_id ),
+            Fecha: i.created_at
+          } );
+        } );
+        console.log( this.excelData );
       },
       error => {
         console.log( error );
@@ -120,27 +132,15 @@ export class AvailabilityComponent implements OnInit {
     );
   }
 
-
-  GetDataUser( user: any, type: string ) {
-    if ( type === 'name' ) {
-      return user.full_name + " " + user.last_name;
-    } else {
-      return user.profile_image;
-    }
-
+  exportToExcel(): void {
+    this.excelService.exportAsExcelFile( this.excelData, 'Listado de gestores' );
   }
-
-  GetDateUser( date: any ) {
-    return moment( date ).format( "DD MMM YYYY" ).replace( '.', '' );
-  }
-
 
   ShowFilter() {
     this.StatusFilter = !this.StatusFilter;
   }
 
   ApplyFilter() {
-
 
     if ( this.Filter.star_date.length >= 0 && this.Filter.star_date != "" ) {
       this.filterapi_stardate = "&start_date=" + this.Filter.star_date;
