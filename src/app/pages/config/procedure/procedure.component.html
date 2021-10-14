@@ -54,9 +54,9 @@
 </section>
 
 <!-- Modal crear tramite -->
-<div class="modal fade bd-example-modal-sm" id="exampleModal" tabindex="-1" role="dialog"
+<div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog"
   aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">{{isEdit ? 'Editar trámite' : 'Crear trámite' }}</h5>
@@ -135,14 +135,25 @@
             <div class="col">
               <div class="form-group">
                 <label for="requeriments" class="text-secondary">Requisitos</label>
-                <select class="form-control" name="requeriments" id="requeriments" formControlName="requeriments"
+                <input type="text" id="req" class="form-control" list="Suggestions" multiple />
+                <datalist id="Suggestions">
+                  <option *ngFor="let r of requirements">{{r.name}}</option>
+                  <!-- <option>option 1</option>
+                  <option>option 2</option>
+                  <option>option 3</option> -->
+                </datalist>
+                <small id="helpId" class="text-muted">Ctrl+click para multiple selección</small>
+                <div *ngIf="submitted && f.requeriments.errors?.required" class="invalid-feedback d-block">
+                  Campo Requerido
+                </div>
+                <!-- <select class="form-control" name="requeriments" id="requeriments" formControlName="requeriments"
                   multiple [compareWith]="compareObjects">
                   <option *ngFor="let r of requirements" [ngValue]="r.id">{{r.name}}</option>
                 </select>
                 <small id="helpId" class="text-muted">Ctrl+click para multiple selección</small>
                 <div *ngIf="submitted && f.requeriments.errors?.required" class="invalid-feedback d-block">
                   Campo Requerido
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
