@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
-import { forkJoin } from 'rxjs';
+import { forkJoin, from } from 'rxjs';
 import { Institution } from 'src/app/shared/interfaces/institution';
 import { Procedure } from 'src/app/shared/interfaces/procedure';
 import { Requirement } from 'src/app/shared/interfaces/requirement';
@@ -10,6 +10,8 @@ import { RequirementService } from 'src/app/shared/service/requirement.service';
 import Swal from 'sweetalert2';
 import { InstitutionService } from '../../../shared/service/institution.service';
 import { Page } from '../../../shared/interfaces/response';
+import { CompensatoryExpenseType } from '../../../shared/interfaces/compenatory-expense-type';
+import { CompensatoryExpenseTypeService } from '../../../shared/service/compensatory-expense-type.service';
 
 @Component( {
   selector: 'app-procedure',
@@ -24,6 +26,7 @@ export class ProcedureComponent implements OnInit {
   isEdit = false;
   institutions: Institution[] = [];
   requirements: Requirement[] = [];
+  compensatoryExpense: CompensatoryExpenseType[] = [];
   paginator!: Page;
   page = 1;
   types = [
@@ -41,6 +44,8 @@ export class ProcedureComponent implements OnInit {
     },
   ]
   managerTypesSelected: any[] = []
+  expensesSelecteds: number[] = [];
+  requirementsSelected: number[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -48,13 +53,15 @@ export class ProcedureComponent implements OnInit {
     private procedureSrv: ProcedureService,
     private reqService: RequirementService,
     private instService: InstitutionService,
+    private compensatoryExpeseService: CompensatoryExpenseTypeService,
   ) {
     this.createForm();
     this.titleService.setTitle( 'Descomplicate - Requisitos' );
-    forkJoin( [ this.instService.list(), this.reqService.list() ] ).
-      subscribe( ( [ instResponse, requirementsResponse ] ) => {
+    forkJoin( [ this.instService.list(), this.reqService.list(), this.compensatoryExpeseService.list() ] ).
+      subscribe( ( [ instResponse, requirementsResponse, compensatoryResponse ] ) => {
         this.requirements = [ ...requirementsResponse.data ];
         this.institutions = [ ...instResponse.data ];
+        this.compensatoryExpense = [ ...compensatoryResponse.data ];
       } );
   }
 
@@ -62,55 +69,14 @@ export class ProcedureComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadData();
-    // note: The JavaScript version is available in the jsfiddle demo
-    const separator = ',';
-    for ( const input of document.getElementsByTagName( 'input' ) ) {
-      if ( !input.multiple ) {
-        continue;
-      }
-
-      if ( input.list instanceof HTMLDataListElement ) {
-        const optionsValues = Array.from( input.list.options ).map( ( opt: any ) => opt.value );
-        let valueCount = input.value.split( separator ).length;
-
-        input.addEventListener( "input", () => {
-          const currentValueCount = input.value.split( separator ).length;
-
-          // Do not update list if the user doesn't add/remove a separator
-          // Current value: "a, b, c"; New value: "a, b, cd" => Do not change the list
-          // Current value: "a, b, c"; New value: "a, b, c," => Update the list
-          // Current value: "a, b, c"; New value: "a, b" => Update the list
-          if ( valueCount !== currentValueCount ) {
-            const lsIndex = input.value.lastIndexOf( separator );
-            const str = lsIndex !== -1 ? input.value.substr( 0, lsIndex ) + separator : "";
-            filldatalist( input, optionsValues, str );
-            valueCount = currentValueCount;
-          }
-        } );
-      }
-    }
-
-    function filldatalist( input: HTMLInputElement, optionValues: string[], optionPrefix: string ) {
-      const list = input.list;
-      if ( list && optionValues.length > 0 ) {
-        list.innerHTML = "";
-
-        const usedOptions = optionPrefix.split( separator ).map( value => value.trim() );
-
-        for ( const optionsValue of optionValues ) {
-          if ( usedOptions.indexOf( optionsValue ) < 0 ) { // Skip used values
-            const option = document.createElement( "option" );
-            option.value = optionPrefix + optionsValue;
-            list.append( option );
-          }
-        }
-      }
-    }
   }
 
   onSubmit(): void {
     this.submitted = true;
     if ( this.form.valid ) {
+      this.form.controls.compensatory_expense_types.setValue( this.expensesSelecteds );
+      this.form.controls.requeriments.setValue( this.requirementsSelected );
+      console.log( this.form.value );
       ( this.isEdit ) ? this.updateProcedure() : this.createProcedure();
     }
   }
@@ -150,6 +116,35 @@ export class ProcedureComponent implements OnInit {
 
   compareObjects( o1: any, o2: any ): boolean {
     return ( o1 === o2.id );
+  }
+
+  onChangeExpenses( event: any ): void {
+    let _expense: string[] = [];
+    const _expenseIds: number[] = [];
+
+    _expense = event.target.value.split( '$,' );
+
+    from( _expense ).subscribe( ( data: any ) => {
+      const index = data.indexOf( '-' );
+      const expenseSlice = data.slice( 0, index - 1 );
+      const expense = this.compensatoryExpense.find( item => item.name === expenseSlice );
+      _expenseIds.push( expense?.id as number );
+
+    } );
+    this.expensesSelecteds = _expenseIds;
+  }
+
+  onChangeRequirements( event: any ): void {
+    let _requirement: string[] = [];
+    const _requirementsId: number[] = [];
+    _requirement = event.target.value.split( ',' );
+
+    from( _requirement ).subscribe( ( data: any ) => {
+      const req = this.requirements.find( item => item.name === data );
+      _requirementsId.push( req?.id as number );
+    } );
+
+    this.requirementsSelected = _requirementsId;
   }
 
   private loadData(): void {
@@ -197,10 +192,12 @@ export class ProcedureComponent implements OnInit {
         name: [ '', [ Validators.required ] ],
         cost: [ '', [ Validators.required ] ],
         estimated_time: [ '1' ],
-        institution_id: [ '', [ Validators.required ] ],
-        institution: [ '', [ Validators.required ] ],
+        requires_activation: [ false ],
+        institution_id: [ '', [ Validators.required ] ], // solo para front
         requeriments: [ '', [ Validators.required ] ],
-        managerTypes: [ '', [ Validators.required ] ]
+        institution: [ '', [ Validators.required ] ],
+        managerTypes: [ '', [ Validators.required ] ],
+        compensatory_expense_types: [ '' ]
       }
     );
   }
@@ -212,12 +209,8 @@ export class ProcedureComponent implements OnInit {
   }
 
   Clean() {
-
-    if ( this.isEdit ) {
-      this.procedure = <Procedure> {};
-      this.isEdit = !this.isEdit;
-
-    }
+    this.procedure = <Procedure> {};
+    this.isEdit &&= false;
   }
 
 }

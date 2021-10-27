@@ -9,7 +9,7 @@
               <label for="" class="text-secondary">Trámites creados hasta el momento</label>
             </div>
             <div class="col-4 text-right">
-              <label for="btn-create" class="text-primary">Crear trámites</label>
+              <label for="btn-create" class="text-primary">Crear trámite</label>
               <button class="btn btn-primary btn-sm ml-2" id="btn-create" data-toggle="modal"
                 data-target="#exampleModal" (click)="add()">
                 <i class="bi bi-plus-lg"></i>
@@ -28,7 +28,7 @@
               </div>
               <div class="w-25">
                 <label for="" class="text-secondary">Intitución</label>
-                <p>{{data.institution.name}}</p>
+                <p>{{data.institution?.name}}</p>
               </div>
               <div>
                 <label for="" class="text-secondary">Tiempo estimado</label>
@@ -66,7 +66,7 @@
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="modal-body">
           <div class="row">
-            <div class="col-12">
+            <div class="col-6">
               <div class="form-group">
                 <label for="name">Nombre del trámite</label>
                 <input type="text" class="form-control" name="name" id="name" placeholder="Ingresar nombre"
@@ -76,6 +76,28 @@
                 </div>
               </div>
             </div>
+            <div class="col-3">
+              <div class="d-flex flex-column mb-3 m-r-1">
+                <label for="" class="text-secondary">Precio del tramite ($)</label>
+                <input type="number" class="form-control" placeholder="Ingrese precio" formControlName="cost">
+                <div *ngIf="submitted && f.cost.errors?.required" class="invalid-feedback d-block">
+                  Campo Requerido
+                </div>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="form-group">
+                <label for="estimated_time">Tiempo estimado (horas)</label>
+                <input type="number" class="form-control" name="estimated_time" id="estimated_time"
+                  placeholder="Ingresar tiempo" formControlName="estimated_time" min="1">
+                <div *ngIf="submitted && f.estimated_time.errors?.required" class="invalid-feedback d-block">
+                  Campo Requerido
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="row">
             <div class="col-12">
               <div class="form-group">
                 <label for="institution_id" class="text-secondary">Institución</label>
@@ -93,28 +115,7 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="row">
 
-            <div class="col">
-              <div class="d-flex flex-column mb-3 m-r-1">
-                <label for="" class="text-secondary">Precio del tramite ($)</label>
-                <input type="text" class="form-control" placeholder="Ingrese precio" formControlName="cost">
-                <div *ngIf="submitted && f.cost.errors?.required" class="invalid-feedback d-block">
-                  Campo Requerido
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-group">
-                <label for="estimated_time">Tiempo estimado (horas)</label>
-                <input type="number" class="form-control" name="estimated_time" id="estimated_time"
-                  placeholder="Ingresar tiempo" formControlName="estimated_time" min="1">
-                <div *ngIf="submitted && f.estimated_time.errors?.required" class="invalid-feedback d-block">
-                  Campo Requerido
-                </div>
-              </div>
-            </div>
           </div>
           <div class="row">
             <div class="col-12">
@@ -135,25 +136,36 @@
             <div class="col-12">
               <div class="form-group">
                 <label for="requeriments" class="text-secondary">Requisitos</label>
-                <input type="text" id="req" class="form-control" list="Suggestions" multiple />
-                <datalist id="Suggestions">
+                <input type="email" id="req" class="form-control" list="emails" multiple name="requeriments"
+                  id="requeriments" formControlName="requeriments" (change)="onChangeRequirements($event)" />
+                <datalist id="emails">
                   <option *ngFor="let r of requirements">{{r.name}}</option>
-                  <!-- <option>option 1</option>
-                  <option>option 2</option>
-                  <option>option 3</option> -->
                 </datalist>
-                <small id="helpId" class="text-muted">Ctrl+click para multiple selección</small>
+                <small id="helpId" class="text-muted">Sepate con coma para multiple selección</small>
                 <div *ngIf="submitted && f.requeriments.errors?.required" class="invalid-feedback d-block">
                   Campo Requerido
                 </div>
-                <!-- <select class="form-control" name="requeriments" id="requeriments" formControlName="requeriments"
-                  multiple [compareWith]="compareObjects">
-                  <option *ngFor="let r of requirements" [ngValue]="r.id">{{r.name}}</option>
-                </select>
-                <small id="helpId" class="text-muted">Ctrl+click para multiple selección</small>
-                <div *ngIf="submitted && f.requeriments.errors?.required" class="invalid-feedback d-block">
-                  Campo Requerido
-                </div> -->
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label for="compensatory" class="text-secondary">Gastos de trámite</label>
+                <input type="email" id="comp" class="form-control" list="Compensatories" multiple
+                  name="compensatory_expense_types" id="compensatory_expense_types"
+                  formControlName="compensatory_expense_types" (change)="onChangeExpenses($event)" />
+                <datalist id="Compensatories">
+                  <option *ngFor="let ce of compensatoryExpense">{{ce.name}} - {{ce.amount | currency}}</option>
+                </datalist>
+                <small id="helpId" class="text-muted">Sepate con coma para multiple selección</small>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue" checked
+                    formControlName="requires_activation">
+                  Requiere autorización
+                </label>
               </div>
             </div>
           </div>

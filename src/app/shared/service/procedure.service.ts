@@ -22,7 +22,7 @@ export class ProcedureService {
     const params = {
       page,
       institution_id,
-      includes: [ 'requeriments', 'managerTypes', 'institution', 'compensatories' ]
+      'includes[]': [ 'requeriments', 'managerTypes', 'institution', 'compensatories' ]
     }
     return this.http.get( `procedures`, { params } );
   }
