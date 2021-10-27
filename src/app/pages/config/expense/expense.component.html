@@ -1,4 +1,3 @@
-<p>expense works!</p>
 <section class="py-2 py-md-5 px-2 px-md-4 ">
   <div class="container bank">
     <div class="card">
@@ -29,7 +28,7 @@
               </div>
               <div class="w-25">
                 <label for="" class="text-secondary">Intitución</label>
-                <p>{{data.amount}}</p>
+                <p>{{data.amount | currency}}</p>
               </div>
               <div class="d-flex justify-content-end">
                 <button class="btn  text-primary" data-toggle="modal" data-target="#exampleModal"
@@ -74,9 +73,10 @@
               </div>
             </div>
             <div class="col-12 col-md-6">
-              <div class="d-flex flex-column mb-3 m-r-1">
-                <label for="" class="text-secondary">Precio del tramite ($)</label>
-                <input type="text" class="form-control" placeholder="Ingrese precio" formControlName="amount">
+              <div class="form-group">
+                <label for="name">Gasto del trámite ($)</label>
+                <input type="number" class="form-control" name="amount" id="amount" placeholder="Ingresar monto"
+                  formControlName="amount">
                 <div *ngIf="submitted && f.amount.errors?.required" class="invalid-feedback d-block">
                   Campo Requerido
                 </div>
