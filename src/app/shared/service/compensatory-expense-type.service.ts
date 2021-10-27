@@ -18,8 +18,11 @@ export class CompensatoryExpenseTypeService {
    * @description Lista los gastos compensatorios
    * @returns 
    */
-  list(): Observable<BaseResponse<CompensatoryExpenseType[]>> {
-    return this.http.get( `compensatory-expense-types` );
+  list( page = 1 ): Observable<BaseResponse<CompensatoryExpenseType[]>> {
+    const params = {
+      page
+    };
+    return this.http.get( `compensatory-expense-types`, { params } );
   }
 
   /**
@@ -28,7 +31,7 @@ export class CompensatoryExpenseTypeService {
    * @returns 
    */
   store( data: any ): Observable<any> {
-    return this.http.get( `compensatory-expense-types`, data );
+    return this.http.post( `compensatory-expense-types`, data );
   }
 
   /**
@@ -38,7 +41,7 @@ export class CompensatoryExpenseTypeService {
    * @returns 
    */
   update( id: number, data: any ): Observable<BaseResponse<CompensatoryExpenseType>> {
-    return this.http.get( `compensatory-expense-types/${id}` );
+    return this.http.put( `compensatory-expense-types/${id}`, data );
   }
 
   /**

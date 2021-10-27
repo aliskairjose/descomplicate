@@ -118,7 +118,7 @@
                     </a>
                 </li>
                 <li>
-                    <a>
+                    <a [routerLink]="['/pages/config/expenses']" routerLinkActive="active">
                         {{item== "active" ? 'GAS':'Gastos'}}
                     </a>
                 </li>
@@ -126,7 +126,7 @@
         </li>
         <li>
             <a (click)="Logout()">
-                <img src="../../../../assets/icon/menu/logout_white.svg" class="icon-menu">
+                <img src="/assets/icon/menu/logout_white.svg" class="icon-menu">
 
                 <label for="" class="m-0 title-option">Cerrar sesión</label>
             </a>

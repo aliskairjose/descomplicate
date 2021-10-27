@@ -27,6 +27,7 @@ import { ProcedureComponent } from './config/procedure/procedure.component';
 import { AvailabilityComponent } from './availability/availability.component';
 import { PaymentVerificationComponent } from './finance/payment-verification/payment-verification.component';
 import { ReportsComponent } from './finance/reports/reports.component';
+import { ExpenseComponent } from './config/expense/expense.component';
 
 const routes: Routes = [
   {
@@ -73,6 +74,10 @@ const routes: Routes = [
   {
     path: "config/procedure",
     component: ProcedureComponent
+  },
+  {
+    path: "config/expenses",
+    component: ExpenseComponent
   },
   {
     path: 'finance/payment-verification',

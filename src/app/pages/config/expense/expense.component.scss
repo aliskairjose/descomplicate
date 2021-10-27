@@ -1,0 +1,71 @@
+@import "../../../../assets/variables.scss";
+.bank {
+  .card {
+    box-shadow: 3px 3px 10px #00000059;
+    border: none;
+    margin-right: auto;
+    width: 80%;
+    margin-left: auto;
+
+    .btn {
+      box-shadow: none !important;
+    }
+
+    .btn.focus,
+    .btn:focus {
+      outline: 0;
+      box-shadow: none !important;
+    }
+
+    .card-title {
+      label {
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+      border-bottom: 1px solid $gray2;
+      margin-bottom: 18px;
+    }
+
+    .card-text {
+      .col-12 {
+        border-bottom: 1px solid $gray2;
+        margin-bottom: 5px;
+      }
+
+      label {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
+
+.modal {
+  label {
+    font-size: 0.8rem;
+  }
+
+  .btn-primary {
+    background: $blue;
+    color: white;
+  }
+
+  .btn-secondary {
+    background: white;
+    color: $gray2;
+    border-color: $gray2;
+  }
+}
+
+@media (max-width: 800px) {
+  .bank {
+    .card {
+      width: 100%;
+    }
+
+    .card-text {
+      .col-12 {
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
