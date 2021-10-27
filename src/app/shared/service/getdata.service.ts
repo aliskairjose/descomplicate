@@ -18,7 +18,7 @@ export class GetdataService {
   users( page = 1 ): Observable<any> {
     const params = {
       page,
-      roles: [ 'admin', 'finance', 'office', 'approves' ],
+      'roles[]': [ 'admin', 'finance', 'office', 'approves' ],
     }
     return this.httpService.get( `users-crud`, { params } );
   }
