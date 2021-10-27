@@ -58,7 +58,7 @@ export class CompensatoryExpenseTypeService {
    * @param id Id del recurso
    * @returns 
    */
-  delete( id: number ): Observable<Observable<BaseResponse<CompensatoryExpenseType>>> {
+  delete( id: number ): Observable<BaseResponse<CompensatoryExpenseType>> {
     return this.http.delete( `compensatory-expense-types/${id}` );
   }
 

@@ -110,7 +110,7 @@ export class ExpenseComponent implements OnInit {
   }
 
   private deleteExpense( id: number ): void {
-    this.expenseService.store( this.expense.id ).subscribe( response => {
+    this.expenseService.delete( id ).subscribe( response => {
       if ( response.status === 'Success' ) {
         Swal.fire( '', response.message, 'success' );
         this.reloadAfter();
