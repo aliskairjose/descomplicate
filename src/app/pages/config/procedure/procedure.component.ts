@@ -12,6 +12,7 @@ import { InstitutionService } from '../../../shared/service/institution.service'
 import { Page } from '../../../shared/interfaces/response';
 import { CompensatoryExpenseType } from '../../../shared/interfaces/compenatory-expense-type';
 import { CompensatoryExpenseTypeService } from '../../../shared/service/compensatory-expense-type.service';
+import { GetdataService } from 'src/app/shared/service/getdata.service';
 
 @Component( {
   selector: 'app-procedure',
@@ -33,20 +34,8 @@ export class ProcedureComponent implements OnInit {
   compensatoryExpenseString: string[] = [];
   paginator!: Page;
   page = 1;
-  types = [
-    {
-      value: 1,
-      name: 'Abogado socio',
-    },
-    {
-      value: 2,
-      name: 'Tramitador socio',
-    },
-    {
-      value: 3,
-      name: 'Mensajero socio',
-    },
-  ]
+  types: any[] = [];
+
   managerTypesSelected: any[] = []
   expensesSelecteds: number[] = [];
   requirementsSelected: number[] = [];
@@ -54,6 +43,7 @@ export class ProcedureComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private titleService: Title,
+    private dataService: GetdataService,
     private procedureSrv: ProcedureService,
     private reqService: RequirementService,
     private instService: InstitutionService,
@@ -61,11 +51,22 @@ export class ProcedureComponent implements OnInit {
   ) {
     this.createForm();
     this.titleService.setTitle( 'Descomplicate - Requisitos' );
-    forkJoin( [ this.instService.list(), this.reqService.list(), this.compensatoryExpeseService.list() ] ).
-      subscribe( ( [ instResponse, requirementsResponse, compensatoryResponse ] ) => {
+    forkJoin( [
+      this.instService.list(),
+      this.reqService.list(),
+      this.compensatoryExpeseService.list(),
+      this.dataService.getManagerTypes()
+    ] ).
+      subscribe( ( [
+        instResponse,
+        requirementsResponse,
+        compensatoryResponse,
+        typesResponse
+      ] ) => {
         this.requirements = [ ...requirementsResponse.data ];
         this.institutions = [ ...instResponse.data ];
         this.compensatoryExpense = [ ...compensatoryResponse.data ];
+        this.types = [ ...typesResponse.data ];
         from( this.compensatoryExpense ).subscribe( ( ce ) => this.compensatoryExpenseString.push( `${ce.name} - ${ce.amount} $` ) );
       } );
   }

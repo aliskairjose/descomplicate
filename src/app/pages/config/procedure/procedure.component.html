@@ -119,7 +119,7 @@
                 <label for="managerTypes" class="text-secondary">Tipo de gestoría</label>
                 <select class="form-control" name="managerTypes" id="managerTypes" formControlName="managerTypes"
                   multiple [compareWith]="compareObjects">
-                  <option [ngValue]="type.value" selected="i=1"
+                  <option [ngValue]="type.id" selected="i=1"
                     *ngFor="let type of types;let i=index; trackBy:trackByType">
                     {{type.name}}</option>
                 </select>
