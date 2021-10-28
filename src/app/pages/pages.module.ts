@@ -29,6 +29,7 @@ import { ReportsComponent } from './finance/reports/reports.component';
 import { ExpenseComponent } from './config/expense/expense.component';
 import { NgxCurrencyModule, CurrencyMaskInputMode } from 'ngx-currency';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
+import { MultiSelectModule } from '@syncfusion/ej2-angular-dropdowns';
 
 export const customCurrencyMaskConfig = {
   align: 'left',
@@ -81,7 +82,7 @@ const maskConfig: Partial<IConfig> = {
     NgbDatepickerModule,
     NgxMaskModule.forRoot( maskConfig ),
     NgxCurrencyModule.forRoot( customCurrencyMaskConfig ),
-
+    MultiSelectModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [

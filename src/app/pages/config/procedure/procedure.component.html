@@ -145,14 +145,10 @@
             </div>
             <div class="col-12">
               <div class="form-group">
-                <label for="compensatory" class="text-secondary">Gastos de trámite</label>
-                <input type="email" id="comp" class="form-control" list="Compensatories" multiple
-                  name="compensatory_expense_types" id="compensatory_expense_types"
-                  formControlName="compensatory_expense_types" (change)="onChangeExpenses($event)" />
-                <datalist id="Compensatories">
-                  <option *ngFor="let ce of compensatoryExpense">{{ce.name}} - {{ce.amount | currency}}</option>
-                </datalist>
-                <small id="helpId" class="text-muted">Separe con coma para multiple selección</small>
+                <label for="" class="text-secondary">Gastos de trámite</label>
+                <ejs-multiselect id='multiselectelement' [dataSource]='compensatoryExpenseString'
+                  [allowFiltering]='true' placeholder='Seleccione' (change)="onChangeExpenses($event)">
+                </ejs-multiselect>
               </div>
             </div>
             <div class="col-12">

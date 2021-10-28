@@ -19,6 +19,9 @@ import { CompensatoryExpenseTypeService } from '../../../shared/service/compensa
   styleUrls: [ './procedure.component.scss' ]
 } )
 export class ProcedureComponent implements OnInit {
+
+  public data: string[] = [ 'Badminton', 'Cricket', 'Football', 'Golf', 'Tennis' ];
+
   form!: FormGroup;
   submitted = false;
   procedures: Procedure[] = [];
@@ -27,6 +30,7 @@ export class ProcedureComponent implements OnInit {
   institutions: Institution[] = [];
   requirements: Requirement[] = [];
   compensatoryExpense: CompensatoryExpenseType[] = [];
+  compensatoryExpenseString: string[] = [];
   paginator!: Page;
   page = 1;
   types = [
@@ -62,6 +66,7 @@ export class ProcedureComponent implements OnInit {
         this.requirements = [ ...requirementsResponse.data ];
         this.institutions = [ ...instResponse.data ];
         this.compensatoryExpense = [ ...compensatoryResponse.data ];
+        from( this.compensatoryExpense ).subscribe( ( ce ) => this.compensatoryExpenseString.push( `${ce.name} - ${ce.amount} $` ) );
       } );
   }
 
@@ -134,8 +139,8 @@ export class ProcedureComponent implements OnInit {
     let _expense: string[] = [];
     const _expenseIds: number[] = [];
 
-    _expense = event.target.value.split( '$,' );
-
+    // _expense = event.target.value.split( '$,' );
+    _expense = event.value;
     from( _expense ).subscribe( ( data: any ) => {
       const index = data.indexOf( '-' );
       const expenseSlice = data.slice( 0, index - 1 );
