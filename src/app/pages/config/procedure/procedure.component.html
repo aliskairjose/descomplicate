@@ -101,10 +101,6 @@
             <div class="col-12">
               <div class="form-group">
                 <label for="institution_id" class="text-secondary">Institución</label>
-                <!-- <select class="form-control" name="institution_id" id="institution_id" formControlName="institution_id">
-                              <option value="" selected>Selecciones</option>
-                              <option *ngFor="let i of institutions" [value]="i.id">{{i.name}}</option>
-                            </select> -->
                 <input type="text" list="institutions" class="form-control" formControlName="institution"
                   (change)="selectInstitution($event)">
                 <datalist id="institutions">
@@ -156,7 +152,7 @@
                 <datalist id="Compensatories">
                   <option *ngFor="let ce of compensatoryExpense">{{ce.name}} - {{ce.amount | currency}}</option>
                 </datalist>
-                <small id="helpId" class="text-muted">Sepate con coma para multiple selección</small>
+                <small id="helpId" class="text-muted">Separe con coma para multiple selección</small>
               </div>
             </div>
             <div class="col-12">

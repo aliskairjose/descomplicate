@@ -96,22 +96,28 @@ export class ProcedureComponent implements OnInit {
   }
 
   update( pro: Procedure ): void {
-    console.log( pro );
     const reqs: string[] = [];
     const expenses: string[] = [];
+    const managerTypesId: number[] = [];
 
     this.isEdit = true;
     this.procedure = { ...pro };
+    this.managerTypesSelected = this.procedure.manager_types;
+
     const result = this.institutions.find( item => item.id === pro.institution_id );
     this.form.controls.institution.patchValue( result?.name );
-    this.managerTypesSelected = this.procedure.manager_types;
+
     this.form.controls.name.patchValue( pro.name );
     this.form.controls.estimated_time.patchValue( pro.estimated_time );
+
     this.form.controls.cost.patchValue( pro.cost );
     this.form.controls.institution_id.patchValue( pro.institution_id );
-    this.form.controls.managerTypes.patchValue( pro.manager_types );
+
+    from( pro.manager_types ).subscribe( ( item: any ) => managerTypesId.push( item.id ) );
     from( pro.requeriments ).subscribe( req => reqs.push( req.name ) );
-    from( pro.compensatories ).subscribe( comp => expenses.push( comp.name ) );
+    from( pro.compensatories ).subscribe( comp => expenses.push( `${comp.name} - ${comp.amount}$` ) );
+
+    this.form.controls.managerTypes.patchValue( pro.manager_types );
     this.form.controls.requeriments.patchValue( reqs );
     this.form.controls.compensatory_expense_types.patchValue( expenses );
   }
