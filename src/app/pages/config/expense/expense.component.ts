@@ -17,8 +17,10 @@ export class ExpenseComponent implements OnInit {
   form!: FormGroup;
   submitted = false;
   paginator!: Page;
+
   page = 1;
   isEdit = false;
+  customePattern = '^[a-zA-Z.áéíóúñ\\s]+$';
 
   expense!: CompensatoryExpenseType;
   expenses: CompensatoryExpenseType[] = [];
@@ -41,9 +43,10 @@ export class ExpenseComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    if ( this.form.valid ) {
-      ( this.isEdit ) ? this.updateExpense() : this.createExpense();
-    }
+    console.log( this.form.value )
+    // if ( this.form.valid ) {
+    //   ( this.isEdit ) ? this.updateExpense() : this.createExpense();
+    // }
   }
 
   cancel() {
@@ -85,8 +88,8 @@ export class ExpenseComponent implements OnInit {
   private createForm(): void {
     this.form = this.fb.group(
       {
-        name: [ '', [ Validators.required ] ],
-        amount: [ 0, [ Validators.required ] ]
+        name: [ '', [ Validators.required, Validators.pattern( this.customePattern ) ] ],
+        amount: [ 0, [ Validators.required, Validators.min( 1 ) ] ]
       }
     )
   }

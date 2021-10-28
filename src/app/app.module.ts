@@ -14,7 +14,15 @@ import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxMaskModule, IConfig } from 'ngx-mask'
 registerLocaleData( localeEs );
+
+
+
+const maskConfig: Partial<IConfig> = {
+  validation: false,
+};
+
 @NgModule( {
   declarations: [
     AppComponent,
@@ -31,7 +39,8 @@ registerLocaleData( localeEs );
     FormsModule,
     ReactiveFormsModule,
     NgxPaginationModule,
-    NgbModule
+    NgbModule,
+    NgxMaskModule.forRoot( maskConfig ),
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es' },

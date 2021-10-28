@@ -27,6 +27,26 @@ import { PaymentVerificationComponent } from './finance/payment-verification/pay
 import { NgbModule, NgbActiveModal, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReportsComponent } from './finance/reports/reports.component';
 import { ExpenseComponent } from './config/expense/expense.component';
+import { NgxCurrencyModule, CurrencyMaskInputMode } from 'ngx-currency';
+import { NgxMaskModule, IConfig } from 'ngx-mask'
+
+export const customCurrencyMaskConfig = {
+  align: 'left',
+  allowNegative: false,
+  allowZero: true,
+  decimal: ',',
+  precision: 2,
+  prefix: '',
+  suffix: 'US$',
+  thousands: '.',
+  nullable: false,
+  min: 0,
+  max: 1000000,
+  inputMode: CurrencyMaskInputMode.FINANCIAL
+};
+const maskConfig: Partial<IConfig> = {
+  validation: false,
+};
 
 @NgModule( {
   declarations: [
@@ -58,7 +78,10 @@ import { ExpenseComponent } from './config/expense/expense.component';
     FormsModule,
     NgxPaginationModule,
     NgbModule,
-    NgbDatepickerModule
+    NgbDatepickerModule,
+    NgxMaskModule.forRoot( maskConfig ),
+    NgxCurrencyModule.forRoot( customCurrencyMaskConfig ),
+
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [
