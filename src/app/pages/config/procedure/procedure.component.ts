@@ -76,7 +76,6 @@ export class ProcedureComponent implements OnInit {
     if ( this.form.valid ) {
       this.form.controls.compensatory_expense_types.setValue( this.expensesSelecteds );
       this.form.controls.requeriments.setValue( this.requirementsSelected );
-      console.log( this.form.value );
       ( this.isEdit ) ? this.updateProcedure() : this.createProcedure();
     }
   }
@@ -97,6 +96,10 @@ export class ProcedureComponent implements OnInit {
   }
 
   update( pro: Procedure ): void {
+    console.log( pro );
+    const reqs: string[] = [];
+    const expenses: string[] = [];
+
     this.isEdit = true;
     this.procedure = { ...pro };
     const result = this.institutions.find( item => item.id === pro.institution_id );
@@ -107,7 +110,10 @@ export class ProcedureComponent implements OnInit {
     this.form.controls.cost.patchValue( pro.cost );
     this.form.controls.institution_id.patchValue( pro.institution_id );
     this.form.controls.managerTypes.patchValue( pro.manager_types );
-    this.form.controls.requeriments.patchValue( pro.requeriments );
+    from( pro.requeriments ).subscribe( req => reqs.push( req.name ) );
+    from( pro.compensatories ).subscribe( comp => expenses.push( comp.name ) );
+    this.form.controls.requeriments.patchValue( reqs );
+    this.form.controls.compensatory_expense_types.patchValue( expenses );
   }
 
   delete( id: number ): void {
