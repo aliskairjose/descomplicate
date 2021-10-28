@@ -37,7 +37,7 @@ export const customCurrencyMaskConfig = {
   decimal: ',',
   precision: 2,
   prefix: '',
-  suffix: 'US$',
+  suffix: ' $',
   thousands: '.',
   nullable: false,
   min: 0,
