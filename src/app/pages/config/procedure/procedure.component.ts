@@ -21,22 +21,21 @@ import { GetdataService } from 'src/app/shared/service/getdata.service';
 } )
 export class ProcedureComponent implements OnInit {
 
-  public data: string[] = [ 'Badminton', 'Cricket', 'Football', 'Golf', 'Tennis' ];
-
   form!: FormGroup;
   submitted = false;
   procedures: Procedure[] = [];
   procedure!: Procedure;
+
   isEdit = false;
   institutions: Institution[] = [];
   requirements: Requirement[] = [];
   compensatoryExpense: CompensatoryExpenseType[] = [];
+
   compensatoryExpenseString: string[] = [];
   paginator!: Page;
   page = 1;
-  types: any[] = [];
+  tiposDeGestoria: any[] = [];
 
-  managerTypesSelected: any[] = []
   expensesSelecteds: number[] = [];
   requirementsSelected: number[] = [];
 
@@ -66,7 +65,7 @@ export class ProcedureComponent implements OnInit {
         this.requirements = [ ...requirementsResponse.data ];
         this.institutions = [ ...instResponse.data ];
         this.compensatoryExpense = [ ...compensatoryResponse.data ];
-        this.types = [ ...typesResponse.data ];
+        this.tiposDeGestoria = [ ...typesResponse.data ];
         from( this.compensatoryExpense ).subscribe( ( ce ) => this.compensatoryExpenseString.push( `${ce.name} - ${ce.amount} $` ) );
       } );
   }
@@ -80,6 +79,12 @@ export class ProcedureComponent implements OnInit {
   onSubmit(): void {
     this.submitted = true;
     if ( this.form.valid ) {
+      const _managerTypes = this.form.controls.managerTypes.value;
+      if ( Object.keys( _managerTypes[ 0 ] ).length ) {
+        const ids: number[] = [];
+        from( this.form.controls.managerTypes.value ).subscribe( ( item: any ) => ids.push( item.id as number ) );
+        this.form.controls.managerTypes.setValue( ids );
+      }
       this.form.controls.compensatory_expense_types.setValue( this.expensesSelecteds );
       this.form.controls.requeriments.setValue( this.requirementsSelected );
       ( this.isEdit ) ? this.updateProcedure() : this.createProcedure();
@@ -102,13 +107,13 @@ export class ProcedureComponent implements OnInit {
   }
 
   update( pro: Procedure ): void {
+    console.log( pro )
     const reqs: string[] = [];
     const expenses: string[] = [];
     const managerTypesId: number[] = [];
 
     this.isEdit = true;
     this.procedure = { ...pro };
-    this.managerTypesSelected = this.procedure.manager_types;
 
     const result = this.institutions.find( item => item.id === pro.institution_id );
     this.form.controls.institution.patchValue( result?.name );

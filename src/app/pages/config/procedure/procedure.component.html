@@ -120,7 +120,7 @@
                 <select class="form-control" name="managerTypes" id="managerTypes" formControlName="managerTypes"
                   multiple [compareWith]="compareObjects">
                   <option [ngValue]="type.id" selected="i=1"
-                    *ngFor="let type of types;let i=index; trackBy:trackByType">
+                    *ngFor="let type of tiposDeGestoria;let i=index; trackBy:trackByType">
                     {{type.name}}</option>
                 </select>
                 <small id="helpId" class="text-muted">Ctrl+click para multiple selección</small>
