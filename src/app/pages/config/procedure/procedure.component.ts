@@ -25,6 +25,7 @@ export class ProcedureComponent implements OnInit {
   submitted = false;
   procedures: Procedure[] = [];
   procedure!: Procedure;
+  procedureId!: number;
 
   isEdit = false;
   institutions: Institution[] = [];
@@ -38,6 +39,10 @@ export class ProcedureComponent implements OnInit {
 
   expensesSelecteds: number[] = [];
   requirementsSelected: number[] = [];
+
+  // Costos
+  procedureAmount = 0;
+  totalExpensesAmount = 0;
 
   constructor(
     private fb: FormBuilder,
@@ -113,7 +118,7 @@ export class ProcedureComponent implements OnInit {
     const managerTypesId: number[] = [];
 
     this.isEdit = true;
-    this.procedure = { ...pro };
+    this.procedureId = pro.id;
 
     const result = this.institutions.find( item => item.id === pro.institution_id );
     this.form.controls.institution.patchValue( result?.name );
@@ -144,16 +149,20 @@ export class ProcedureComponent implements OnInit {
   onChangeExpenses( event: any ): void {
     let _expense: string[] = [];
     const _expenseIds: number[] = [];
+    let _costs: number[] = [];
 
-    // _expense = event.target.value.split( '$,' );
     _expense = event.value;
+    console.log( _expense )
+
     from( _expense ).subscribe( ( data: any ) => {
       const index = data.indexOf( '-' );
       const expenseSlice = data.slice( 0, index - 1 );
       const expense = this.compensatoryExpense.find( item => item.name === expenseSlice );
       _expenseIds.push( expense?.id as number );
+      _costs.push( expense?.amount as number );
 
     } );
+    this.totalExpensesAmount = _costs.reduce( ( p, c ) => p + c );
     this.expensesSelecteds = _expenseIds;
   }
 
@@ -190,7 +199,7 @@ export class ProcedureComponent implements OnInit {
   }
 
   private updateProcedure(): void {
-    this.procedureSrv.update( this.procedure.id, this.form.value ).subscribe( response => {
+    this.procedureSrv.update( this.procedureId, this.form.value ).subscribe( response => {
       if ( response.status === 'Success' ) {
         Swal.fire( '', response.message, 'success' );
         document.getElementById( "close" )?.click();

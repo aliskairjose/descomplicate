@@ -79,7 +79,8 @@
             <div class="col-3">
               <div class="d-flex flex-column mb-3 m-r-1">
                 <label for="" class="text-secondary">Precio del tramite ($)</label>
-                <input type="number" class="form-control" placeholder="Ingrese precio" formControlName="cost">
+                <input type="number" class="form-control" placeholder="Ingrese precio" formControlName="cost"
+                  [(ngModel)]="procedureAmount">
                 <div *ngIf="submitted && f.cost.errors?.required" class="invalid-feedback d-block">
                   Campo Requerido
                 </div>
@@ -159,6 +160,11 @@
                   Requiere autorización
                 </label>
               </div>
+            </div>
+            <div class="col-12">
+              <label for="">Costo del Trámite {{procedureAmount | currency}} </label> <br>
+              <label for="">Costo Total de Gastos {{totalExpensesAmount | currency}} </label> <br>
+              <label for="">Costo Total del Trámite {{procedureAmount + totalExpensesAmount | currency}}</label>
             </div>
           </div>
         </div>
